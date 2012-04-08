@@ -1,0 +1,9 @@
+[Bb]in
+[Oo]bj
+*.suo
+*.user
+*.local.xml
+_ReSharper.*
+*.resharper.user
+*.ReSharper
+
