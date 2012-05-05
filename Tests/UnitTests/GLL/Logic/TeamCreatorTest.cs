@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using GLL.Dataclasses;
 using GLL.Exceptions;
@@ -7,11 +6,11 @@ using GLL.Logic;
 using Xunit;
 using Xunit.Extensions;
 
-//TODO: Test for random generation using structuremap as support
+//TODO: Test for random generation using DI as support - only test that a function on IRandom is hit
 
 namespace UnitTests.GLL.Logic
 {
-	public class TeamCreatorTest
+	public class TeamCreatorTest //TODO: Consider a creator for each type of creation - consider parameters
 	{
 		private readonly TeamCreator _teamCreator;
 
