@@ -4,13 +4,13 @@ using Castle.Windsor;
 
 namespace FoosballGameManager.Installers
 {
-    public class FoosballGameManagerInstaller : IWindsorInstaller
-    {
-        public void Install(IWindsorContainer container, IConfigurationStore store)
-        {
-            container.Register(Classes.FromThisAssembly()
-                .Pick()
-                .LifestyleTransient());
-        }
-    }
+	public class FoosballGameManagerInstaller : IWindsorInstaller
+	{
+		public void Install(IWindsorContainer container, IConfigurationStore store)
+		{
+			container.Register(Classes.FromThisAssembly()
+				.Pick()
+				.LifestyleTransient());
+		}
+	}
 }
