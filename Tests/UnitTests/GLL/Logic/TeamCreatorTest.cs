@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using GLL.Dataclasses;
 using GLL.Exceptions;
@@ -7,6 +6,7 @@ using GLL.Logic;
 using Xunit;
 using Xunit.Extensions;
 
+//TOOD: subtypes instead of enums - a file for each type
 //TODO: Test for random generation using structuremap as support
 
 namespace UnitTests.GLL.Logic
