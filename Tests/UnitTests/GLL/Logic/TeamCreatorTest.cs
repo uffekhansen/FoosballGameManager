@@ -8,10 +8,11 @@ using Xunit.Extensions;
 
 //TOOD: subtypes instead of enums - a file for each type
 //TODO: Test for random generation using structuremap as support
+//TODO: Test for random generation using DI as support - only test that a function on IRandom is hit
 
 namespace UnitTests.GLL.Logic
 {
-	public class TeamCreatorTest
+	public class TeamCreatorTest //TODO: Consider a creator for each type of creation - consider parameters
 	{
 		private readonly TeamCreator _teamCreator;
 
