@@ -1,4 +1,4 @@
-﻿namespace GLL.Entities
+﻿namespace GameLogic.Entities
 {
     public class Player
     {

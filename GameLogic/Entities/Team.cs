@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GLL.Entities
+namespace GameLogic.Entities
 {
     public class Team
     {
