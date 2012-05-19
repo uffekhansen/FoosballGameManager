@@ -5,7 +5,7 @@ using GameLogic.Exceptions;
 
 namespace GameLogic.Logic
 {
-	public class TeamCreator
+	public abstract class TeamCreator
 	{
 		public List<Team> CreateTeams(List<Player> players, int playersPerTeam)
 		{
@@ -45,21 +45,6 @@ namespace GameLogic.Logic
 			}
 		}
 
-		private List<Team> GenerateTeams(List<Player> players, int playersPerTeam)
-		{
-			var teams = new List<Team>();
-
-			for (int i = 0; i < players.Count; i += playersPerTeam)
-			{
-				teams.Add(new Team
-				{
-					Players = players
-						.GetRange(i, playersPerTeam)
-						.ToList()
-				});
-			}
-
-			return teams;
-		}
+		protected abstract List<Team> GenerateTeams(List<Player> players, int playersPerTeam);
 	}
 }
