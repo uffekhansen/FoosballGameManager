@@ -24,7 +24,7 @@ namespace Tests.UnitTests.GameLogic.Logic
 		[InlineData(1, 2, 2)]
 		[InlineData(5, 5, 1)]
 		[InlineData(3, 6, 2)]
-		public void GivenPlayers_WhenCreatingTeam_ThenTheExpectedNumberOfTeamsAreReturned(int expectedNumberOfTeams, int numberPlayersInlist, int playersPerTeam)
+		public void Given_players_When_creating_team_Then_the_expected_number_of_teams_are_returned(int expectedNumberOfTeams, int numberPlayersInlist, int playersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInlist);
 
@@ -37,7 +37,7 @@ namespace Tests.UnitTests.GameLogic.Logic
 		[InlineData(1, 2)]
 		[InlineData(2, 3)]
 		[InlineData(3, 10)]
-		public void GivenFeverPlayerThanPlayersPerTeam_WhenCreatingTeam_ThenTeamGenerationExceptionIsThrown(int numberPlayersInlist, int playersPerTeam)
+		public void Given_fewer_players_than_players_per_team_When_creating_team_Then_teamgenerationexception_is_thrown(int numberPlayersInlist, int playersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInlist);
 
@@ -51,7 +51,7 @@ namespace Tests.UnitTests.GameLogic.Logic
 		[InlineData(5, 6)]
 		[InlineData(11, 5)]
 		[InlineData(101, 10)]
-		public void GivenPlayersNotDivisableWithNumberPlayersPerTeam_WhenCreatingTeam_ThenTeamGenerationExceptionIsThrown(int numberPlayersInlist, int playersPerTeam)
+		public void Given_players_not_divisable_with_number_players_per_team_When_creating_team_Then_teamgenerationException_is_thrown(int numberPlayersInlist, int playersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInlist);
 
@@ -61,7 +61,7 @@ namespace Tests.UnitTests.GameLogic.Logic
 		}
 
 		[Fact]
-		public void GivenZeroPlayers_WhenCreatingTeam_ThenTeamGenerationExceptionIsThrown()
+		public void Given_zero_players_When_creating_team_Then_teamgenerationException_is_thrown()
 		{
 			const int any = 2;
 			var playerList = ArrangePlayerList(0);
