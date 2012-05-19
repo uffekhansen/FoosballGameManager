@@ -3,7 +3,6 @@ using System.Linq;
 using GameLogic.Entities;
 using GameLogic.Exceptions;
 using GameLogic.Logic;
-using GameLogic.ValueObjects;
 using Xunit;
 using Xunit.Extensions;
 
@@ -28,9 +27,8 @@ namespace Tests.UnitTests.GameLogic.Logic
 		public void GivenPlayers_WhenCreatingTeam_ThenTheExpectedNumberOfTeamsAreReturned(int expectedNumberOfTeams, int numberPlayersInlist, int playersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInlist);
-			_teamCreator.TeamSettings = ArrangeTeamSettings(playersPerTeam);
 
-			var teams = _teamCreator.CreateTeams(playerList);
+			var teams = _teamCreator.CreateTeams(playerList, playersPerTeam);
 
 			Assert.Equal(expectedNumberOfTeams, teams.Count);
 		}
@@ -42,9 +40,8 @@ namespace Tests.UnitTests.GameLogic.Logic
 		public void GivenFeverPlayerThanPlayersPerTeam_WhenCreatingTeam_ThenTeamGenerationExceptionIsThrown(int numberPlayersInlist, int playersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInlist);
-			_teamCreator.TeamSettings = ArrangeTeamSettings(playersPerTeam);
 
-			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams(playerList);
+			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams(playerList, playersPerTeam);
 
 			Assert.Throws<TeamGenerationException>(act);
 		}
@@ -57,9 +54,8 @@ namespace Tests.UnitTests.GameLogic.Logic
 		public void GivenPlayersNotDivisableWithNumberPlayersPerTeam_WhenCreatingTeam_ThenTeamGenerationExceptionIsThrown(int numberPlayersInlist, int playersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInlist);
-			_teamCreator.TeamSettings = ArrangeTeamSettings(playersPerTeam);
 
-			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams(playerList);
+			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams(playerList, playersPerTeam);
 
 			Assert.Throws<TeamGenerationException>(act);
 		}
@@ -67,21 +63,12 @@ namespace Tests.UnitTests.GameLogic.Logic
 		[Fact]
 		public void GivenZeroPlayers_WhenCreatingTeam_ThenTeamGenerationExceptionIsThrown()
 		{
-			const int aPositiveNumber = 4;
+			const int any = 2;
 			var playerList = ArrangePlayerList(0);
-			_teamCreator.TeamSettings = ArrangeTeamSettings(playersPerTeam: aPositiveNumber);
 
-			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams(playerList);
+			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams(playerList, playersPerTeam: any);
 
 			Assert.Throws<TeamGenerationException>(act);
-		}
-
-		private TeamSettings ArrangeTeamSettings(int playersPerTeam)
-		{
-			return new TeamSettings
-			{
-				NumberPlayers = playersPerTeam,
-			};
 		}
 
 		private List<Player> ArrangePlayerList(int numberPlayers)

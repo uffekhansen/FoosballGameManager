@@ -2,21 +2,23 @@
 using System.Linq;
 using GameLogic.Entities;
 using GameLogic.Exceptions;
-using GameLogic.ValueObjects;
 
 namespace GameLogic.Logic
 {
 	public class TeamCreator
 	{
-		public TeamSettings TeamSettings;
+		public List<Team> CreateTeams(List<Player> players, int playersPerTeam)
+		{
+			GuardAgainstWrongSettings(players, playersPerTeam);
 
-		public List<Team> CreateTeams(List<Player> players)
+			return GenerateTeams(players, playersPerTeam);
+		}
+
+		private void GuardAgainstWrongSettings(List<Player> players, int playersPerTeam)
 		{
 			ThrowsIfEmpty(players);
-			ThrowsIfNotEnoughPlayersForOneTeam(players);
-			ThrowsIfNumberPlayersDoesNotMatchTeamSettings(players);
-
-			return GenerateTeams(players);
+			ThrowsIfNotEnoughPlayersForOneTeam(players, playersPerTeam);
+			ThrowsIfNumberPlayersDoesNotMatchTeamSettings(players, playersPerTeam);
 		}
 
 		private void ThrowsIfEmpty(List<Player> players)
@@ -27,26 +29,25 @@ namespace GameLogic.Logic
 			}
 		}
 
-		private void ThrowsIfNotEnoughPlayersForOneTeam(List<Player> players)
+		private void ThrowsIfNotEnoughPlayersForOneTeam(List<Player> players, int playersPerTeam)
 		{
-			if (players.Count < TeamSettings.NumberPlayers)
+			if (players.Count < playersPerTeam)
 			{
 				throw new TeamGenerationException("Not enough players for a single team");
 			}
 		}
 
-		private void ThrowsIfNumberPlayersDoesNotMatchTeamSettings(List<Player> players)
+		private void ThrowsIfNumberPlayersDoesNotMatchTeamSettings(List<Player> players, int playersPerTeam)
 		{
-			if (players.Count % TeamSettings.NumberPlayers != 0)
+			if (players.Count % playersPerTeam != 0)
 			{
 				throw new TeamGenerationException("Number players not divisable with number players per team in team settings");
 			}
 		}
 
-		private List<Team> GenerateTeams(List<Player> players)
+		private List<Team> GenerateTeams(List<Player> players, int playersPerTeam)
 		{
 			var teams = new List<Team>();
-			int playersPerTeam = TeamSettings.NumberPlayers;
 
 			for (int i = 0; i < players.Count; i += playersPerTeam)
 			{
