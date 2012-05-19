@@ -1,13 +1,18 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Routing;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using FoosballGameManager.Installers;
+using GameLogic.Installers;
 
 namespace FoosballGameManager
 {
 	public class MvcApplication : System.Web.HttpApplication
 	{
 		private static IWindsorContainer _container;
+		private static IServiceProvider _serviceProvider;
 
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
@@ -37,10 +42,16 @@ namespace FoosballGameManager
 
 		private static void BootstrapContainer()
 		{
-			_container = new WindsorContainer()
-				.Install(FromAssembly.This());
+			var installers = new IWindsorInstaller[]
+			{
+				new FoosballGameManagerInstaller(),
+				new GameLogicInstaller(),
+			};
 
-			var provider = new WindsorServiceProvider(_container);
+			_container = new WindsorContainer();
+			_container.Install(installers);
+
+			_serviceProvider = new WindsorServiceProvider(_container);
 		}
 	}
 }
