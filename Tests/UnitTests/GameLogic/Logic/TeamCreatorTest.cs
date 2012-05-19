@@ -6,11 +6,9 @@ using GameLogic.Logic;
 using Xunit;
 using Xunit.Extensions;
 
-//TODO: Test for random generation using DI as support - only test that a function on IRandom is hit
-
 namespace Tests.UnitTests.GameLogic.Logic
 {
-	public class TeamCreatorTest //TODO: Consider a creator for each type of creation - consider parameters
+	public class TeamCreatorTest
 	{
 		private readonly TeamCreator _teamCreator;
 
