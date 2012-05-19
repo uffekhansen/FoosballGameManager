@@ -8,9 +8,9 @@ namespace FoosballGameManager.Installers
 	{
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
-			container.Register(Classes.FromThisAssembly()
+			container.Register(/*Classes.FromThisAssembly()
 				.Pick()
-				.LifestyleTransient());
+				.LifestyleTransient()*/);
 		}
 	}
 }
