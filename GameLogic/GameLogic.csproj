@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Entities\TeamSettings.cs" />
+    <Compile Include="ValueObjects\TeamSettings.cs" />
     <Compile Include="Enums\TeamGenerationRule.cs" />
     <Compile Include="Exceptions\TeamGenerationException.cs" />
     <Compile Include="Installers\GameLogicInstaller.cs" />

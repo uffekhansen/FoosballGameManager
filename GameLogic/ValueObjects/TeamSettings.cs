@@ -1,4 +1,4 @@
-﻿namespace GameLogic.Entities
+﻿namespace GameLogic.ValueObjects
 {
 	public class TeamSettings
 	{

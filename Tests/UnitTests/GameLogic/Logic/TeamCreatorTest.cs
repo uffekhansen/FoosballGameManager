@@ -3,6 +3,7 @@ using System.Linq;
 using GameLogic.Entities;
 using GameLogic.Exceptions;
 using GameLogic.Logic;
+using GameLogic.ValueObjects;
 using Xunit;
 using Xunit.Extensions;
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using GameLogic.Entities;
 using GameLogic.Exceptions;
+using GameLogic.ValueObjects;
 
 namespace GameLogic.Logic
 {
