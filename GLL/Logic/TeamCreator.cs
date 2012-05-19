@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GLL.Dataclasses;
+using GLL.Entities;
 using GLL.Exceptions;
 
 namespace GLL.Logic
