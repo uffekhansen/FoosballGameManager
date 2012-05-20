@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using GameLogic.Entities;
-using GameLogic.Services;
+using Domain.Entities;
+using Domain.Services;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Tests.UnitTests.GameLogic.Services
+namespace Tests.UnitTests.Domain.Services
 {
 	public class RandomTeamCreatorTest
 	{

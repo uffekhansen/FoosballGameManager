@@ -3,8 +3,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Domain.Installers;
 using FoosballGameManager.Installers;
-using GameLogic.Installers;
 
 namespace FoosballGameManager
 {

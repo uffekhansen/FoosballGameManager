@@ -8,8 +8,8 @@
     <ProjectGuid>{325D0C97-10FC-4F33-AD5C-6B637648F01F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GameLogic</RootNamespace>
-    <AssemblyName>GameLogic</AssemblyName>
+    <RootNamespace>Domain</RootNamespace>
+    <AssemblyName>Domain</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

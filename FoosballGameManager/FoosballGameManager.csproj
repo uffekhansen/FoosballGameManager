@@ -126,9 +126,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameLogic\GameLogic.csproj">
+    <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{325D0C97-10FC-4F33-AD5C-6B637648F01F}</Project>
-      <Name>GameLogic</Name>
+      <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
