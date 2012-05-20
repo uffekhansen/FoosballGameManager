@@ -3,7 +3,7 @@ using System.Linq;
 using GameLogic.Entities;
 using GameLogic.Exceptions;
 
-namespace GameLogic.Logic
+namespace GameLogic.Services
 {
 	public abstract class TeamCreator
 	{

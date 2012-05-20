@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using GameLogic.Entities;
 using GameLogic.Exceptions;
-using GameLogic.Logic;
+using GameLogic.Services;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Tests.UnitTests.GameLogic.Logic
+namespace Tests.UnitTests.GameLogic.Services
 {
 	public class TeamCreatorTest
 	{

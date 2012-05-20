@@ -49,8 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTests\GameLogic\Logic\RandomTeamCreatorTest.cs" />
-    <Compile Include="UnitTests\GameLogic\Logic\TeamCreatorTest.cs" />
+    <Compile Include="UnitTests\GameLogic\Services\RandomTeamCreatorTest.cs" />
+    <Compile Include="UnitTests\GameLogic\Services\TeamCreatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameLogic\GameLogic.csproj">

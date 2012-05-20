@@ -47,8 +47,8 @@
     <Compile Include="Enums\TeamGenerationRule.cs" />
     <Compile Include="Exceptions\TeamGenerationException.cs" />
     <Compile Include="Installers\GameLogicInstaller.cs" />
-    <Compile Include="Logic\RandomTeamCreator.cs" />
-    <Compile Include="Logic\TeamCreator.cs" />
+    <Compile Include="Services\RandomTeamCreator.cs" />
+    <Compile Include="Services\TeamCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Team.cs" />
   </ItemGroup>

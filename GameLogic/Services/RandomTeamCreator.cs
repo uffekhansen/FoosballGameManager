@@ -2,7 +2,7 @@
 using System.Linq;
 using GameLogic.Entities;
 
-namespace GameLogic.Logic
+namespace GameLogic.Services
 {
 	public class RandomTeamCreator : TeamCreator
 	{
