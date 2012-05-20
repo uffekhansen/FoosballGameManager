@@ -4,7 +4,7 @@ using Castle.Windsor;
 
 namespace Domain.Installers
 {
-	public class GameLogicInstaller : IWindsorInstaller
+	public class DomainInstaller : IWindsorInstaller
 	{
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{

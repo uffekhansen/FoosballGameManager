@@ -44,7 +44,7 @@ namespace FoosballGameManager
 			var installers = new IWindsorInstaller[]
 			{
 				new FoosballGameManagerInstaller(),
-				new GameLogicInstaller(),
+				new DomainInstaller(),
 			};
 
 			_container = new WindsorContainer();
