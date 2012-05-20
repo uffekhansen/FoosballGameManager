@@ -14,7 +14,7 @@ namespace Tests.UnitTests.GameLogic.Logic
 
 		public TeamCreatorTest()
 		{
-			_teamCreator = new RandomTeamCreator();
+			_teamCreator = new TeamCreatorBase();
 		}
 
 		[Theory]
@@ -64,6 +64,14 @@ namespace Tests.UnitTests.GameLogic.Logic
 		private Player ArrangePlayer()
 		{
 			return new Player();
+		}
+	}
+
+	public class TeamCreatorBase : TeamCreator
+	{
+		protected override List<Team> GenerateTeams(List<Player> players, int playersPerTeam)
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }
