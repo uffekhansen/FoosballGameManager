@@ -5,7 +5,7 @@ using Domain.Exceptions;
 
 namespace Domain.Services
 {
-	public abstract class TeamCreator
+	public abstract class TeamCreator : ITeamCreator
 	{
 		public List<Team> CreateTeams(List<Player> players, int playersPerTeam)
 		{
