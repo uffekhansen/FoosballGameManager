@@ -16,12 +16,12 @@ namespace Tests.UnitTests.Domain.Services
 		[InlineData(1, 2, 2)]
 		[InlineData(5, 5, 1)]
 		[InlineData(3, 6, 2)]
-		public void Given_players_When_creating_team_Then_the_expected_number_of_teams_are_returned(int expectedNumberOfTeams, int numberPlayersInlist, int playersPerTeam)
+		public void Given_randomTeamCreator_When_creating_teams_Then_the_expected_number_of_teams_are_returned(int expectedNumberOfTeams, int numberPlayersInlist, int playersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInlist);
-			var _teamCreator = new RandomTeamCreator(playersPerTeam, playerList);
+			var teamCreator = new RandomTeamCreator(playersPerTeam, playerList);
 
-			var teams = _teamCreator.CreateTeams();
+			var teams = teamCreator.CreateTeams();
 
 			Assert.Equal(expectedNumberOfTeams, teams.Count);
 		}
