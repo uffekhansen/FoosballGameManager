@@ -7,44 +7,53 @@ namespace Domain.Services
 {
 	public abstract class TeamCreator : ITeamCreator
 	{
-		public List<Team> CreateTeams(List<Player> players, int playersPerTeam)
-		{
-			GuardAgainstWrongSettings(players, playersPerTeam);
+		protected readonly int _playersPerTeam;
+		protected readonly List<Player> _players;
 
-			return GenerateTeams(players, playersPerTeam);
+		protected TeamCreator(int playersPerTeam, List<Player> players)
+		{
+			_playersPerTeam = playersPerTeam;
+			_players = players;
 		}
 
-		private void GuardAgainstWrongSettings(List<Player> players, int playersPerTeam)
+		public List<Team> CreateTeams()
 		{
-			ThrowsIfEmpty(players);
-			ThrowsIfNotEnoughPlayersForOneTeam(players, playersPerTeam);
-			ThrowsIfNumberPlayersDoesNotMatchTeamSettings(players, playersPerTeam);
+			GuardAgainstWrongSettings();
+
+			return GenerateTeams();
 		}
 
-		private void ThrowsIfEmpty(List<Player> players)
+		private void GuardAgainstWrongSettings()
 		{
-			if (!players.Any())
+			ThrowsIfEmpty();
+			ThrowsIfNotEnoughPlayersForOneTeam();
+			ThrowsIfNumberPlayersDoesNotMatchTeamSettings();
+		}
+
+		private void ThrowsIfEmpty()
+		{
+			if (!_players.Any())
 			{
 				throw new TeamGenerationException("Zero players in list");
 			}
 		}
 
-		private void ThrowsIfNotEnoughPlayersForOneTeam(List<Player> players, int playersPerTeam)
+		private void ThrowsIfNotEnoughPlayersForOneTeam()
 		{
-			if (players.Count < playersPerTeam)
+			if (_players.Count < _playersPerTeam)
 			{
 				throw new TeamGenerationException("Not enough players for a single team");
 			}
 		}
 
-		private void ThrowsIfNumberPlayersDoesNotMatchTeamSettings(List<Player> players, int playersPerTeam)
+		private void ThrowsIfNumberPlayersDoesNotMatchTeamSettings()
 		{
-			if (players.Count % playersPerTeam != 0)
+			if (_players.Count % _playersPerTeam != 0)
 			{
 				throw new TeamGenerationException("Number players not divisable with number players per team in team settings");
 			}
 		}
 
-		protected abstract List<Team> GenerateTeams(List<Player> players, int playersPerTeam);
+		protected abstract List<Team> GenerateTeams();
 	}
 }

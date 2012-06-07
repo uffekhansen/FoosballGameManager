@@ -9,13 +9,6 @@ namespace Tests.UnitTests.Domain.Services
 {
 	public class RandomTeamCreatorTest
 	{
-		private readonly RandomTeamCreator _teamCreator;
-
-		public RandomTeamCreatorTest()
-		{
-			_teamCreator = new RandomTeamCreator();
-		}
-
 		[Theory]
 		[InlineData(1, 1, 1)]
 		[InlineData(1, 2, 2)]
@@ -26,8 +19,9 @@ namespace Tests.UnitTests.Domain.Services
 		public void Given_players_When_creating_team_Then_the_expected_number_of_teams_are_returned(int expectedNumberOfTeams, int numberPlayersInlist, int playersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInlist);
+			var _teamCreator = new RandomTeamCreator(playersPerTeam, playerList);
 
-			var teams = _teamCreator.CreateTeams(playerList, playersPerTeam);
+			var teams = _teamCreator.CreateTeams();
 
 			Assert.Equal(expectedNumberOfTeams, teams.Count);
 		}

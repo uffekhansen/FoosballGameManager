@@ -10,13 +10,6 @@ namespace Tests.UnitTests.Domain.Services
 {
 	public class TeamCreatorTest
 	{
-		private readonly TeamCreator _teamCreator;
-
-		public TeamCreatorTest()
-		{
-			_teamCreator = new TeamCreatorBase();
-		}
-
 		[Theory]
 		[InlineData(1, 2)]
 		[InlineData(2, 3)]
@@ -24,8 +17,9 @@ namespace Tests.UnitTests.Domain.Services
 		public void Given_fewer_players_than_players_per_team_When_creating_team_Then_teamgenerationexception_is_thrown(int numberPlayersInlist, int playersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInlist);
+			var _teamCreator = new TeamCreatorBase(playersPerTeam, playerList);
 
-			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams(playerList, playersPerTeam);
+			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams();
 
 			Assert.Throws<TeamGenerationException>(act);
 		}
@@ -38,8 +32,9 @@ namespace Tests.UnitTests.Domain.Services
 		public void Given_players_not_divisable_with_number_players_per_team_When_creating_team_Then_teamgenerationException_is_thrown(int numberPlayersInlist, int playersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInlist);
+			var _teamCreator = new TeamCreatorBase(playersPerTeam, playerList);
 
-			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams(playerList, playersPerTeam);
+			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams();
 
 			Assert.Throws<TeamGenerationException>(act);
 		}
@@ -49,8 +44,9 @@ namespace Tests.UnitTests.Domain.Services
 		{
 			const int any = 2;
 			var playerList = ArrangePlayerList(0);
+			var _teamCreator = new TeamCreatorBase(any, playerList);
 
-			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams(playerList, playersPerTeam: any);
+			Assert.ThrowsDelegate act = () => _teamCreator.CreateTeams();
 
 			Assert.Throws<TeamGenerationException>(act);
 		}
@@ -69,7 +65,12 @@ namespace Tests.UnitTests.Domain.Services
 
 	public class TeamCreatorBase : TeamCreator
 	{
-		protected override List<Team> GenerateTeams(List<Player> players, int playersPerTeam)
+		public TeamCreatorBase(int playersPerTeam, List<Player> players)
+			: base(playersPerTeam, players)
+		{
+		}
+
+		protected override List<Team> GenerateTeams()
 		{
 			throw new System.NotImplementedException();
 		}

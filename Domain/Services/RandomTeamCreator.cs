@@ -6,16 +6,21 @@ namespace Domain.Services
 {
 	public class RandomTeamCreator : TeamCreator
 	{
-		protected override List<Team> GenerateTeams(List<Player> players, int playersPerTeam)
+		public RandomTeamCreator(int playersPerTeam, List<Player> players)
+			: base(playersPerTeam, players)
+		{
+		}
+
+		protected override List<Team> GenerateTeams()
 		{
 			var teams = new List<Team>();
 
-			for (int i = 0; i < players.Count; i += playersPerTeam)
+			for (int i = 0; i < _players.Count; i += _playersPerTeam)
 			{
 				teams.Add(new Team
 				{
-					Players = players
-						.GetRange(i, playersPerTeam)
+					Players = _players
+						.GetRange(i, _playersPerTeam)
 						.ToList()
 				});
 			}
