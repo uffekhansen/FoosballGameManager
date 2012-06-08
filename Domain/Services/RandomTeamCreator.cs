@@ -18,15 +18,12 @@ namespace Domain.Services
 		protected override List<Team> GenerateTeams()
 		{
 			var teams = new List<Team>();
+			var players = _players.ToList();
 
-			for (int i = 0; i < _players.Count; i += _playersPerTeam)
+			for (int i = 0; i < players.Count; i += _playersPerTeam)
 			{
-				teams.Add(new Team
-				{
-					Players = _players
-						.GetRange(i, _playersPerTeam)
-						.ToList()
-				});
+				var playersForTeam = players.GetRange(i, _playersPerTeam).ToList();
+				teams.Add(new Team(playersForTeam));
 			}
 
 			return teams;
