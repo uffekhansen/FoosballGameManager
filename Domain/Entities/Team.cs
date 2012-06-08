@@ -2,13 +2,13 @@
 
 namespace Domain.Entities
 {
-    public class Team
-    {
-        public List<Player> Players;
+	public class Team
+	{
+		public List<Player> Players;
 
-        public Team()
-        {
-            Players = new List<Player>();
-        }
-    }
+		public Team()
+		{
+			Players = new List<Player>();
+		}
+	}
 }
