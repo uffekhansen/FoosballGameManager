@@ -28,8 +28,12 @@ namespace Tests.UnitTests.Domain.Services
 		}
 
 		[Theory]
-		[InlineData(1, 1, 1)]
-		public void Given_randomTeamCreator_When_creating_teams_Then_next_is_called_expected_number_of_times(int expectedHits, int numberPlayersInlist, int numberPlayersPerTeam)
+		[InlineData(1, 1)]
+		[InlineData(2, 2)]
+		[InlineData(2, 1)]
+		[InlineData(5, 1)]
+		[InlineData(6, 2)]
+		public void Given_randomTeamCreator_When_creating_teams_Then_next_is_called_expected_number_of_times(int numberPlayersInlist, int numberPlayersPerTeam)
 		{
 			var randomSubstitute = Substitute.For<IRandom>();
 			var teamCreator = ArrangeTeamCreator(randomSubstitute, numberPlayersInlist, numberPlayersPerTeam);
