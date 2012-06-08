@@ -51,10 +51,9 @@ namespace Tests.UnitTests.Domain.Services
 			return new RandomTeamCreator(random, numberPlayersPerTeam, playerList);
 		}
 
-		private List<Player> ArrangePlayerList(int numberPlayers)
+		private IEnumerable<Player> ArrangePlayerList(int numberPlayers)
 		{
-			return Enumerable.Repeat(ArrangePlayer(), numberPlayers)
-				.ToList();
+			return Enumerable.Repeat(ArrangePlayer(), numberPlayers);
 		}
 
 		private Player ArrangePlayer()
