@@ -3,6 +3,7 @@ using System.Linq;
 using Domain.Entities;
 using Domain.Services;
 using Domain.Tools;
+using NSubstitute;
 using Xunit;
 using Xunit.Extensions;
 
@@ -26,10 +27,28 @@ namespace Tests.UnitTests.Domain.Services
 			Assert.Equal(expectedNumberOfTeams, teams.Count);
 		}
 
+		[Theory]
+		[InlineData(1, 1, 1)]
+		public void Given_randomTeamCreator_When_creating_teams_Then_next_is_called_expected_number_of_times(int expectedHits, int numberPlayersInlist, int numberPlayersPerTeam)
+		{
+			var randomSubstitute = Substitute.For<IRandom>();
+			var teamCreator = ArrangeTeamCreator(randomSubstitute, numberPlayersInlist, numberPlayersPerTeam);
+
+			teamCreator.CreateTeams();
+
+			randomSubstitute.Received(numberPlayersInlist).Next(Arg.Any<int>());
+		}
+
 		private RandomTeamCreator ArrangeTeamCreator(int numberPlayersInList, int numberPlayersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInList);
 			return new RandomTeamCreator(new FoosBallRandom(), numberPlayersPerTeam, playerList);
+		}
+
+		private RandomTeamCreator ArrangeTeamCreator(IRandom random, int numberPlayersInList, int numberPlayersPerTeam)
+		{
+			var playerList = ArrangePlayerList(numberPlayersInList);
+			return new RandomTeamCreator(random, numberPlayersPerTeam, playerList);
 		}
 
 		private List<Player> ArrangePlayerList(int numberPlayers)
