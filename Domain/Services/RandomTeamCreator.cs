@@ -9,7 +9,7 @@ namespace Domain.Services
 	{
 		private IRandom _random;
 
-		public RandomTeamCreator(IRandom random, int playersPerTeam, List<Player> players)
+		public RandomTeamCreator(IRandom random, int playersPerTeam, IEnumerable<Player> players)
 			: base(playersPerTeam, players)
 		{
 			_random = random;

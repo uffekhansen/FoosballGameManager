@@ -8,9 +8,9 @@ namespace Domain.Services
 	public abstract class TeamCreator : ITeamCreator
 	{
 		protected readonly int _playersPerTeam;
-		protected readonly List<Player> _players;
+		protected readonly IEnumerable<Player> _players;
 
-		protected TeamCreator(int playersPerTeam, List<Player> players)
+		protected TeamCreator(int playersPerTeam, IEnumerable<Player> players)
 		{
 			_playersPerTeam = playersPerTeam;
 			_players = players;
@@ -40,7 +40,7 @@ namespace Domain.Services
 
 		private void ThrowsIfNotEnoughPlayersForOneTeam()
 		{
-			if (_players.Count < _playersPerTeam)
+			if (_players.Count() < _playersPerTeam)
 			{
 				throw new TeamGenerationException("Not enough players for a single team");
 			}
@@ -48,7 +48,7 @@ namespace Domain.Services
 
 		private void ThrowsIfNumberPlayersDoesNotMatchTeamSettings()
 		{
-			if (_players.Count % _playersPerTeam != 0)
+			if (_players.Count() % _playersPerTeam != 0)
 			{
 				throw new TeamGenerationException("Number players not divisable with number players per team in team settings");
 			}
