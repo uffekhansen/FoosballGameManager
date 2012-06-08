@@ -7,7 +7,7 @@ namespace Domain.Services
 {
 	public class RandomTeamCreator : TeamCreator
 	{
-		private IRandom _random;
+		private readonly IRandom _random;
 
 		public RandomTeamCreator(IRandom random, int playersPerTeam, IEnumerable<Player> players)
 			: base(playersPerTeam, players)
