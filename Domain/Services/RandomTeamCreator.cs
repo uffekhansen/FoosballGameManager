@@ -20,13 +20,34 @@ namespace Domain.Services
 			var teams = new List<Team>();
 			var players = _players.ToList();
 
-			for (int i = 0; i < players.Count; i += _playersPerTeam)
+			for (int i = 0; i < _players.Count(); i += _playersPerTeam)
 			{
-				var playersForTeam = players.GetRange(i, _playersPerTeam).ToList();
-				teams.Add(new Team(playersForTeam));
+				teams.Add(TakeTeam(players));
 			}
 
 			return teams;
+		}
+
+		private Team TakeTeam(List<Player> players)
+		{
+			var playersForTeam = new List<Player>();
+
+			for (int i = 0; i < _playersPerTeam; i++)
+			{
+				playersForTeam.Add(TakeRandomPlayer(players));
+			}
+
+			return new Team(playersForTeam);
+		}
+
+		private Player TakeRandomPlayer(List<Player> players)
+		{
+			int index = _random.Next(players.Count);
+			var player = players.ElementAt(index);
+
+			players.RemoveAt(index);
+
+			return player;
 		}
 	}
 }
