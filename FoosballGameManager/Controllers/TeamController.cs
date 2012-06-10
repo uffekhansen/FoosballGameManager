@@ -4,7 +4,7 @@ namespace FoosballGameManager.Controllers
 {
     public class TeamController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Players()
         {
             return View();
         }
