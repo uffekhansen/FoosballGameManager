@@ -2,13 +2,18 @@
 
 namespace Domain.Entities
 {
-    public class Team
-    {
-        public List<Player> Players;
+	public class Team
+	{
+		private readonly IEnumerable<Player> _players;
 
-        public Team()
-        {
-            Players = new List<Player>();
-        }
-    }
+		public IEnumerable<Player> Players
+		{
+			get { return _players; }
+		}
+
+		public Team(IEnumerable<Player> players)
+		{
+			_players = players;
+		}
+	}
 }
