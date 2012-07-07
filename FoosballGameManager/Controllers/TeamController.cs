@@ -2,11 +2,11 @@
 
 namespace FoosballGameManager.Controllers
 {
-    public class TeamController : Controller
-    {
-        public ActionResult Players()
-        {
-            return View();
-        }
-    }
+	public class TeamController : Controller
+	{
+		public ActionResult Players()
+		{
+			return View();
+		}
+	}
 }
