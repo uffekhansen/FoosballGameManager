@@ -9,7 +9,7 @@ using Xunit.Extensions;
 
 namespace Tests.UnitTests.Domain.Services
 {
-	public class RandomTeamCreatorTest : InDatabaseTest
+	public class RandomTeamCreatorTest
 	{
 		[Theory]
 		[InlineData(1, 1, 1)]
