@@ -1,15 +1,16 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using DAL.Queries;
 
-namespace FoosballGameManager.Installers
+namespace DAL.Installers
 {
 	public class DalInstaller : IWindsorInstaller
 	{
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
-			container.Register(Classes.FromThisAssembly()
-				.InSameNamespaceAs<DalInstaller>()
+			container.Register(Component.For<IGetPlayersQuery>()
+				.ImplementedBy<GetPlayersQuery>()
 				.LifestyleTransient());
 		}
 	}
