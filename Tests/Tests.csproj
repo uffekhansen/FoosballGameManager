@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\DataBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\Domain\Services\RandomTeamCreatorTest.cs" />
     <Compile Include="UnitTests\Domain\Services\TeamCreatorTest.cs" />
