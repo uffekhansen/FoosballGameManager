@@ -21,7 +21,7 @@ namespace FoosballGameManager
 		private static IServiceProvider _serviceProvider;
 		private static ISessionFactory _sessionFactory;
 
-		private const string _databaseFileName = @"C:\Users\Uffe\Desktop\dbfiles\foosball.db";
+		private const string _databaseFilename = @"C:\Users\Uffe\Desktop\dbfiles\foosball.db";
 
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
@@ -69,10 +69,7 @@ namespace FoosballGameManager
 		private static ISessionFactory CreateSessionFactory()
 		{
 			return Fluently.Configure()
-				.Database(
-				SQLiteConfiguration.Standard
-				.UsingFile(_databaseFileName)
-				)
+				.Database(SQLiteConfiguration.Standard.UsingFile(_databaseFilename))
 				.Mappings(m => m.FluentMappings.Add<PlayerMapping>())
 				.ExposeConfiguration(BuildSchema)
 				.BuildSessionFactory();
