@@ -3,7 +3,7 @@ using FluentNHibernate.Mapping;
 
 namespace DAL.Mappings
 {
-	class PlayerMapping : ClassMap<Player>
+	public class PlayerMapping : ClassMap<Player>
 	{
 		public PlayerMapping()
 		{

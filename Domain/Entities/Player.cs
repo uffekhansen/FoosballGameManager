@@ -4,8 +4,22 @@ namespace Domain.Entities
 {
 	public class Player
 	{
-		public Guid Id;
-		public string Name;
-		public string Affiliation;
+		public virtual Guid Id
+		{
+			get;
+			set;
+		}
+
+		public virtual string Name
+		{
+			get;
+			set;
+		}
+
+		public virtual string Affiliation
+		{
+			get;
+			set;
+		}
 	}
 }

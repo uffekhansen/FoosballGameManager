@@ -4,6 +4,7 @@ using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using DAL.Installers;
+using DAL.Mappings;
 using Domain.Installers;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -20,7 +21,7 @@ namespace FoosballGameManager
 		private static IServiceProvider _serviceProvider;
 		private static ISessionFactory _sessionFactory;
 
-		private const string _databaseFileName = "foosball.db";
+		private const string _databaseFileName = @"C:\Users\Uffe\Desktop\dbfiles\foosball.db";
 
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
@@ -72,8 +73,7 @@ namespace FoosballGameManager
 				SQLiteConfiguration.Standard
 				.UsingFile(_databaseFileName)
 				)
-				.Mappings(m =>
-							m.FluentMappings.AddFromAssemblyOf<MvcApplication>())
+				.Mappings(m => m.FluentMappings.Add<PlayerMapping>())
 				.ExposeConfiguration(BuildSchema)
 				.BuildSessionFactory();
 		}
