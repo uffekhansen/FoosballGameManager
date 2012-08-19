@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using DAL.Installers;
 using Domain.Installers;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -55,6 +56,7 @@ namespace FoosballGameManager
 			{
 				new FoosballGameManagerInstaller(),
 				new DomainInstaller(),
+				new DalInstaller(),
 			};
 
 			_container = new WindsorContainer();

@@ -142,6 +142,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{7E959837-A37F-4BCE-AD22-99D74408A4DA}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{325D0C97-10FC-4F33-AD5C-6B637648F01F}</Project>
       <Name>Domain</Name>
