@@ -70,7 +70,7 @@ namespace FoosballGameManager
 		{
 			return Fluently.Configure()
 				.Database(SQLiteConfiguration.Standard.UsingFile(_databaseFilename))
-				.Mappings(m => m.FluentMappings.Add<PlayerMapping>())
+				.Mappings(m => m.FluentMappings.AddFromAssemblyOf<PlayerMapping>())
 				.ExposeConfiguration(BuildSchema)
 				.BuildSessionFactory();
 		}
