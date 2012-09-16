@@ -23,6 +23,18 @@ namespace FoosballGameManager
 
 		private const string _databaseFilename = @"C:\Users\Uffe\Desktop\dbfiles\foosball.db";
 
+		protected void Application_Start()
+		{
+			AreaRegistration.RegisterAllAreas();
+
+			RegisterGlobalFilters(GlobalFilters.Filters);
+			RegisterRoutes(RouteTable.Routes);
+
+			BootstrapContainer();
+
+			_sessionFactory = CreateSessionFactory();
+		}
+
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
 			filters.Add(new HandleErrorAttribute());
@@ -38,18 +50,6 @@ namespace FoosballGameManager
 				url: "{controller}/{action}/{id}",
 				defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
 			);
-		}
-
-		protected void Application_Start()
-		{
-			AreaRegistration.RegisterAllAreas();
-
-			RegisterGlobalFilters(GlobalFilters.Filters);
-			RegisterRoutes(RouteTable.Routes);
-
-			BootstrapContainer();
-
-			_sessionFactory = CreateSessionFactory();
 		}
 
 		private static void BootstrapContainer()
