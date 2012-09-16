@@ -36,6 +36,7 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Windsor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.1.7.1.1\Lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
