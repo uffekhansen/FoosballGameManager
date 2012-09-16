@@ -3,7 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using DAL.Queries;
 
-namespace DAL.Installers
+namespace DAL.Infrastructure.Installers
 {
 	public class DalInstaller : IWindsorInstaller
 	{

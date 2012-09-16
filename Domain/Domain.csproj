@@ -47,7 +47,7 @@
     <Compile Include="Enums\TeamGenerationRule.cs" />
     <Compile Include="Exceptions\TeamGenerationException.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Installers\DomainInstaller.cs" />
+    <Compile Include="Infrastructure\Installers\DomainInstaller.cs" />
     <Compile Include="Services\ITeamCreator.cs" />
     <Compile Include="Services\RandomTeamCreator.cs" />
     <Compile Include="Services\TeamCreator.cs" />

@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Installers\DalInstaller.cs" />
+    <Compile Include="Infrastructure\Installers\DalInstaller.cs" />
     <Compile Include="Mappings\PlayerMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\IGetPlayersQuery.cs" />

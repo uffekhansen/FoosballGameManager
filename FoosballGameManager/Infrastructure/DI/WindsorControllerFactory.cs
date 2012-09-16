@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel;
 
-namespace FoosballGameManager.DI
+namespace FoosballGameManager.Infrastructure.DI
 {
 	public class WindsorControllerFactory : DefaultControllerFactory
 	{

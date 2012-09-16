@@ -78,11 +78,11 @@
   <ItemGroup>
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\TempController.cs" />
-    <Compile Include="DI\WindsorControllerFactory.cs" />
+    <Compile Include="Infrastructure\DI\WindsorControllerFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Installers\FoosballGameManagerInstaller.cs" />
+    <Compile Include="Infrastructure\Installers\FoosballGameManagerInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\PlayersViewModel.cs" />
   </ItemGroup>
