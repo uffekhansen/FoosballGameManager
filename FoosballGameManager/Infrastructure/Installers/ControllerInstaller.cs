@@ -5,7 +5,7 @@ using Castle.Windsor;
 
 namespace FoosballGameManager.Infrastructure.Installers
 {
-	public class FoosballGameManagerInstaller : IWindsorInstaller
+	public class ControllerInstaller : IWindsorInstaller
 	{
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{

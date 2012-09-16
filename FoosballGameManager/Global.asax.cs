@@ -60,7 +60,7 @@ namespace FoosballGameManager
 		{
 			var installers = new IWindsorInstaller[]
 			{
-				new FoosballGameManagerInstaller(),
+				new ControllerInstaller(),
 				new DomainInstaller(),
 				new DalInstaller()
 			};
