@@ -48,6 +48,9 @@ namespace FoosballGameManager
 
 			BootstrapContainer();
 
+			var windsorControllerFactory = new WindsorControllerFactory(_container.Kernel);
+			ControllerBuilder.Current.SetControllerFactory(windsorControllerFactory);
+
 			_sessionFactory = CreateSessionFactory();
 		}
 
