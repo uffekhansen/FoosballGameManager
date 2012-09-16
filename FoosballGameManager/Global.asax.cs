@@ -3,12 +3,13 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using DAL.Installers;
+using DAL.Infrastructure.Installers;
 using DAL.Mappings;
-using Domain.Installers;
+using Domain.Infrastructure.Installers;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using FoosballGameManager.Installers;
+using FoosballGameManager.Infrastructure.DI;
+using FoosballGameManager.Infrastructure.Installers;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -61,7 +62,7 @@ namespace FoosballGameManager
 			{
 				new FoosballGameManagerInstaller(),
 				new DomainInstaller(),
-				new DalInstaller(),
+				new DalInstaller()
 			};
 
 			_container = new WindsorContainer();
