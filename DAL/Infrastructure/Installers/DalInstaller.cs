@@ -1,7 +1,6 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using DAL.Queries;
 
 namespace DAL.Infrastructure.Installers
 {
@@ -9,8 +8,10 @@ namespace DAL.Infrastructure.Installers
 	{
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
-			container.Register(Component.For<IGetPlayersQuery>()
-				.ImplementedBy<GetPlayersQuery>()
+			container.Register(
+				Classes.FromThisAssembly()
+				.Pick()
+				.WithServiceDefaultInterfaces()
 				.LifestyleTransient());
 		}
 	}

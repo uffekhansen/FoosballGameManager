@@ -12,7 +12,8 @@ namespace Domain.Infrastructure.Installers
 			container.Register(
 				Classes.FromThisAssembly()
 				.Pick()
-				.WithServiceDefaultInterfaces());
+				.WithServiceDefaultInterfaces()
+				.LifestyleTransient());
 		}
 	}
 }
