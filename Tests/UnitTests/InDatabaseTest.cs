@@ -10,7 +10,8 @@ namespace Tests.UnitTests
 {
 	public class InDatabaseTest
 	{
-		private ISession _session;
+		protected ISession _session;
+
 		private IWindsorContainer _container;
 		private static ISessionFactory _sessionFactory;
 
