@@ -19,7 +19,6 @@ namespace FoosballGameManager
 	public class MvcApplication : System.Web.HttpApplication
 	{
 		private static IWindsorContainer _container;
-		private static IServiceProvider _serviceProvider;
 		private static ISessionFactory _sessionFactory;
 
 		private const string _databaseFilename = @"C:\Users\Uffe\Desktop\dbfiles\foosball.db";
@@ -50,9 +49,6 @@ namespace FoosballGameManager
 
 			BootstrapContainer();
 
-			var windsorControllerFactory = new WindsorControllerFactory(_container.Kernel);
-			ControllerBuilder.Current.SetControllerFactory(windsorControllerFactory);
-
 			_sessionFactory = CreateSessionFactory();
 		}
 
@@ -68,7 +64,8 @@ namespace FoosballGameManager
 			_container = new WindsorContainer();
 			_container.Install(installers);
 
-			_serviceProvider = new WindsorServiceProvider(_container);
+			var windsorControllerFactory = new WindsorControllerFactory(_container.Kernel);
+			ControllerBuilder.Current.SetControllerFactory(windsorControllerFactory);
 		}
 
 		private static ISessionFactory CreateSessionFactory()
