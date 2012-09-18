@@ -1,27 +1,17 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using DAL.Infrastructure.Installers;
-using DAL.Mappings;
 using Domain.Infrastructure.Installers;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
 using FoosballGameManager.Infrastructure.DI;
 using FoosballGameManager.Infrastructure.Installers;
-using NHibernate;
-using NHibernate.Cfg;
-using NHibernate.Tool.hbm2ddl;
 
 namespace FoosballGameManager
 {
 	public class MvcApplication : System.Web.HttpApplication
 	{
 		private static IWindsorContainer _container;
-		private static ISessionFactory _sessionFactory;
-
-		private const string _databaseFilename = @"C:\Users\Uffe\Desktop\dbfiles\foosball.db";
 
 		protected void Application_Start()
 		{
@@ -31,8 +21,6 @@ namespace FoosballGameManager
 			RegisterRoutes(RouteTable.Routes);
 
 			BootstrapContainer();
-
-			_sessionFactory = CreateSessionFactory();
 		}
 
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -58,7 +46,8 @@ namespace FoosballGameManager
 			{
 				new ControllerInstaller(),
 				new DomainInstaller(),
-				new DalInstaller()
+				new DalInstaller(),
+				new SessionInstaller()
 			};
 
 			_container = new WindsorContainer();
@@ -66,20 +55,6 @@ namespace FoosballGameManager
 
 			var windsorControllerFactory = new WindsorControllerFactory(_container.Kernel);
 			ControllerBuilder.Current.SetControllerFactory(windsorControllerFactory);
-		}
-
-		private static ISessionFactory CreateSessionFactory()
-		{
-			return Fluently.Configure()
-				.Database(SQLiteConfiguration.Standard.UsingFile(_databaseFilename))
-				.Mappings(m => m.FluentMappings.AddFromAssemblyOf<PlayerMapping>())
-				.ExposeConfiguration(BuildSchema)
-				.BuildSessionFactory();
-		}
-
-		private static void BuildSchema(Configuration config)
-		{
-			new SchemaExport(config).Create(false, true);
 		}
 	}
 }

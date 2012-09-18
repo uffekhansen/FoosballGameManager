@@ -1,33 +1,22 @@
-﻿using DAL.Mappings;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
-using NHibernate;
-using NHibernate.Cfg;
-using NHibernate.Tool.hbm2ddl;
+﻿using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using Tests.Infrastructure.Installers;
 
 namespace Tests.Infrastructure
 {
 	public class DataBootstrapper
 	{
-		private const string _databaseFilename = @"C:\Users\Uffe\Desktop\dbfiles\foosball_tests.db";
+		private IWindsorContainer _container;
 
 		public void Boostrap()
 		{
-			CreateSessionFactory();
-		}
+			var installers = new IWindsorInstaller[]
+			{
+				new SessionInstaller()
+			};
 
-		private static ISessionFactory CreateSessionFactory()
-		{
-			return Fluently.Configure()
-				.Database(SQLiteConfiguration.Standard.UsingFile(_databaseFilename))
-				.Mappings(m => m.FluentMappings.AddFromAssemblyOf<PlayerMapping>())
-				.ExposeConfiguration(BuildSchema)
-				.BuildSessionFactory();
-		}
-
-		private static void BuildSchema(Configuration config)
-		{
-			new SchemaExport(config).Create(false, true);
+			_container = new WindsorContainer();
+			_container.Install(installers);
 		}
 	}
 }
