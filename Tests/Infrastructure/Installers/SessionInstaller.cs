@@ -31,5 +31,6 @@ namespace Tests.Infrastructure.Installers
 				.Mappings(m => m.FluentMappings.AddFromAssemblyOf<PlayerMapping>())
 				.BuildSessionFactory();
 		}
+
 	}
 }
