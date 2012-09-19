@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\TempController.cs" />
+    <Compile Include="Infrastructure\DI\FoosballContainer.cs" />
     <Compile Include="Infrastructure\DI\WindsorControllerFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

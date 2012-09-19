@@ -42,18 +42,9 @@ namespace FoosballGameManager
 
 		private static void BootstrapContainer()
 		{
-			var installers = new IWindsorInstaller[]
-			{
-				new ControllerInstaller(),
-				new DomainInstaller(),
-				new DalInstaller(),
-				new SessionInstaller()
-			};
+			FoosballContainer.Initialize();
 
-			_container = new WindsorContainer();
-			_container.Install(installers);
-
-			var windsorControllerFactory = new WindsorControllerFactory(_container.Kernel);
+			var windsorControllerFactory = new WindsorControllerFactory(FoosballContainer.Kernel);
 			ControllerBuilder.Current.SetControllerFactory(windsorControllerFactory);
 		}
 	}

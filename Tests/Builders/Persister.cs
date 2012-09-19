@@ -8,10 +8,6 @@ namespace Tests.Builders
 	{
 		private readonly ISession _session;
 		private readonly IList<object> _objects;
-		
-		public Persister()
-		{
-		}
 
 		public Persister(ISession session)
 		{
