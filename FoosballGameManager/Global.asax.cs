@@ -1,11 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using DAL.Infrastructure.Installers;
-using Domain.Infrastructure.Installers;
 using FoosballGameManager.Infrastructure.DI;
-using FoosballGameManager.Infrastructure.Installers;
 
 namespace FoosballGameManager
 {
