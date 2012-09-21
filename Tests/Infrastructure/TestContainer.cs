@@ -6,20 +6,22 @@ namespace Tests.Infrastructure
 {
 	internal static class TestContainer
 	{
+		private static IWindsorContainer _container;
+
 		private static IWindsorContainer WindsorContainer
 		{
 			get
 			{
-				if(WindsorContainer == null)
+				if (_container == null)
 				{
 					Initialize();
 				}
 
-				return WindsorContainer;
+				return _container;
 			}
 			set
 			{
-				WindsorContainer = value;
+				_container = value;
 			}
 		}
 

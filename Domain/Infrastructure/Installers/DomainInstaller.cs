@@ -12,7 +12,7 @@ namespace Domain.Infrastructure.Installers
 				Classes.FromThisAssembly()
 				.Pick()
 				.WithServiceDefaultInterfaces()
-				.LifestyleTransient());
+				.LifestylePerWebRequest());
 		}
 	}
 }

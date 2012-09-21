@@ -11,7 +11,7 @@ namespace FoosballGameManager.Infrastructure.Installers
 		{
 			container.Register(Classes.FromThisAssembly()
 				.BasedOn<IController>()
-				.LifestyleTransient());
+				.LifestylePerWebRequest());
 		}
 	}
 }

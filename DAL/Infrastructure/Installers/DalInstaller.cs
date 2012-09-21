@@ -12,7 +12,7 @@ namespace DAL.Infrastructure.Installers
 				Classes.FromThisAssembly()
 				.Pick()
 				.WithServiceDefaultInterfaces()
-				.LifestyleTransient());
+				.LifestylePerWebRequest());
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel;
+﻿using System;
+using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using DAL.Infrastructure.Installers;
@@ -7,22 +8,24 @@ using FoosballGameManager.Infrastructure.Installers;
 
 namespace FoosballGameManager.Infrastructure.DI
 {
-	internal static class FoosballContainer
+	public class FoosballContainer
 	{
+		private static IWindsorContainer _container;
+
 		private static IWindsorContainer WindsorContainer
 		{
 			get
 			{
-				if(WindsorContainer == null)
+				if (_container == null)
 				{
 					Initialize();
 				}
 
-				return WindsorContainer;
+				return _container;
 			}
 			set
 			{
-				WindsorContainer = value;
+				_container = value;
 			}
 		}
 
@@ -34,7 +37,7 @@ namespace FoosballGameManager.Infrastructure.DI
 			}
 		}
 
-		internal static void Initialize()
+		public static void Initialize()
 		{
 			var installers = new IWindsorInstaller[]
 			{
@@ -48,9 +51,14 @@ namespace FoosballGameManager.Infrastructure.DI
 			WindsorContainer.Install(installers);
 		}
 
-		internal static T Resolve<T>()
+		public static T Resolve<T>()
 		{
 			return WindsorContainer.Resolve<T>();
+		}
+
+		public static object Resolve(Type service)
+		{
+			return WindsorContainer.Resolve(service);
 		}
 	}
 }
