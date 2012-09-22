@@ -29,7 +29,7 @@ namespace Tests.Infrastructure
 		{
 			var installers = new IWindsorInstaller[]
 			{
-				new SessionInstaller()
+				new SessionInstaller(new NHibernateBootstrapper())
 			};
 
 			WindsorContainer = new WindsorContainer();

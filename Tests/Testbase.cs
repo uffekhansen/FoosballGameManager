@@ -6,11 +6,13 @@ namespace Tests
 {
 	public class TestBase
 	{
+		protected readonly ISession _session;
 		protected readonly IPersister _persister;
 
 		public TestBase()
 		{
-			_persister = new Persister(TestContainer.Resolve<ISession>());
+			_session = TestContainer.Resolve<ISession>();
+			_persister = new Persister(_session);
 		}
 	}
 }

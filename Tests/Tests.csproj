@@ -76,6 +76,8 @@
     <Compile Include="Builders\IPersister.cs" />
     <Compile Include="Builders\Persister.cs" />
     <Compile Include="Builders\PlayerBuilder.cs" />
+    <Compile Include="Infrastructure\NHibernateBootstrapper.cs" />
+    <Compile Include="Infrastructure\INHibernateBootstrapper.cs" />
     <Compile Include="Infrastructure\TestContainer.cs" />
     <Compile Include="Infrastructure\DataBootstrapper.cs" />
     <Compile Include="Infrastructure\Installers\SessionInstaller.cs" />
