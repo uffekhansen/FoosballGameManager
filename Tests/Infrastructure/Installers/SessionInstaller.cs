@@ -22,7 +22,7 @@ namespace Tests.Infrastructure.Installers
 				.UsingFactoryMethod(_nHibernateBootstrapper.Bootstrap));
 
 			container.Register(Component.For<ISession>()
-				.LifeStyle.PerThread
+				.LifeStyle.Transient
 				.UsingFactoryMethod(kernel => kernel.Resolve<ISessionFactory>().OpenSession()));
 		}
 	}

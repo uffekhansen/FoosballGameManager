@@ -76,6 +76,7 @@
     <Compile Include="Builders\IPersister.cs" />
     <Compile Include="Builders\Persister.cs" />
     <Compile Include="Builders\PlayerBuilder.cs" />
+    <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="Infrastructure\NHibernateBootstrapper.cs" />
     <Compile Include="Infrastructure\INHibernateBootstrapper.cs" />
     <Compile Include="Infrastructure\TestContainer.cs" />
@@ -83,11 +84,10 @@
     <Compile Include="Infrastructure\Installers\SessionInstaller.cs" />
     <Compile Include="IntegrationTests\DAL\PlayerPersistenceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestBase.cs" />
     <Compile Include="UnitTests\DAL\GetPlayerQuerytest.cs" />
-    <Compile Include="UnitTests\Domain\Extensions\Copy of EnumerableExtensions.cs" />
+    <Compile Include="UnitTests\Domain\Extensions\IntExtensionsTest.cs" />
     <Compile Include="UnitTests\Domain\Extensions\EnumerableExtensions.cs" />
-    <Compile Include="UnitTests\InDatabaseTest.cs" />
+    <Compile Include="Infrastructure\TestBases\InDatabaseTest.cs" />
     <Compile Include="UnitTests\Domain\Services\RandomTeamCreatorTest.cs" />
     <Compile Include="UnitTests\Domain\Services\TeamCreatorTest.cs" />
   </ItemGroup>

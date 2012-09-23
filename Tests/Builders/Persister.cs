@@ -1,6 +1,7 @@
 using System.Collections.Generic;
-using Domain.Extensions;
+using System.Linq;
 using NHibernate;
+using Tests.Extensions;
 
 namespace Tests.Builders
 {
@@ -12,6 +13,7 @@ namespace Tests.Builders
 		public Persister(ISession session)
 		{
 			_session = session;
+			_objects = new List<object>();
 		}
 
 		public void Add(object obj)
@@ -21,7 +23,7 @@ namespace Tests.Builders
 
 		public void Persist()
 		{
-			_objects.Each(x => _session.Save(x));
+			_session.SaveWithTransaction(_objects.ToArray());
 		}
 	}
 }
