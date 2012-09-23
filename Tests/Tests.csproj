@@ -81,7 +81,7 @@
     <Compile Include="Infrastructure\TestContainer.cs" />
     <Compile Include="Infrastructure\DataBootstrapper.cs" />
     <Compile Include="Infrastructure\Installers\SessionInstaller.cs" />
-    <Compile Include="IntegrationTests\DAL\GetPlayersQueryTest.cs" />
+    <Compile Include="IntegrationTests\DAL\PlayerPersistenceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="UnitTests\Domain\Extensions\EnumerableExtensions.cs" />

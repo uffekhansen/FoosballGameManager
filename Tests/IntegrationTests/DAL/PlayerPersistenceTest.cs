@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Tests.IntegrationTests.DAL
 {
-	public class GetPlayersQueryTest : TestBase
+	public class PlayerPersistenceTest : TestBase
 	{
 		[Fact]
 		public void Given_Player_When_Executing_Then_Player_Is_Returned()
