@@ -7,7 +7,14 @@
 
 <h2>Team manager</h2>
 
-@foreach(Player player in Model)
+@foreach (Player player in Model)
 {
 	Html.DisplayFor(x => player);
 }
+
+<div>
+	@using (Html.BeginForm("AddPlayer", "Players", FormMethod.Get))
+	{
+		<input type="submit" value="Tilføj spiller" />
+	}
+</div>
