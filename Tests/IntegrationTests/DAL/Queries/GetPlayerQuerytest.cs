@@ -7,7 +7,7 @@ using Tests.Builders;
 using Tests.Infrastructure.TestBases;
 using Xunit.Extensions;
 
-namespace Tests.UnitTests.DAL
+namespace Tests.IntegrationTests.DAL.Queries
 {
 	public class GetPlayerQuerytest : InDatabaseTest
 	{
