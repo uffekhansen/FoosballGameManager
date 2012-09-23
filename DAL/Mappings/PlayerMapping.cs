@@ -7,7 +7,7 @@ namespace DAL.Mappings
 	{
 		public PlayerMapping()
 		{
-			Id(x => x.Id);
+			Id(x => x.Id).GeneratedBy.Assigned();
 			Map(x => x.Name);
 			Map(x => x.Affiliation);
 		}
