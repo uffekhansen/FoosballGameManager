@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Player>
+
+@{
+	ViewBag.Title = "Team manager";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Team manager</h2>
+
+@foreach(Player player in Model)
+{
+	Html.DisplayFor(x => player);
+}

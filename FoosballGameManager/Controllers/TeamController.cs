@@ -1,12 +1,20 @@
 ﻿using System.Web.Mvc;
+using DAL.Queries;
 
 namespace FoosballGameManager.Controllers
 {
 	public class TeamController : Controller
 	{
-		public ActionResult Players()
+		private readonly IGetPlayersQuery _getPlayersQuery;
+
+		public TeamController(IGetPlayersQuery getPlayersQuery)
 		{
-			return View();
+			_getPlayersQuery = getPlayersQuery;
+		}
+
+		public ActionResult Index()
+		{
+			return View(_getPlayersQuery.Execute());
 		}
 	}
 }
