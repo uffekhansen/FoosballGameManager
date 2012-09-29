@@ -1,14 +1,11 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using Castle.Windsor;
 using FoosballGameManager.Infrastructure.DI;
 
 namespace FoosballGameManager
 {
 	public class MvcApplication : System.Web.HttpApplication
 	{
-		private static IWindsorContainer _container;
-
 		protected void Application_Start()
 		{
 			AreaRegistration.RegisterAllAreas();
