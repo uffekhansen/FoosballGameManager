@@ -82,6 +82,7 @@
     <Compile Include="Infrastructure\TestContainer.cs" />
     <Compile Include="Infrastructure\DataBootstrapper.cs" />
     <Compile Include="Infrastructure\Installers\SessionInstaller.cs" />
+    <Compile Include="IntegrationTests\DAL\Commands\AddCommandTest.cs" />
     <Compile Include="IntegrationTests\DAL\PlayerPersistenceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IntegrationTests\DAL\Queries\GetPlayerQuerytest.cs" />

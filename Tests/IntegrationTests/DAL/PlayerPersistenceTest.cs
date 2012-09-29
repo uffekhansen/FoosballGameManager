@@ -2,7 +2,6 @@
 using Domain.Entities;
 using FluentNHibernate.Testing;
 using Tests.Infrastructure.TestBases;
-using Tests.UnitTests;
 using Xunit;
 
 namespace Tests.IntegrationTests.DAL
