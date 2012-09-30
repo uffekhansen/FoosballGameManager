@@ -1,14 +1,14 @@
 ﻿using System.Web.Mvc;
-using DAL.Queries;
+using DAL.Commands;
 using Domain.Entities;
 
 namespace FoosballGameManager.Controllers
 {
 	public class PlayerController : Controller
 	{
-		private readonly IAddPlayerQuery _addPlayerQuery;
+		private readonly IAddCommand<Player> _addPlayerQuery;
 
-		public PlayerController(IAddPlayerQuery addPlayerQuery)
+		public PlayerController(IAddCommand<Player> addPlayerQuery)
 		{
 			_addPlayerQuery = addPlayerQuery;
 		}

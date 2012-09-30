@@ -49,17 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddCommand.cs" />
+    <Compile Include="Commands\IAddCommand.cs" />
     <Compile Include="Infrastructure\Installers\DalInstaller.cs" />
     <Compile Include="Mappings\PlayerMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queries\AddPlayerQuery.cs" />
-    <Compile Include="Queries\IAddPlayerQuery.cs" />
     <Compile Include="Queries\IGetPlayersQuery.cs" />
     <Compile Include="Queries\GetPlayersQuery.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{325D0C97-10FC-4F33-AD5C-6B637648F01F}</Project>
