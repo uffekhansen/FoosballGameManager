@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Enums\TeamGenerationRule.cs" />
-    <Compile Include="Exceptions\TeamGenerationException.cs" />
+    <Compile Include="Extensions\TeamGenerationException.cs" />
     <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Infrastructure\Installers\DomainInstaller.cs" />
@@ -57,7 +57,9 @@
     <Compile Include="Tools\IRandom.cs" />
     <Compile Include="Tools\Random.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

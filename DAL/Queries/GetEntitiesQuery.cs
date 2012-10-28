@@ -1,22 +1,21 @@
 ﻿using System.Collections.Generic;
-using Domain.Entities;
 using NHibernate;
 using NHibernate.Linq;
 
 namespace DAL.Queries
 {
-	public class GetPlayersQuery : IGetPlayersQuery
+	public class GetEntitiesQuery<T> : IGetEntitiesQuery<T> where T : class
 	{
 		private readonly ISession _session;
 
-		public GetPlayersQuery(ISession session)
+		public GetEntitiesQuery(ISession session)
 		{
 			_session = session;
 		}
 
-		public IEnumerable<Player> Execute()
+		public IEnumerable<T> Execute()
 		{
-			return _session.Query<Player>();
+			return _session.Query<T>();
 		}
 	}
 }

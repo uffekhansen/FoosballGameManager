@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DAL.Queries;
+using Domain.Entities;
 using Domain.Extensions;
 using FluentAssertions;
 using Tests.Builders;
@@ -9,13 +10,13 @@ using Xunit.Extensions;
 
 namespace Tests.IntegrationTests.DAL.Queries
 {
-	public class GetPlayerQuerytest : InDatabaseTest
+	public class GetEntitiesQueryTest : InDatabaseTest
 	{
-		private readonly GetPlayersQuery _getPlayersQuery;
+		private readonly GetEntitiesQuery<Player> _getEntitiesQuery;
 
-		public GetPlayerQuerytest()
+		public GetEntitiesQueryTest()
 		{
-			_getPlayersQuery = new GetPlayersQuery(_session);
+			_getEntitiesQuery = new GetEntitiesQuery<Player>(_session);
 		}
 
 		[Theory]
@@ -26,7 +27,7 @@ namespace Tests.IntegrationTests.DAL.Queries
 			ArrangePlayers(numberPlayers);
 			_persister.Persist();
 
-			var players = _getPlayersQuery.Execute();
+			var players = _getEntitiesQuery.Execute();
 
 			players.Count().Should().Be(numberPlayers);
 		}

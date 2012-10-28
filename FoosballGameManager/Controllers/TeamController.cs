@@ -1,13 +1,14 @@
 ﻿using System.Web.Mvc;
 using DAL.Queries;
+using Domain.Entities;
 
 namespace FoosballGameManager.Controllers
 {
 	public class TeamController : Controller
 	{
-		private readonly IGetPlayersQuery _getPlayersQuery;
+		private readonly IGetEntitiesQuery<Player> _getPlayersQuery;
 
-		public TeamController(IGetPlayersQuery getPlayersQuery)
+		public TeamController(IGetEntitiesQuery<Player> getPlayersQuery)
 		{
 			_getPlayersQuery = getPlayersQuery;
 		}
