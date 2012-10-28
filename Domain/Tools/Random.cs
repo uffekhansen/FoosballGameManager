@@ -2,7 +2,7 @@
 
 namespace Domain.Tools
 {
-	public class FoosBallRandom : IRandom
+	public class FoosballRandom : IRandom
 	{
 		private readonly Random _random = new Random();
 

@@ -1,9 +1,6 @@
 ﻿using System;
 using Domain.Extensions;
-using FluentAssertions;
-using FluentAssertions.Assertions;
 using NHibernate;
-using NSubstitute;
 
 namespace Tests.Extensions
 {

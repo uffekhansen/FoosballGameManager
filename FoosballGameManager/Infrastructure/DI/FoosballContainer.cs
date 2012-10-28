@@ -60,5 +60,10 @@ namespace FoosballGameManager.Infrastructure.DI
 		{
 			return WindsorContainer.Resolve(service);
 		}
+
+		public static void Dispose()
+		{
+			_container.Dispose();
+		}
 	}
 }

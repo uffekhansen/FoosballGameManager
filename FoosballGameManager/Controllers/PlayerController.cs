@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using DAL.Commands;
 using Domain.Entities;
 
@@ -15,7 +16,14 @@ namespace FoosballGameManager.Controllers
 
 		public ActionResult AddPlayer()
 		{
-			_addPlayerQuery.Execute(new Player());
+			var player = new Player
+			{
+				Affiliation = "foo",
+				Id = Guid.NewGuid(),
+				Name = "bar",
+			};
+
+			_addPlayerQuery.Execute(player);
 			return RedirectToAction("Index", "Team");
 		}
 	}
