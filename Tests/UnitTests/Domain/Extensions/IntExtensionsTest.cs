@@ -6,7 +6,7 @@ namespace Tests.UnitTests.Domain.Extensions
 {
 	public class IntExtensionsTest
 	{
-		private int _numberOfTimesInvoked = 0;
+		private int _numberOfTimesInvoked;
 
 		[Theory]
 		[InlineData(0)]
