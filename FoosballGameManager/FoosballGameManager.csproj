@@ -78,7 +78,6 @@
   <ItemGroup>
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
-    <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Infrastructure\DI\FoosballContainer.cs" />
     <Compile Include="Infrastructure\DI\WindsorControllerFactory.cs" />
     <Compile Include="Global.asax.cs">
@@ -138,9 +137,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Temp\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
