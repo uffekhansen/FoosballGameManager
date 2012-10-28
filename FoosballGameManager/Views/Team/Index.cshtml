@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Player>
+﻿@model PlayersViewModel
 
 @{
 	ViewBag.Title = "Team manager";
@@ -6,15 +6,4 @@
 }
 
 <h2>Team manager</h2>
-
-@foreach (Player player in Model)
-{
-	@Html.DisplayFor(x => player)
-}
-
-<div>
-	@using (Html.BeginForm("AddPlayer", "Player", FormMethod.Get))
-	{
-		<input type="submit" value="Tilføj spiller" />
-	}
-</div>
+@Html.DropDownListFor(model => model.SelectedPlayerId, new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"))

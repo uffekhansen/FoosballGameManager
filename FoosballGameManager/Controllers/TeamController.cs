@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using DAL.Queries;
 using Domain.Entities;
+using FoosballGameManager.ViewModels;
 
 namespace FoosballGameManager.Controllers
 {
@@ -15,7 +17,12 @@ namespace FoosballGameManager.Controllers
 
 		public ActionResult Index()
 		{
-			return View(_getPlayersQuery.Execute());
+			var viewModel = new PlayersViewModel
+			{
+				Players = _getPlayersQuery.Execute(), SelectedPlayerId = Guid.Empty,
+			};
+
+			return View(viewModel);
 		}
 	}
 }
