@@ -1,0 +1,11 @@
+﻿@model Domain.Entities.Player
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Player", FormMethod.Post, null) )
+{
+	@Html.EditorFor(model => model)
+	<input type="submit" name="Tilføj"/>
+}

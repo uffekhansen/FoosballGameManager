@@ -1,0 +1,13 @@
+﻿@model Domain.Entities.Player
+
+<div>
+	<p>
+		@Html.LabelFor(m => m.Name)
+		@Html.EditorFor(m => m.Name)
+	</p>
+	
+	<p>
+		@Html.LabelFor(m => m.Affiliation)
+		@Html.EditorFor(m => m.Affiliation)
+	</p>
+</div>

@@ -14,16 +14,17 @@ namespace FoosballGameManager.Controllers
 			_addPlayerQuery = addPlayerQuery;
 		}
 
-		public ActionResult AddPlayer()
+		public ActionResult New()
 		{
-			var player = new Player
-			{
-				Affiliation = "foo",
-				Id = Guid.NewGuid(),
-				Name = "bar",
-			};
+			return View();
+		}
 
+		[HttpPost]
+		public ActionResult Create(Player player)
+		{
+			player.Id = Guid.NewGuid();
 			_addPlayerQuery.Execute(player);
+
 			return RedirectToAction("Index", "Team");
 		}
 	}

@@ -20,6 +20,10 @@ namespace FoosballGameManager.Controllers
 			var viewModel = new PlayersViewModel
 			{
 				Players = _getPlayersQuery.Execute(), SelectedPlayerId = Guid.Empty,
+				NewPlayer = new Player()
+				{
+					Name = "test",
+				}
 			};
 
 			return View(viewModel);

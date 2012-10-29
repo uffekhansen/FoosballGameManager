@@ -6,4 +6,10 @@
 }
 
 <h2>Team manager</h2>
+
 @Html.DropDownListFor(model => model.SelectedPlayerId, new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"))
+
+@using (Html.BeginForm("New", "Player", FormMethod.Get) )
+{
+	<input type="submit" title="Tilføj spiller"/>
+}
