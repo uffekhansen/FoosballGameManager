@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DAL.Commands;
 using Domain.Entities;
 
@@ -22,7 +21,6 @@ namespace FoosballGameManager.Controllers
 		[HttpPost]
 		public ActionResult Create(Player player)
 		{
-			player.Id = Guid.NewGuid();
 			_addPlayerQuery.Execute(player);
 
 			return RedirectToAction("Index", "Team");

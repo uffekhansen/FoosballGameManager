@@ -4,22 +4,15 @@ namespace Domain.Entities
 {
 	public class Player
 	{
-		public virtual Guid Id
-		{
-			get;
-			set;
-		}
+		public virtual Guid Id { get; set; }
 
-		public virtual string Name
-		{
-			get;
-			set;
-		}
+		public virtual string Name { get; set; }
 
-		public virtual string Affiliation
+		public virtual string Affiliation { get; set; }
+
+		public Player()
 		{
-			get;
-			set;
+			Id = Guid.NewGuid();
 		}
 	}
 }
