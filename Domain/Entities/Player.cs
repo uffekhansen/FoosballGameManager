@@ -1,18 +1,9 @@
-﻿using System;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
-	public class Player
+	public class Player : AssignedIdEntity
 	{
-		public virtual Guid Id { get; set; }
-
 		public virtual string Name { get; set; }
 
 		public virtual string Affiliation { get; set; }
-
-		public Player()
-		{
-			Id = Guid.NewGuid();
-		}
 	}
 }

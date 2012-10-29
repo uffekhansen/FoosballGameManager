@@ -34,13 +34,11 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 				new Player
 				{
 					Affiliation = "ATeam",
-					Id = Guid.NewGuid(),
 					Name = "A",
 				},
 				new Player
 				{
 					Affiliation = "ATeam",
-					Id = Guid.NewGuid(),
 					Name = "B",
 				},
 			};

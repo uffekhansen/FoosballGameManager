@@ -1,5 +1,4 @@
-﻿using System;
-using Domain.Entities;
+﻿using Domain.Entities;
 using FluentNHibernate.Testing;
 using Tests.Infrastructure.TestBases;
 using Xunit;
@@ -13,7 +12,6 @@ namespace Tests.IntegrationTests.DAL
 		{
 			new PersistenceSpecification<Player>(_session)
 				.CheckProperty(p => p.Affiliation, "Player affiliation")
-				.CheckProperty(p => p.Id, Guid.NewGuid())
 				.CheckProperty(p => p.Name, "Player name")
 				.VerifyTheMappings();
 		}
