@@ -5,6 +5,8 @@ using DAL.Mappings;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 
 namespace FoosballGameManager.Infrastructure.Installers
 {
@@ -24,12 +26,19 @@ namespace FoosballGameManager.Infrastructure.Installers
 				.UsingFactoryMethod(kernel => kernel.Resolve<ISessionFactory>().OpenSession()));
 		}
 
-		private static ISessionFactory CreateSessionFactory()
+		private ISessionFactory CreateSessionFactory()
 		{
 			return Fluently.Configure()
 				.Database(SQLiteConfiguration.Standard.UsingFile(_databaseFilename))
 				.Mappings(m => m.FluentMappings.AddFromAssemblyOf<PlayerMapping>())
+				.ExposeConfiguration(BuildSchema)
 				.BuildSessionFactory();
+		}
+
+		private void BuildSchema(Configuration configuration)
+		{
+			var schemaExport = new SchemaExport(configuration);
+			schemaExport.Create(script: false, export: true);
 		}
 	}
 }
