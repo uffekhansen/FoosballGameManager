@@ -1,16 +1,17 @@
 ﻿using System.Web.Mvc;
 using DAL.Commands;
 using Domain.Entities;
+using Domain.Exceptions;
 
 namespace FoosballGameManager.Controllers
 {
 	public class PlayerController : Controller
 	{
-		private readonly IAddCommand<Player> _addPlayerQuery;
+		private readonly AddPlayerCommand _addPlayerCommand;
 
-		public PlayerController(IAddCommand<Player> addPlayerQuery)
+		public PlayerController(AddPlayerCommand addPlayerCommand)
 		{
-			_addPlayerQuery = addPlayerQuery;
+			_addPlayerCommand = addPlayerCommand;
 		}
 
 		public ActionResult New()
@@ -21,7 +22,15 @@ namespace FoosballGameManager.Controllers
 		[HttpPost]
 		public ActionResult Create(Player player)
 		{
-			_addPlayerQuery.Execute(player);
+			try
+			{
+				_addPlayerCommand.Execute(player);
+			}
+			catch (AlreadyExistsException exception)
+			{
+				ModelState.AddModelError("_FORM", exception.Message);
+				return View("New");
+			}
 
 			return RedirectToAction("Index", "Team");
 		}

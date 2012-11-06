@@ -4,7 +4,7 @@ namespace Tests.Builders
 {
 	public class PlayerBuilder : Builder<Player>
 	{
-		public string Name;
+		public string Name = "Default name";
 
 		public PlayerBuilder()
 		{

@@ -155,7 +155,7 @@
     <Content Include="Views\Team\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Team\EditorTemplates\Player.cshtml" />
+    <Content Include="Views\Player\EditorTemplates\Player.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Player\New.cshtml" />

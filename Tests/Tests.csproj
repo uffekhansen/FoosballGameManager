@@ -84,6 +84,7 @@
     <Compile Include="Infrastructure\DataBootstrapper.cs" />
     <Compile Include="Infrastructure\Installers\SessionInstaller.cs" />
     <Compile Include="IntegrationTests\DAL\Commands\AddCommandTest.cs" />
+    <Compile Include="IntegrationTests\DAL\Commands\AddPlayerCommandTest.cs" />
     <Compile Include="IntegrationTests\DAL\PlayerPersistenceTest.cs" />
     <Compile Include="IntegrationTests\DAL\Queries\IsPlayerNameUniqueQueryTest.cs" />
     <Compile Include="IntegrationTests\DAL\Queries\GetEntitiesQueryTest.cs" />

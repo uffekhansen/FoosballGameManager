@@ -9,24 +9,34 @@ using Xunit;
 
 namespace Tests.IntegrationTests.DAL.Commands
 {
-	public class AddCommandTest : InDatabaseTest
+	public abstract class AddCommandTest<T> : InDatabaseTest where T : class
 	{
-		private readonly AddCommand<Player> _addCommand;
-
-		public AddCommandTest()
-		{
-			_addCommand = new AddCommand<Player>(_session);
-		}
+		protected IAddCommand<T> _addCommand;
 
 		[Fact]
 		public void Given_Entity_When_Calling_Execute_Then_Player_Is_Persisted()
 		{
-			var entity = new Player();
+			var entity = CreateEntity();
 
 			_session.ExecuteWithTransactionAndClear(() => _addCommand.Execute(entity));
 
 			var persistedPlayer = _session.Query<Player>().First();
 			persistedPlayer.Should().NotBeNull();
+		}
+
+		protected abstract T CreateEntity();
+	}
+
+	public class AddCommandTest_WithPlayerEntity : AddCommandTest<Player>
+	{
+		public AddCommandTest_WithPlayerEntity() 
+		{
+			_addCommand = new AddCommand<Player>(_session);
+		}
+
+		protected override Player CreateEntity()
+		{
+			return new Player();
 		}
 	}
 }
