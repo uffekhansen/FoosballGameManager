@@ -7,7 +7,8 @@
 
 <h2>Team manager</h2>
 
-@Html.DropDownListFor(model => model.SelectedPlayerId, new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"))
+@Html.ListBoxFor(model => model.SelectedPlayerId, new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"))
+@Html.ListBox("selected-player-list-box", new List<SelectListItem>())
 
 @using (Html.BeginForm("New", "Player", FormMethod.Get) )
 {
