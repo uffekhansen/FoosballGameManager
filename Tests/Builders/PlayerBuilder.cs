@@ -1,11 +1,10 @@
-﻿using System;
-using Domain.Entities;
+﻿using Domain.Entities;
 
 namespace Tests.Builders
 {
 	public class PlayerBuilder : Builder<Player>
 	{
-		public Guid Id = Guid.NewGuid();
+		public string Name;
 
 		public PlayerBuilder()
 		{

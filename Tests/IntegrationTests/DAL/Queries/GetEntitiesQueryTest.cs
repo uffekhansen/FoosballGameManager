@@ -36,11 +36,7 @@ namespace Tests.IntegrationTests.DAL.Queries
 		{
 			var playerBuilder = new PlayerBuilder();
 
-			numberPlayers.TimesDo(() =>
-			{
-				playerBuilder.Id = Guid.NewGuid();
-				_persister.Add(playerBuilder.Build());
-			});
+			numberPlayers.TimesDo(() => _persister.Add(playerBuilder.Build()));
 		}
 	}
 }
