@@ -7,7 +7,7 @@
 
 <h2>Team manager</h2>
 
-@using (Html.BeginForm("Create", "Team", FormMethod.Post) )
+@using (Html.BeginForm("Create", "TeamSelection", FormMethod.Post) )
 {
 	<div>
 		@Html.ListBoxFor(model => model.SelectedPlayers, new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"))

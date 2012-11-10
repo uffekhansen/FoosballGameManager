@@ -14,13 +14,13 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 	public class TeamControllerTest
 	{
 		private IEnumerable<Player> _players;
-		private readonly TeamController _teamController;
+		private readonly TeamSelectionController _teamSelectionController;
 		private readonly ITeamCreator _teamCreator = Substitute.For<ITeamCreator>();
 		private readonly IGetEntitiesQuery<Player> _getPlayerEntitiesQuery = Substitute.For<IGetEntitiesQuery<Player>>();
 
 		public TeamControllerTest()
 		{
-			_teamController = new TeamController(_getPlayerEntitiesQuery, _teamCreator);
+			_teamSelectionController = new TeamSelectionController(_getPlayerEntitiesQuery, _teamCreator);
 		}
 
 		[Fact]
@@ -28,7 +28,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		{
 			ArrangeGetEntitiesQueryReturningPlayers();
 
-			var viewResult = _teamController.Index() as ViewResult;
+			var viewResult = _teamSelectionController.Index() as ViewResult;
 
 			viewResult.Model.As<PlayersViewModel>().Players.Should().BeEquivalentTo(_players);
 		}
@@ -36,7 +36,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		[Fact]
 		public void Given_GetEntitiesQuery_For_Players_When_Index_Then_GetEntitiesQuery_Is_Executed()
 		{
-			_teamController.Index();
+			_teamSelectionController.Index();
 
 			_getPlayerEntitiesQuery.Received(1).Execute();
 		}
@@ -44,7 +44,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		[Fact]
 		public void Given_TeamCreator_When_Create_Then_TeamCreator_Is_Executed()
 		{
-			_teamController.Create(null);
+			_teamSelectionController.Create(null);
 
 			_teamCreator.Received(1).CreateTeams();
 		}
