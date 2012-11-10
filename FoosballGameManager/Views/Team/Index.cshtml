@@ -5,10 +5,24 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section HeadSection
+{
+	<script src="/Scripts/jquery-1.4.4.js" type="text/javascript"></script>
+	<script src="/Scripts/CopyListSelectionToList.js" type="text/javascript"></script>
+}
+
 <h2>Team manager</h2>
 
-@Html.ListBoxFor(model => model.SelectedPlayerId, new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"))
-@Html.ListBox("selected-player-list-box", new List<SelectListItem>())
+@*@Html.ListBoxFor(model => model.SelectedPlayerId, new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"))*@
+<div>
+	@Html.ListBox("available-player-list", new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"))
+	@Html.ListBox("selected-player-list", new List<SelectListItem>())
+</div>
+
+<div>
+	<button onclick="copyListToList('available-player-list', 'selected-player-list')">Select</button>
+	<button onclick="copyListToList('selected-player-list', 'available-player-list')">Remove</button>
+</div>
 
 @using (Html.BeginForm("New", "Player", FormMethod.Get) )
 {

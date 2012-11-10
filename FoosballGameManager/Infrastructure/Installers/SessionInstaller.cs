@@ -37,8 +37,8 @@ namespace FoosballGameManager.Infrastructure.Installers
 
 		private void BuildSchema(Configuration configuration)
 		{
-			var schemaExport = new SchemaExport(configuration);
-			schemaExport.Create(script: false, export: true);
+			//var schemaExport = new SchemaExport(configuration);
+			//schemaExport.Create(script: false, export: true);
 		}
 	}
 }
