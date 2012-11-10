@@ -47,6 +47,7 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Enums\TeamGenerationRule.cs" />
     <Compile Include="Exceptions\AlreadyExistsException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Extensions\TeamGenerationException.cs" />
     <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />

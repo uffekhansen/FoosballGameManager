@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using DAL.Queries;
 using Domain.Entities;
 using Domain.Extensions;

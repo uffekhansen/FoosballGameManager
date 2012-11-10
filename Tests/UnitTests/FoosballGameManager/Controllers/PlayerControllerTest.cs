@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
 using System.Web.Mvc;
 using DAL.Commands;
-using DAL.Queries;
 using Domain.Entities;
 using Domain.Exceptions;
-using Domain.Services;
 using FluentAssertions;
 using FoosballGameManager.Controllers;
-using FoosballGameManager.ViewModels;
 using NSubstitute;
 using Xunit;
 
@@ -57,9 +53,20 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		{
 			_addPlayerCommand.When(x => x.Execute(Arg.Any<Player>())).Do(x => { throw new AlreadyExistsException("unit test"); });
 
-			var result = _playerController.Create(null) as ViewResult;
+			var viewResult = _playerController.Create(null) as ViewResult;
 
-			result.ViewName.Should().Be("New");
+			viewResult.ViewName.Should().Be("New");
+		}
+
+		[Fact]
+		public void Given_AddPlayerCommand_Throws_AlreadyExistsException_When_New_Then_ModelsState_Contains_Exception_Message()
+		{
+			const string exceptionMessage = "unit test";
+			_addPlayerCommand.When(x => x.Execute(Arg.Any<Player>())).Do(x => { throw new AlreadyExistsException(exceptionMessage); });
+
+			var viewResult = _playerController.Create(null) as ViewResult;
+
+			viewResult.ViewData.ModelState["_Form"].Errors.Single().ErrorMessage.Should().Be(exceptionMessage);
 		}
 	}
 }
