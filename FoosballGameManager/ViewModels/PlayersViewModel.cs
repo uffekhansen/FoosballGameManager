@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Domain.Entities;
 
 namespace FoosballGameManager.ViewModels
@@ -7,6 +8,6 @@ namespace FoosballGameManager.ViewModels
 	{
 		public IEnumerable<Player> Players { get; set; }
 
-		public IEnumerable<string> SelectedPlayers { get; set; }
+		public IEnumerable<Guid> SelectedPlayers { get; set; }
 	}
 }
