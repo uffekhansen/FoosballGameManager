@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DAL.Queries;
 using Domain.Entities;
 using FoosballGameManager.ViewModels;
