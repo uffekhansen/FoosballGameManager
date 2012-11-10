@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using DAL.Queries;
 using Domain.Entities;
@@ -19,14 +20,16 @@ namespace FoosballGameManager.Controllers
 		{
 			var viewModel = new PlayersViewModel
 			{
-				Players = _getPlayersQuery.Execute(), SelectedPlayerId = Guid.Empty,
-				NewPlayer = new Player()
-				{
-					Name = "test",
-				}
+				Players = _getPlayersQuery.Execute(),
 			};
 
 			return View(viewModel);
+		}
+
+		[HttpPost]
+		public ActionResult Create(PlayersViewModel playersViewModel)
+		{
+			return RedirectToAction("Index");
 		}
 	}
 }
