@@ -7,9 +7,9 @@ namespace FoosballGameManager.Controllers
 {
 	public class PlayerController : Controller
 	{
-		private readonly AddPlayerCommand _addPlayerCommand;
+		private readonly IAddPlayerCommand _addPlayerCommand;
 
-		public PlayerController(AddPlayerCommand addPlayerCommand)
+		public PlayerController(IAddPlayerCommand addPlayerCommand)
 		{
 			_addPlayerCommand = addPlayerCommand;
 		}

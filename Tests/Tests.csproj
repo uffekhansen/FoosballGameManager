@@ -57,6 +57,7 @@
     <Reference Include="System.Data.SQLite">
       <HintPath>..\ExternalLibraries\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -94,7 +95,8 @@
     <Compile Include="Infrastructure\TestBases\InDatabaseTest.cs" />
     <Compile Include="UnitTests\Domain\Services\RandomTeamCreatorTest.cs" />
     <Compile Include="UnitTests\Domain\Services\TeamCreatorTest.cs" />
-    <Compile Include="UnitTests\FoosballGameManager\Controllers\TeamControllerTest.cs" />
+    <Compile Include="UnitTests\FoosballGameManager\Controllers\PlayerControllerTest.cs" />
+    <Compile Include="UnitTests\FoosballGameManager\Controllers\TeamSelectionControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
