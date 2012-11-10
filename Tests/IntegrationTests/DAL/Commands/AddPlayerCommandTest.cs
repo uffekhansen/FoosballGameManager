@@ -10,22 +10,22 @@ using Xunit;
 
 namespace Tests.IntegrationTests.DAL.Commands
 {
-	public class AddPlayerCommandTest : AddCommandTest<Player>
+	public class AddPlayerCommandTest
 	{
 		private readonly AddPlayerCommand _addPlayerCommand;
 		private readonly IIsPlayerNameUniqueQuery _isPlayerNameUniqueQuery = Substitute.For<IIsPlayerNameUniqueQuery>();
+		private readonly IAddCommand<Player> _addCommandForPlayer = Substitute.For<IAddCommand<Player>>();
 
 		public AddPlayerCommandTest()
 		{
 			_isPlayerNameUniqueQuery.Execute(Arg.Any<string>()).Returns(true);
-			_addPlayerCommand = new AddPlayerCommand(_session, _isPlayerNameUniqueQuery);
-			_addCommand = _addPlayerCommand;
+			_addPlayerCommand = new AddPlayerCommand(_addCommandForPlayer, _isPlayerNameUniqueQuery);
 		}
 
 		[Fact]
 		public void Given_Player_When_Calling_Execute_Then_IsPlayerNameUnique_Is_Executed()
 		{
-			var player = CreateEntity();
+			var player = ArrangePlayer();
 
 			_addPlayerCommand.Execute(player);
 
@@ -35,7 +35,7 @@ namespace Tests.IntegrationTests.DAL.Commands
 		[Fact]
 		public void Given_IsPlayerNameUniqueQuery_Return_False_When_Calling_Execute_Then_AlreadyExistException_Is_Thrown()
 		{
-			var player = CreateEntity();
+			var player = ArrangePlayer();
 			_isPlayerNameUniqueQuery.Execute(Arg.Any<string>()).Returns(false);
 
 			Action execute = () => _addPlayerCommand.Execute(player);
@@ -46,14 +46,24 @@ namespace Tests.IntegrationTests.DAL.Commands
 		[Fact]
 		public void Given_IsPlayerNameUniqueQuery_Return_True_When_Calling_Execute_Then_No_Exception_Is_Thrown()
 		{
-			var player = CreateEntity();
+			var player = ArrangePlayer();
 
 			Action execute = () => _addPlayerCommand.Execute(player);
 
 			execute();
 		}
 
-		protected override Player CreateEntity()
+		[Fact]
+		public void Given_AddCommand_When_Execute_Then_AddCommand_Is_Executed()
+		{
+			var player = ArrangePlayer();
+
+			_addPlayerCommand.Execute(player);
+
+			_addCommandForPlayer.Received(1).Execute(player);
+		}
+
+		protected Player ArrangePlayer()
 		{
 			return new PlayerBuilder().Build();
 		}

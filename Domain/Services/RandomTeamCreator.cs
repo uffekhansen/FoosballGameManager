@@ -9,8 +9,8 @@ namespace Domain.Services
 	{
 		private readonly IRandom _random;
 
-		public RandomTeamCreator(IRandom random, int playersPerTeam, IEnumerable<Player> players)
-			: base(playersPerTeam, players)
+		public RandomTeamCreator(IRandom random, IEnumerable<Player> players)
+			: base(players)
 		{
 			_random = random;
 		}
@@ -20,7 +20,7 @@ namespace Domain.Services
 			var teams = new List<Team>();
 			var players = _players.ToList();
 
-			for (int i = 0; i < _players.Count(); i += _playersPerTeam)
+			for (int i = 0; i < _players.Count(); i += PlayersPerTeam)
 			{
 				teams.Add(TakeTeam(players));
 			}
@@ -32,7 +32,7 @@ namespace Domain.Services
 		{
 			var playersForTeam = new List<Player>();
 
-			for (int i = 0; i < _playersPerTeam; i++)
+			for (int i = 0; i < PlayersPerTeam; i++)
 			{
 				playersForTeam.Add(TakeRandomPlayer(players));
 			}

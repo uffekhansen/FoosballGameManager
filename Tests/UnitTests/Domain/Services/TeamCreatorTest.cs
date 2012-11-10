@@ -40,9 +40,8 @@ namespace Tests.UnitTests.Domain.Services
 		[Fact]
 		public void Given_TeamCreatorBase_with_zero_players_When_creating_teams_Then_teamgenerationException_is_thrown()
 		{
-			const int any = 2;
 			var playerList = ArrangePlayerList(0);
-			var teamCreator = new TeamCreatorBase(any, playerList);
+			var teamCreator = new TeamCreatorBase(playerList);
 
 			Assert.ThrowsDelegate act = () => teamCreator.CreateTeams();
 
@@ -52,7 +51,10 @@ namespace Tests.UnitTests.Domain.Services
 		private TeamCreatorBase ArrangeTeamCreator(int numberPlayersInList, int numberPlayersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInList);
-			return new TeamCreatorBase(numberPlayersPerTeam, playerList);
+			return new TeamCreatorBase(playerList)
+			{
+				PlayersPerTeam = numberPlayersPerTeam,
+			};
 		}
 
 		private List<Player> ArrangePlayerList(int numberPlayers)
@@ -69,8 +71,8 @@ namespace Tests.UnitTests.Domain.Services
 
 	public class TeamCreatorBase : TeamCreator
 	{
-		public TeamCreatorBase(int playersPerTeam, List<Player> players)
-			: base(playersPerTeam, players)
+		public TeamCreatorBase(List<Player> players)
+			: base(players)
 		{
 		}
 

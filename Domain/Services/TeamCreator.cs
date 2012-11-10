@@ -7,12 +7,17 @@ namespace Domain.Services
 {
 	public abstract class TeamCreator : ITeamCreator
 	{
-		protected readonly int _playersPerTeam;
+		private int _playersPerTeam = 2;
+		public int PlayersPerTeam
+		{
+			get { return _playersPerTeam; }
+			set { _playersPerTeam = value; }
+		}
+
 		protected readonly IEnumerable<Player> _players;
 
-		protected TeamCreator(int playersPerTeam, IEnumerable<Player> players)
+		protected TeamCreator(IEnumerable<Player> players)
 		{
-			_playersPerTeam = playersPerTeam;
 			_players = players;
 		}
 

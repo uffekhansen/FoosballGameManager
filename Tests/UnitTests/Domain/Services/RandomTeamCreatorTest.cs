@@ -62,13 +62,19 @@ namespace Tests.UnitTests.Domain.Services
 		private RandomTeamCreator ArrangeTeamCreator(int numberPlayersInList, int numberPlayersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInList);
-			return new RandomTeamCreator(new FoosballRandom(), numberPlayersPerTeam, playerList);
+			return new RandomTeamCreator(new FoosballRandom(), playerList)
+			{
+				PlayersPerTeam = numberPlayersPerTeam,
+			};
 		}
 
 		private RandomTeamCreator ArrangeTeamCreator(IRandom random, int numberPlayersInList, int numberPlayersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInList);
-			return new RandomTeamCreator(random, numberPlayersPerTeam, playerList);
+			return new RandomTeamCreator(random, playerList)
+			{
+				PlayersPerTeam = numberPlayersPerTeam,
+			};
 		}
 
 		private IEnumerable<Player> ArrangePlayerList(int numberPlayers)

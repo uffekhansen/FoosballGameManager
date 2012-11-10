@@ -52,6 +52,7 @@
     <Compile Include="Commands\AddCommand.cs" />
     <Compile Include="Commands\AddPlayerCommand.cs" />
     <Compile Include="Commands\IAddCommand.cs" />
+    <Compile Include="Commands\IAddPlayerCommand.cs" />
     <Compile Include="Infrastructure\Installers\DalInstaller.cs" />
     <Compile Include="Mappings\PlayerMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

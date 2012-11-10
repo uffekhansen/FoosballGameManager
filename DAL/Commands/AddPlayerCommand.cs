@@ -1,18 +1,18 @@
 using DAL.Queries;
 using Domain.Entities;
 using Domain.Exceptions;
-using NHibernate;
 
 namespace DAL.Commands
 {
-	public class AddPlayerCommand : AddCommand<Player>
+	public class AddPlayerCommand : IAddPlayerCommand
 	{
+		private readonly IAddCommand<Player> _addCommand;
 		private readonly IIsPlayerNameUniqueQuery _isPlayerNameUniqueQuery;
 
-		public AddPlayerCommand(ISession session, IIsPlayerNameUniqueQuery isPlayerNameUniqueQuery)
-			: base(session)
+		public AddPlayerCommand(IAddCommand<Player> addCommand, IIsPlayerNameUniqueQuery isPlayerNameUniqueQuery)
 		{
 			_isPlayerNameUniqueQuery = isPlayerNameUniqueQuery;
+			_addCommand = addCommand;
 		}
 
 		public void Execute(Player player)
@@ -22,7 +22,7 @@ namespace DAL.Commands
 				throw new AlreadyExistsException("Player name not unique");
 			}
 
-			base.Execute(player);
+			_addCommand.Execute(player);
 		}
 	}
 }
