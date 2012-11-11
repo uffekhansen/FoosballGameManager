@@ -78,6 +78,7 @@
     <Compile Include="Builders\IPersister.cs" />
     <Compile Include="Builders\Persister.cs" />
     <Compile Include="Builders\PlayerBuilder.cs" />
+    <Compile Include="Extensions\FluentAssertionsExtensions.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="Infrastructure\NHibernateBootstrapper.cs" />
     <Compile Include="Infrastructure\INHibernateBootstrapper.cs" />

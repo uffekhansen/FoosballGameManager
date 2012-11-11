@@ -86,7 +86,7 @@ namespace Tests.IntegrationTests.DAL.Queries
 			var players = _getPlayersByIdsQuery.Execute(recognizedPlayerIds);
 
 			var retrievedIds = players.Select(x => x.Id);
-			retrievedIds.Should().ContainInOrder(recognizedPlayerIds);
+			retrievedIds.Should().ContainInOrder(recognizedPlayerIds).And.HaveSameCount(recognizedPlayerIds);
 		}
 
 		private void ArrangeGetPlayerQueryToReturnNullOnId(Guid id)

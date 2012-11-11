@@ -11,6 +11,7 @@ using FluentAssertions;
 using FoosballGameManager.Controllers;
 using FoosballGameManager.ViewModels;
 using NSubstitute;
+using Tests.Extensions;
 using Xunit;
 using Xunit.Extensions;
 
@@ -64,9 +65,8 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 			_getTournamentByIdQuery.Execute(Arg.Any<Guid>()).Returns(tournament);
 
 			var viewResult = _tournamentController.Show(Guid.NewGuid()) as ViewResult;
-
-			viewResult.Model.As<TournamentViewModel>().Tournament.Teams.Add(new Team(null));
-			viewResult.Model.As<TournamentViewModel>().Tournament.Teams.Should().Contain(tournament.Teams);
+			
+			viewResult.Model.As<TournamentViewModel>().Tournament.Teams.Should().ContainExactlyInOrder(tournament.Teams);
 		}
 
 		// BAD
