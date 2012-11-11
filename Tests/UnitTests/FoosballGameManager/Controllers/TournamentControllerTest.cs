@@ -69,12 +69,15 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 			viewResult.Model.As<TournamentViewModel>().Tournament.Teams.Should().ContainExactlyInOrder(tournament.Teams);
 		}
 
-		// BAD
-		// Given unknown id to show view, then NotFoundException is thrown with text "Tournament not found"
-
 		[Fact]
-		public void Given_()
+		public void Given_GetTournamentQuery_Throws_NotFoundExceptino_When_Show_Then_Model_Contains_Exception_Message()
 		{
+			const string exceptionMessage = "unit test";
+			_getTournamentByIdQuery.When(x => x.Execute(Arg.Any<Guid>())).Do(x => { throw new NotFoundException(exceptionMessage); });
+
+			Action show = () => _tournamentController.Show(Guid.NewGuid());
+
+			show.ShouldThrow<NotFoundException>().WithMessage(exceptionMessage);
 		}
 
 		private Tournament ArrangeTournament(int numberTeams)
