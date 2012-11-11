@@ -32,11 +32,11 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		}
 
 		[Fact]
-		public void Given_PlayerController_When_Create_Then_Result_Is_Redirected_To_Index_Action_On_TeamSelectionController()
+		public void Given_PlayerController_When_Create_Then_Result_Is_Redirected_To_Index_Action_On_PlayerSelectionController()
 		{
 			var redirectToRouteResult = _playerController.Create(null) as RedirectToRouteResult;
 
-			redirectToRouteResult.RouteValues["Controller"].Should().Be("TeamSelection");
+			redirectToRouteResult.RouteValues["Controller"].Should().Be("PlayerSelection");
 			redirectToRouteResult.RouteValues["Action"].Should().Be("Index");
 		}
 
@@ -66,7 +66,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 
 			var viewResult = _playerController.Create(null) as ViewResult;
 
-			viewResult.ViewData.ModelState["_Form"].Errors.Single().ErrorMessage.Should().Be(exceptionMessage);
+			viewResult.ViewData.ModelState["_FORM"].Errors.Single().ErrorMessage.Should().Be(exceptionMessage);
 		}
 	}
 }

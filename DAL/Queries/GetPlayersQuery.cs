@@ -8,12 +8,12 @@ namespace DAL.Queries
 {
 	public class GetPlayersQuery : IGetPlayersQuery
 	{
-		private readonly IGetEntityQuery<Player> _getPlayerEntityQuery;
+		private readonly IGetEntityByIdQuery<Player> _getPlayerEntityByIdQuery;
 		private readonly IList<Guid> _unrecognizedPlayerIds = new List<Guid>();
 
-		public GetPlayersQuery(IGetEntityQuery<Player> getPlayerEntityQuery)
+		public GetPlayersQuery(IGetEntityByIdQuery<Player> getPlayerEntityByIdQuery)
 		{
-			_getPlayerEntityQuery = getPlayerEntityQuery;
+			_getPlayerEntityByIdQuery = getPlayerEntityByIdQuery;
 		}
 
 		public IEnumerable<Player> Execute(IEnumerable<Guid> playerIds)
@@ -39,7 +39,7 @@ namespace DAL.Queries
 
 		private Player GetPlayer(Guid id)
 		{
-			var player = _getPlayerEntityQuery.Execute(id);
+			var player = _getPlayerEntityByIdQuery.Execute(id);
 
 			if (player == null)
 			{

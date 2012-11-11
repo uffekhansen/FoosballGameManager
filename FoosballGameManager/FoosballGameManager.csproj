@@ -76,9 +76,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
-    <Compile Include="Controllers\TeamSelectionController.cs" />
+    <Compile Include="Controllers\PlayerSelectionController.cs" />
     <Compile Include="Infrastructure\DI\FoosballContainer.cs" />
     <Compile Include="Infrastructure\DI\WindsorControllerFactory.cs" />
     <Compile Include="Global.asax.cs">
@@ -155,7 +154,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\TeamSelection\Index.cshtml" />
+    <Content Include="Views\PlayerSelection\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Player\EditorTemplates\Player.cshtml" />

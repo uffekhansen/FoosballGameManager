@@ -2,7 +2,7 @@
 
 namespace DAL.Queries
 {
-	public interface IGetEntityQuery<T>
+	public interface IGetEntityByIdQuery<T>
 	{
 		T Execute(Guid id);
 	}

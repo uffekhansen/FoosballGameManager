@@ -32,7 +32,7 @@ namespace FoosballGameManager.Controllers
 				return View("New");
 			}
 
-			return RedirectToAction("Index", "TeamSelection");
+			return RedirectToAction("Index", "PlayerSelection");
 		}
 	}
 }

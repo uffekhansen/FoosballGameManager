@@ -13,13 +13,13 @@ namespace Tests.IntegrationTests.DAL.Queries
 {
 	public class GetPlayersQueryTest
 	{
-		private readonly IGetEntityQuery<Player> _getPlayerEntityQuery = Substitute.For<IGetEntityQuery<Player>>();
+		private readonly IGetEntityByIdQuery<Player> _getPlayerEntityByIdQuery = Substitute.For<IGetEntityByIdQuery<Player>>();
 		private readonly GetPlayersQuery _getPlayersQuery;
 
 		public GetPlayersQueryTest()
 		{
-			_getPlayerEntityQuery.Execute(Arg.Any<Guid>()).Returns(new Player());
-			_getPlayersQuery = new GetPlayersQuery(_getPlayerEntityQuery);
+			_getPlayerEntityByIdQuery.Execute(Arg.Any<Guid>()).Returns(new Player());
+			_getPlayersQuery = new GetPlayersQuery(_getPlayerEntityByIdQuery);
 		}
 
 		//public static IEnumerable<object[]> ExistingPlayers
@@ -104,12 +104,12 @@ namespace Tests.IntegrationTests.DAL.Queries
 
 		private void ArrangeGetPlayerQueryToReturnNullOnId(Guid id)
 		{
-			_getPlayerEntityQuery.Execute(id).Returns((Player)null);
+			_getPlayerEntityByIdQuery.Execute(id).Returns((Player)null);
 		}
 
 		private void ArrangeGetPlayerQueryToReturnPlayerWithId(Guid id)
 		{
-			_getPlayerEntityQuery.Execute(id).Returns(new Player{ Id = id });
+			_getPlayerEntityByIdQuery.Execute(id).Returns(new Player{ Id = id });
 		}
 	}
 }
