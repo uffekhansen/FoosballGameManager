@@ -72,12 +72,16 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		}
 
 		[Fact]
-		public void Given_PlayersViewModel_When_Create_Then_Result_Is_Redirected_To_Create_Action_On_TournamentController()
+		public void Given_PlayersViewModel_When_Create_Then_Result_Is_Redirected_To_Show_Action_On_TournamentController_With_Tournament_Id()
 		{
+			var tournament = new Tournament();
+			_tournamentCreator.CreateTournament().Returns(tournament);
+
 			var redirectToRouteResult = _playerSelectionController.Create(new PlayersViewModel()) as RedirectToRouteResult;
 
 			redirectToRouteResult.RouteValues["Controller"].Should().Be("Tournament");
 			redirectToRouteResult.RouteValues["Action"].Should().Be("Show");
+			redirectToRouteResult.RouteValues["Id"].Should().Be(tournament.Id);
 		}
 
 		[Fact]

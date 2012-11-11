@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-	public class Tournament
+	public class Tournament : AssignedIdEntity
 	{
 		public IEnumerable<Team> Teams
 		{

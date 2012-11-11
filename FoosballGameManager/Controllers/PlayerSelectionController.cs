@@ -11,13 +11,13 @@ namespace FoosballGameManager.Controllers
 	public class PlayerSelectionController : Controller
 	{
 		private readonly IGetPlayersByIdsQuery _getPlayersByIdsQuery;
-		private readonly IGetEveryEntityQuery<Player> _getPlayerEveryEntityQuery;
+		private readonly IGetEveryEntityQuery<Player> _getEveryPlayerEntityQuery;
 		private readonly ITeamCreator _teamCreator;
 		private readonly ITournamentCreator _tournamentCreator;
 
-		public PlayerSelectionController(IGetEveryEntityQuery<Player> getPlayerEveryEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery, ITeamCreator teamCreator, ITournamentCreator tournamentCreator)
+		public PlayerSelectionController(IGetEveryEntityQuery<Player> getEveryPlayerEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery, ITeamCreator teamCreator, ITournamentCreator tournamentCreator)
 		{
-			_getPlayerEveryEntityQuery = getPlayerEveryEntityQuery;
+			_getEveryPlayerEntityQuery = getEveryPlayerEntityQuery;
 			_getPlayersByIdsQuery = getPlayersByIdsQuery;
 			_teamCreator = teamCreator;
 			_tournamentCreator = tournamentCreator;
@@ -27,7 +27,7 @@ namespace FoosballGameManager.Controllers
 		{
 			var viewModel = new PlayersViewModel
 			{
-				Players = _getPlayerEveryEntityQuery.Execute(),
+				Players = _getEveryPlayerEntityQuery.Execute(),
 			};
 
 			return View(viewModel);
@@ -48,9 +48,9 @@ namespace FoosballGameManager.Controllers
 			}
 
 			CreateTeams(players);
-			CreateTournament();
+			var tournament = CreateTournament();
 
-			return RedirectToAction("Show", "Tournament");
+			return RedirectToAction("Show", "Tournament", new { Id = tournament.Id });
 		}
 
 		private Tournament CreateTournament()

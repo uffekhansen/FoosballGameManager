@@ -98,6 +98,7 @@
     <Compile Include="UnitTests\Domain\Services\TournamentCreatorTest.cs" />
     <Compile Include="UnitTests\Domain\Services\RandomTeamCreatorTest.cs" />
     <Compile Include="UnitTests\Domain\Services\TeamCreatorTest.cs" />
+    <Compile Include="UnitTests\FoosballGameManager\Controllers\TournamentControllerTest.cs" />
     <Compile Include="UnitTests\FoosballGameManager\Controllers\PlayerControllerTest.cs" />
     <Compile Include="UnitTests\FoosballGameManager\Controllers\TeamSelectionControllerTest.cs" />
   </ItemGroup>
