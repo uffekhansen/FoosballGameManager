@@ -9,8 +9,7 @@ namespace Domain.Services
 	{
 		private readonly IRandom _random;
 
-		public RandomTeamCreator(IRandom random, IEnumerable<Player> players)
-			: base(players)
+		public RandomTeamCreator(IRandom random)
 		{
 			_random = random;
 		}

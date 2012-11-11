@@ -38,10 +38,9 @@ namespace Tests.UnitTests.Domain.Services
 		}
 
 		[Fact]
-		public void Given_TeamCreatorBase_with_zero_players_When_creating_teams_Then_teamgenerationException_is_thrown()
+		public void Given_TeamCreatorBase_With_Zero_Players_When_Creating_Teams_Then_TeamGenerationException_Is_Thrown()
 		{
-			var playerList = ArrangePlayerList(0);
-			var teamCreator = new TeamCreatorBase(playerList);
+			var teamCreator = ArrangeTeamCreator(0, 0);
 
 			Assert.ThrowsDelegate act = () => teamCreator.CreateTeams();
 
@@ -51,13 +50,14 @@ namespace Tests.UnitTests.Domain.Services
 		private TeamCreatorBase ArrangeTeamCreator(int numberPlayersInList, int numberPlayersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInList);
-			return new TeamCreatorBase(playerList)
+			return new TeamCreatorBase
 			{
+				Players = playerList,
 				PlayersPerTeam = numberPlayersPerTeam,
-			};
+			};;
 		}
 
-		private List<Player> ArrangePlayerList(int numberPlayers)
+		private IEnumerable<Player> ArrangePlayerList(int numberPlayers)
 		{
 			return Enumerable.Repeat(ArrangePlayer(), numberPlayers)
 				.ToList();
@@ -71,11 +71,6 @@ namespace Tests.UnitTests.Domain.Services
 
 	public class TeamCreatorBase : TeamCreator
 	{
-		public TeamCreatorBase(List<Player> players)
-			: base(players)
-		{
-		}
-
 		protected override List<Team> GenerateTeams()
 		{
 			throw new System.NotImplementedException();
