@@ -26,6 +26,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		public PlayerSelectionControllerTest()
 		{
 			_getPlayersByIdsQuery = Substitute.For<IGetPlayersByIdsQuery>();
+			_tournamentCreator.CreateTournament().Returns(new Tournament());
 			_playerSelectionController = new PlayerSelectionController(_getEveryPlayerEntityQuery, _getPlayersByIdsQuery, _teamCreator, _tournamentCreator);
 		}
 
