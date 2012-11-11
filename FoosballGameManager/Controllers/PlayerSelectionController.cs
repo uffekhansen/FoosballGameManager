@@ -10,14 +10,14 @@ namespace FoosballGameManager.Controllers
 {
 	public class PlayerSelectionController : Controller
 	{
-		private readonly IGetPlayersQuery _getPlayersQuery;
-		private readonly IGetEntitiesQuery<Player> _getPlayerEntitiesQuery;
+		private readonly IGetPlayersByIdsQuery _getPlayersByIdsQuery;
+		private readonly IGetEveryEntityQuery<Player> _getPlayerEveryEntityQuery;
 		private readonly ITeamCreator _teamCreator;
 
-		public PlayerSelectionController(IGetEntitiesQuery<Player> getPlayerEntitiesQuery, IGetPlayersQuery getPlayersQuery, ITeamCreator teamCreator)
+		public PlayerSelectionController(IGetEveryEntityQuery<Player> getPlayerEveryEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery, ITeamCreator teamCreator)
 		{
-			_getPlayerEntitiesQuery = getPlayerEntitiesQuery;
-			_getPlayersQuery = getPlayersQuery;
+			_getPlayerEveryEntityQuery = getPlayerEveryEntityQuery;
+			_getPlayersByIdsQuery = getPlayersByIdsQuery;
 			_teamCreator = teamCreator;
 		}
 
@@ -25,7 +25,7 @@ namespace FoosballGameManager.Controllers
 		{
 			var viewModel = new PlayersViewModel
 			{
-				Players = _getPlayerEntitiesQuery.Execute(),
+				Players = _getPlayerEveryEntityQuery.Execute(),
 			};
 
 			return View(viewModel);
@@ -37,7 +37,7 @@ namespace FoosballGameManager.Controllers
 			IEnumerable<Player> players;
 			try
 			{
-				players = _getPlayersQuery.Execute(playersViewModel.SelectedPlayers);
+				players = _getPlayersByIdsQuery.Execute(playersViewModel.SelectedPlayers);
 			}
 			catch (NotFoundException exception)
 			{
@@ -45,9 +45,15 @@ namespace FoosballGameManager.Controllers
 				return View("Index");
 			}
 
-			_teamCreator.CreateTeams();
+			var teams = CreateTeams(players);
 
 			return RedirectToAction("Show", "Tournament");
+		}
+
+		private IEnumerable<Team> CreateTeams(IEnumerable<Player> players)
+		{
+			_teamCreator.Players = players;
+			return _teamCreator.CreateTeams();
 		}
 	}
 }

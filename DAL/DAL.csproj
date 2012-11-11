@@ -58,11 +58,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\GetEntityByIdQuery.cs" />
     <Compile Include="Queries\IGetEntityByIdQuery.cs" />
-    <Compile Include="Queries\GetPlayersQuery.cs" />
-    <Compile Include="Queries\IGetPlayersQuery.cs" />
+    <Compile Include="Queries\GetPlayersByIdsQuery.cs" />
+    <Compile Include="Queries\IGetPlayersByIdsQuery.cs" />
     <Compile Include="Queries\IIsPlayerNameUniqueQuery.cs" />
-    <Compile Include="Queries\IGetEntitiesQuery.cs" />
-    <Compile Include="Queries\GetEntitiesQuery.cs" />
+    <Compile Include="Queries\IGetEveryEntityQuery.cs" />
+    <Compile Include="Queries\GetEveryEntityQuery.cs" />
     <Compile Include="Queries\IsPlayerNameUniqueQuery.cs" />
   </ItemGroup>
   <ItemGroup />

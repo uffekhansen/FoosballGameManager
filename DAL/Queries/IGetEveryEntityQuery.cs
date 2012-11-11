@@ -2,7 +2,7 @@
 
 namespace DAL.Queries
 {
-	public interface IGetEntitiesQuery<T>
+	public interface IGetEveryEntityQuery<T>
 	{
 		IEnumerable<T> Execute();
 	}

@@ -11,11 +11,11 @@ namespace Tests.IntegrationTests.DAL.Queries
 {
 	public class GetEntitiesQueryTest : InDatabaseTest
 	{
-		private readonly GetEntitiesQuery<Player> _getEntitiesQuery;
+		private readonly GetEveryEntityQuery<Player> _getEveryEntityQuery;
 
 		public GetEntitiesQueryTest()
 		{
-			_getEntitiesQuery = new GetEntitiesQuery<Player>(_session);
+			_getEveryEntityQuery = new GetEveryEntityQuery<Player>(_session);
 		}
 
 		[Theory]
@@ -26,7 +26,7 @@ namespace Tests.IntegrationTests.DAL.Queries
 			ArrangePlayers(numberPlayers);
 			_persister.Persist();
 
-			var players = _getEntitiesQuery.Execute();
+			var players = _getEveryEntityQuery.Execute();
 
 			players.Count().Should().Be(numberPlayers);
 		}

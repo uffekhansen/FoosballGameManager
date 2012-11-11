@@ -4,7 +4,7 @@ using Domain.Entities;
 
 namespace DAL.Queries
 {
-	public interface IGetPlayersQuery
+	public interface IGetPlayersByIdsQuery
 	{
 		IEnumerable<Player> Execute(IEnumerable<Guid> playerIds);
 	}

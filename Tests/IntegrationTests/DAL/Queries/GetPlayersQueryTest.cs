@@ -14,12 +14,12 @@ namespace Tests.IntegrationTests.DAL.Queries
 	public class GetPlayersQueryTest
 	{
 		private readonly IGetEntityByIdQuery<Player> _getPlayerEntityByIdQuery = Substitute.For<IGetEntityByIdQuery<Player>>();
-		private readonly GetPlayersQuery _getPlayersQuery;
+		private readonly GetPlayersByIdsQuery _getPlayersByIdsQuery;
 
 		public GetPlayersQueryTest()
 		{
 			_getPlayerEntityByIdQuery.Execute(Arg.Any<Guid>()).Returns(new Player());
-			_getPlayersQuery = new GetPlayersQuery(_getPlayerEntityByIdQuery);
+			_getPlayersByIdsQuery = new GetPlayersByIdsQuery(_getPlayerEntityByIdQuery);
 		}
 
 		//public static IEnumerable<object[]> ExistingPlayers
@@ -66,7 +66,7 @@ namespace Tests.IntegrationTests.DAL.Queries
 		{
 			unrecognizedPlayerIds.Each(ArrangeGetPlayerQueryToReturnNullOnId);
 
-			Action execute = () => _getPlayersQuery.Execute(unrecognizedPlayerIds.Concat(recognizedPlayerIds));
+			Action execute = () => _getPlayersByIdsQuery.Execute(unrecognizedPlayerIds.Concat(recognizedPlayerIds));
 
 			execute.ShouldThrow<NotFoundException>().WithMessage(expectedExceptionMessage);
 		}
@@ -96,7 +96,7 @@ namespace Tests.IntegrationTests.DAL.Queries
 		{
 			recognizedPlayerIds.Each(ArrangeGetPlayerQueryToReturnPlayerWithId);
 
-			var players = _getPlayersQuery.Execute(recognizedPlayerIds);
+			var players = _getPlayersByIdsQuery.Execute(recognizedPlayerIds);
 
 			var retrievedIds = players.Select(x => x.Id);
 			retrievedIds.Should().ContainInOrder(recognizedPlayerIds);

@@ -4,11 +4,11 @@ using NHibernate.Linq;
 
 namespace DAL.Queries
 {
-	public class GetEntitiesQuery<T> : IGetEntitiesQuery<T> where T : class
+	public class GetEveryEntityQuery<T> : IGetEveryEntityQuery<T> where T : class
 	{
 		private readonly ISession _session;
 
-		public GetEntitiesQuery(ISession session)
+		public GetEveryEntityQuery(ISession session)
 		{
 			_session = session;
 		}

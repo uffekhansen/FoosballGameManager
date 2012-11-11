@@ -6,12 +6,12 @@ using Domain.Exceptions;
 
 namespace DAL.Queries
 {
-	public class GetPlayersQuery : IGetPlayersQuery
+	public class GetPlayersByIdsQuery : IGetPlayersByIdsQuery
 	{
 		private readonly IGetEntityByIdQuery<Player> _getPlayerEntityByIdQuery;
 		private readonly IList<Guid> _unrecognizedPlayerIds = new List<Guid>();
 
-		public GetPlayersQuery(IGetEntityByIdQuery<Player> getPlayerEntityByIdQuery)
+		public GetPlayersByIdsQuery(IGetEntityByIdQuery<Player> getPlayerEntityByIdQuery)
 		{
 			_getPlayerEntityByIdQuery = getPlayerEntityByIdQuery;
 		}
