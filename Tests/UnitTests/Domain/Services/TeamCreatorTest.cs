@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Services;
+using FluentAssertions;
 using Xunit;
 using Xunit.Extensions;
 
@@ -14,27 +16,27 @@ namespace Tests.UnitTests.Domain.Services
 		[InlineData(1, 2)]
 		[InlineData(2, 3)]
 		[InlineData(3, 10)]
-		public void Given_TeamCreatorBase_with_fewer_players_than_players_per_team_When_creating_teams_Then_teamgenerationexception_is_thrown(int numberPlayersInList, int numberPlayersPerTeam)
+		public void Given_TeamCreatorBase_With_Fewer_Players_Than_Players_Per_Team_When_Creating_Teams_Then_TeamGenerationException_Is_Thrown(int numberPlayersInList, int numberPlayersPerTeam)
 		{
 			var teamCreator = ArrangeTeamCreator(numberPlayersInList, numberPlayersPerTeam);
 
-			Assert.ThrowsDelegate act = () => teamCreator.CreateTeams();
+			Action createTeams = () => teamCreator.CreateTeams();
 
-			Assert.Throws<TeamGenerationException>(act);
+			createTeams.ShouldThrow<TeamGenerationException>().WithMessage("Not enough players for a single team");
 		}
 
 		[Theory]
 		[InlineData(3, 2)]
-		[InlineData(5, 6)]
+		[InlineData(10, 6)]
 		[InlineData(11, 5)]
 		[InlineData(101, 10)]
-		public void Given_TeamCreatorBase_with_players_not_divisable_with_number_players_per_teams_When_creating_team_Then_teamgenerationException_is_thrown(int numberPlayersInList, int numberPlayersPerTeam)
+		public void Given_TeamCreatorBase_With_Players_Not_Divisable_With_Number_Players_Per_Teams_When_Creating_Team_Then_TeamGenerationException_Is_Thrown(int numberPlayersInList, int numberPlayersPerTeam)
 		{
 			var teamCreator = ArrangeTeamCreator(numberPlayersInList, numberPlayersPerTeam);
 
-			Assert.ThrowsDelegate act = () => teamCreator.CreateTeams();
+			Action createTeams = () => teamCreator.CreateTeams();
 
-			Assert.Throws<TeamGenerationException>(act);
+			createTeams.ShouldThrow<TeamGenerationException>().WithMessage("Number players not divisable with number players per team in team settings");
 		}
 
 		[Fact]
@@ -42,9 +44,9 @@ namespace Tests.UnitTests.Domain.Services
 		{
 			var teamCreator = ArrangeTeamCreator(0, 0);
 
-			Assert.ThrowsDelegate act = () => teamCreator.CreateTeams();
+			Action createTeams = () => teamCreator.CreateTeams();
 
-			Assert.Throws<TeamGenerationException>(act);
+			createTeams.ShouldThrow<TeamGenerationException>().WithMessage("Zero players in list");
 		}
 
 		private TeamCreatorBase ArrangeTeamCreator(int numberPlayersInList, int numberPlayersPerTeam)
@@ -73,7 +75,7 @@ namespace Tests.UnitTests.Domain.Services
 	{
 		protected override List<Team> GenerateTeams()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 	}
 }
