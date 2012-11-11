@@ -56,6 +56,7 @@
     <Compile Include="Infrastructure\Installers\DalInstaller.cs" />
     <Compile Include="Mappings\PlayerMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\IGetEntityQuery.cs" />
     <Compile Include="Queries\GetPlayersQuery.cs" />
     <Compile Include="Queries\IGetPlayersQuery.cs" />
     <Compile Include="Queries\IIsPlayerNameUniqueQuery.cs" />

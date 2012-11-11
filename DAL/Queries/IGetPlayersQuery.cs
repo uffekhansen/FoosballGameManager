@@ -1,11 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using Domain.Entities;
 
 namespace DAL.Queries
 {
 	public interface IGetPlayersQuery
 	{
-		IEnumerable Execute(IEnumerable<Guid> playerIds);
+		IEnumerable<Player> Execute(IEnumerable<Guid> playerIds);
 	}
 }
