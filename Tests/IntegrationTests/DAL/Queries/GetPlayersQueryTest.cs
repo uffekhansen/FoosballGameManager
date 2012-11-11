@@ -22,19 +22,6 @@ namespace Tests.IntegrationTests.DAL.Queries
 			_getPlayersByIdsQuery = new GetPlayersByIdsQuery(_getPlayerEntityByIdQuery);
 		}
 
-		//public static IEnumerable<object[]> ExistingPlayers
-		//{
-		//    get
-		//    {
-		//        yield return new object[] { new Guid("11111111-1111-1111-1111-111111111111"), "Player A" };
-		//        yield return new object[] { new Guid("11111111-1111-1111-1111-111111111111"), "Player B" };
-		//        yield return new object[] { new Guid("11111111-1111-1111-1111-111111111111"), "Player C" };
-		//        yield return new object[] { new Guid("11111111-1111-1111-1111-111111111111"), "Player D" };
-		//        yield return new object[] { new Guid("11111111-1111-1111-1111-111111111111"), "Player E" };
-		//        yield return new object[] { new Guid("11111111-1111-1111-1111-111111111111"), "Player F" };
-		//    }
-		//}
-
 		public static IEnumerable<object[]> UnrecognizedPlayerIdErrorMessageTestData
 		{
 			get

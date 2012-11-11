@@ -13,12 +13,14 @@ namespace FoosballGameManager.Controllers
 		private readonly IGetPlayersByIdsQuery _getPlayersByIdsQuery;
 		private readonly IGetEveryEntityQuery<Player> _getPlayerEveryEntityQuery;
 		private readonly ITeamCreator _teamCreator;
+		private readonly ITournamentCreator _tournamentCreator;
 
-		public PlayerSelectionController(IGetEveryEntityQuery<Player> getPlayerEveryEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery, ITeamCreator teamCreator)
+		public PlayerSelectionController(IGetEveryEntityQuery<Player> getPlayerEveryEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery, ITeamCreator teamCreator, ITournamentCreator tournamentCreator)
 		{
 			_getPlayerEveryEntityQuery = getPlayerEveryEntityQuery;
 			_getPlayersByIdsQuery = getPlayersByIdsQuery;
 			_teamCreator = teamCreator;
+			_tournamentCreator = tournamentCreator;
 		}
 
 		public ActionResult Index()
@@ -45,9 +47,15 @@ namespace FoosballGameManager.Controllers
 				return View("Index");
 			}
 
-			var teams = CreateTeams(players);
+			CreateTeams(players);
+			CreateTournament();
 
 			return RedirectToAction("Show", "Tournament");
+		}
+
+		private Tournament CreateTournament()
+		{
+			return _tournamentCreator.CreateTournament();
 		}
 
 		private IEnumerable<Team> CreateTeams(IEnumerable<Player> players)

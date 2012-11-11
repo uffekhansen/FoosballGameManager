@@ -34,7 +34,7 @@ namespace Tests.UnitTests.Domain.Services
 		[InlineData(5, 1)]
 		[InlineData(6, 2)]
 		[InlineData(6, 3)]
-		public void Given_randomTeamCreator_When_creating_teams_Then_generated_teams_contains_expected_number_of_players(int numberPlayersInlist, int numberPlayersPerTeam)
+		public void Given_RandomTeamCreator_When_Creating_Teams_Then_Generated_Teams_Contains_Expected_Number_Of_Players(int numberPlayersInlist, int numberPlayersPerTeam)
 		{
 			var teamCreator = ArrangeTeamCreator(numberPlayersInlist, numberPlayersPerTeam);
 
@@ -49,7 +49,7 @@ namespace Tests.UnitTests.Domain.Services
 		[InlineData(2, 1)]
 		[InlineData(5, 1)]
 		[InlineData(6, 2)]
-		public void Given_randomTeamCreator_When_creating_teams_Then_next_is_called_expected_number_of_times(int numberPlayersInlist, int numberPlayersPerTeam)
+		public void Given_RandomTeamCreator_When_Creating_Teams_Then_Next_Is_Called_Expected_Number_Of_Times(int numberPlayersInlist, int numberPlayersPerTeam)
 		{
 			var randomSubstitute = Substitute.For<IRandom>();
 			var teamCreator = ArrangeTeamCreator(randomSubstitute, numberPlayersInlist, numberPlayersPerTeam);

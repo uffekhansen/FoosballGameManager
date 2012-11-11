@@ -19,13 +19,14 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		private IEnumerable<Player> _players;
 		private readonly PlayerSelectionController _playerSelectionController;
 		private readonly ITeamCreator _teamCreator = Substitute.For<ITeamCreator>();
+		private readonly ITournamentCreator _tournamentCreator = Substitute.For<ITournamentCreator>();
 		private readonly IGetPlayersByIdsQuery _getPlayersByIdsQuery;
 		private readonly IGetEveryEntityQuery<Player> _getEveryPlayerEntityQuery = Substitute.For<IGetEveryEntityQuery<Player>>();
 
 		public PlayerSelectionControllerTest()
 		{
 			_getPlayersByIdsQuery = Substitute.For<IGetPlayersByIdsQuery>();
-			_playerSelectionController = new PlayerSelectionController(_getEveryPlayerEntityQuery, _getPlayersByIdsQuery, _teamCreator);
+			_playerSelectionController = new PlayerSelectionController(_getEveryPlayerEntityQuery, _getPlayersByIdsQuery, _teamCreator, _tournamentCreator);
 		}
 
 		[Fact]
@@ -55,7 +56,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		}
 
 		[Fact]
-		public void Given_TeamCreator_When_Create_Then_TeamCreator_Is_Executed()
+		public void Given_TeamCreator_When_Create_Then_CreateTeams_Is_Called_On_TeamCreator()
 		{
 			_playerSelectionController.Create(new PlayersViewModel());
 
@@ -80,7 +81,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		}
 
 		[Fact]
-		public void Given_GetPlayersByIdsQuery_Throws_NotFoundException_Then_ModelState_Contains_Exception_Message()
+		public void Given_GetPlayersByIdsQuery_Throws_NotFoundException_When_Create_Then_ModelState_Contains_Exception_Message()
 		{
 			const string exceptionMessage = "unit test";
 			_getPlayersByIdsQuery.When(x => x.Execute(Arg.Any<IEnumerable<Guid>>())).Do(x => { throw new NotFoundException(exceptionMessage); });
@@ -91,7 +92,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		}
 
 		[Fact]
-		public void Given_GetPlayersByIdsQuery_Throws_NotFoundException_Then_Result_Is_Redirected_To_Index_Action_On_PlayerSelectionController()
+		public void Given_GetPlayersByIdsQuery_Throws_NotFoundException_When_Create_Then_Result_Is_Redirected_To_Index_Action_On_PlayerSelectionController()
 		{
 			_getPlayersByIdsQuery.When(x => x.Execute(Arg.Any<IEnumerable<Guid>>())).Do(x => { throw new NotFoundException("unit test"); });
 
@@ -112,6 +113,14 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 			_playerSelectionController.Create(viewModel);
 
 			_getPlayersByIdsQuery.Received(1).Execute(identifierList);
+		}
+
+		[Fact]
+		public void Given_PlayersViewModel__When_Create_Then_CreateTournament_Is_Called_On_TournamentCreator()
+		{
+			_playerSelectionController.Create(new PlayersViewModel());
+
+			_tournamentCreator.Received(1).CreateTournament();
 		}
 
 		private void ArrangeGetEntitiesQueryReturningPlayers()
