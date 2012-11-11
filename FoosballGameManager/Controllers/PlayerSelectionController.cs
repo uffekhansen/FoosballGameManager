@@ -47,7 +47,7 @@ namespace FoosballGameManager.Controllers
 
 			_teamCreator.CreateTeams();
 
-			return RedirectToAction("Create", "Tournament");
+			return RedirectToAction("Show", "Tournament");
 		}
 	}
 }

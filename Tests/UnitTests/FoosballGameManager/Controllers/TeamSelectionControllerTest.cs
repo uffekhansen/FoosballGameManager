@@ -57,17 +57,17 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		[Fact]
 		public void Given_TeamCreator_When_Create_Then_TeamCreator_Is_Executed()
 		{
-			_playerSelectionController.Create(null);
+			_playerSelectionController.Create(new PlayersViewModel());
 
 			_teamCreator.Received(1).CreateTeams();
 		}
 
 		[Fact]
-		public void Given_PlayersViewModel_When_Index_Then_Result_Is_Redirected_To_Index_Action()
+		public void Given_PlayerSelectionController_When_Index_Then_Result_Is_Redirected_To_Index_Action()
 		{
-			var redirectToRouteResult = _playerSelectionController.Create(new PlayersViewModel()) as RedirectToRouteResult;
+			var viewResult = _playerSelectionController.Index() as ViewResult;
 
-			redirectToRouteResult.RouteValues["Action"].Should().Be("Index");
+			viewResult.ViewName.Should().Be("");
 		}
 
 		[Fact]
@@ -76,7 +76,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 			var redirectToRouteResult = _playerSelectionController.Create(new PlayersViewModel()) as RedirectToRouteResult;
 
 			redirectToRouteResult.RouteValues["Controller"].Should().Be("Tournament");
-			redirectToRouteResult.RouteValues["Action"].Should().Be("Create");
+			redirectToRouteResult.RouteValues["Action"].Should().Be("Show");
 		}
 
 		[Fact]
