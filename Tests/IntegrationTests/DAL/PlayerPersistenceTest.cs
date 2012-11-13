@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Domain.Entities;
-using Domain.ValueObjects;
 using FluentNHibernate.Testing;
+using Tests.Builders;
 using Tests.Infrastructure.TestBases;
 using Xunit;
 
@@ -12,8 +12,11 @@ namespace Tests.IntegrationTests.DAL
 		[Fact]
 		public void Given_Tournament_When_Executing_Then_Tournament_Is_Returned()
 		{
+			var teams = ArrangeTeams();
+			_persister.Persist();
+
 			new PersistenceSpecification<Tournament>(_session)
-				//.CheckProperty(p => p.Teams, ArrangeTeams())
+				.CheckProperty(p => p.Teams, teams)
 				.VerifyTheMappings();
 		}
 
@@ -21,9 +24,23 @@ namespace Tests.IntegrationTests.DAL
 		{
 			return new List<Team>
 			{
-				new Team(null),
-				new Team(null),
+				new Team(ArrangePlayers()),
+				new Team(ArrangePlayers()),
 			};
+		}
+
+		private IEnumerable<Player> ArrangePlayers()
+		{
+			return new List<Player>
+			{
+				ArrangePlayer(),
+				ArrangePlayer(),
+			};
+		}
+
+		private Player ArrangePlayer()
+		{
+			return new PlayerBuilder(_persister).Build();
 		}
 	}
 }

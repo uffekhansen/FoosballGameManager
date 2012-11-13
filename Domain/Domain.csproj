@@ -57,7 +57,7 @@
     <Compile Include="Services\RandomTeamCreator.cs" />
     <Compile Include="Services\TeamCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValueObjects\Team.cs" />
+    <Compile Include="Entities\Team.cs" />
     <Compile Include="Entities\Tournament.cs" />
     <Compile Include="Services\TournamentCreator.cs" />
     <Compile Include="Tools\IRandom.cs" />

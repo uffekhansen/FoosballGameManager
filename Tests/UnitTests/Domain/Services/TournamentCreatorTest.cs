@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Extensions;
 using Domain.Services;
-using Domain.ValueObjects;
 using FluentAssertions;
 using Xunit;
 using Xunit.Extensions;

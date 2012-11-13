@@ -1,4 +1,5 @@
-﻿using NHibernate;
+﻿using HibernatingRhinos.Profiler.Appender.NHibernate;
+using NHibernate;
 using Tests.Builders;
 
 namespace Tests.Infrastructure.TestBases
@@ -18,6 +19,8 @@ namespace Tests.Infrastructure.TestBases
 			_sessionFactory = TestContainer.Resolve<ISessionFactory>();
 			_session = _sessionFactory.OpenSession();
 			_persister = new Persister(_session);
+
+			NHibernateProfiler.Initialize();
 		}
 	}
 }

@@ -2,7 +2,6 @@
 using System.Linq;
 using Domain.Entities;
 using Domain.Tools;
-using Domain.ValueObjects;
 
 namespace Domain.Services
 {

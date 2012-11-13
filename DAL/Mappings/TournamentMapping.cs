@@ -8,8 +8,12 @@ namespace DAL.Mappings
 		public TournamentMapping()
 		{
 			Id(tournament => tournament.Id).GeneratedBy.Assigned();
-			HasMany(tournament => tournament.Teams)
-				.Component(team => team.Map(x => x.Players));
+			HasMany(tournament => tournament.Teams).Inverse();
+			//.Component(team =>
+			//    {
+			//        team.Map(x => x.Players);
+
+			//    });
 		}
 	}
 }

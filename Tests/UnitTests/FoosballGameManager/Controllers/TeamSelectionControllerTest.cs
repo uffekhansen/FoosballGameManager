@@ -6,7 +6,6 @@ using DAL.Queries;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Services;
-using Domain.ValueObjects;
 using FluentAssertions;
 using FoosballGameManager.Controllers;
 using FoosballGameManager.ViewModels;
