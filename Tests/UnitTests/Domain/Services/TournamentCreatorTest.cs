@@ -5,6 +5,7 @@ using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Extensions;
 using Domain.Services;
+using Domain.ValueObjects;
 using FluentAssertions;
 using Xunit;
 using Xunit.Extensions;
@@ -18,8 +19,9 @@ namespace Tests.UnitTests.Domain.Services
 		[Fact]
 		public void Given_No_Teams_When_CreateTournament_Then_TournamentCreationException_Is_Thrown()
 		{
-			_tournamentCreator.Teams = ArrangeTeams(0);
-			Action createTournament = () => _tournamentCreator.CreateTournament();
+			var teams = ArrangeTeams(0);
+
+			Action createTournament = () => _tournamentCreator.CreateTournament(teams);
 
 			createTournament.ShouldThrow<TournamentCreationException>().WithMessage("No teams to create tournament from");
 		}
@@ -27,8 +29,9 @@ namespace Tests.UnitTests.Domain.Services
 		[Fact]
 		public void Given_A_Single_Team_When_CreateTournament_Then_TournamentCreationException_Is_Thrown()
 		{
-			_tournamentCreator.Teams = ArrangeTeams(1);
-			Action createTournament = () => _tournamentCreator.CreateTournament();
+			var teams = ArrangeTeams(1);
+
+			Action createTournament = () => _tournamentCreator.CreateTournament(teams);
 
 			createTournament.ShouldThrow<TournamentCreationException>().WithMessage("Only 1 team supplied - need at least 2 to create a tournament");
 		}
@@ -40,9 +43,8 @@ namespace Tests.UnitTests.Domain.Services
 		public void Given_Teams_When_CreateTournament_Then_Tournament_Created_Contains_Teams(int numberTeams)
 		{
 			var arrangedTeams = ArrangeTeams(numberTeams);
-			_tournamentCreator.Teams = arrangedTeams;
 
-			var tournament = _tournamentCreator.CreateTournament();
+			var tournament = _tournamentCreator.CreateTournament(arrangedTeams);
 
 			tournament.Teams.Should().Contain(arrangedTeams);
 		}

@@ -2,20 +2,22 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
 using Domain.Exceptions;
+using Domain.ValueObjects;
 
 namespace Domain.Services
 {
 	public class TournamentCreator : ITournamentCreator
 	{
-		public IEnumerable<Team> Teams;
+		private IEnumerable<Team> _teams;
 
-		public Tournament CreateTournament()
+		public Tournament CreateTournament(IEnumerable<Team> teams)
 		{
+			_teams = teams;
 			GuardAgainstWrongSettings();
 
 			return new Tournament
 			{
-				Teams = Teams,
+				Teams = _teams,
 			};
 		}
 
@@ -27,7 +29,7 @@ namespace Domain.Services
 
 		private void ThrowsIfNoTeams()
 		{
-			if (!Teams.Any())
+			if (!_teams.Any())
 			{
 				throw new TournamentCreationException("No teams to create tournament from");
 			}
@@ -35,7 +37,7 @@ namespace Domain.Services
 
 		private void ThrowsIfOnlyOneTeam()
 		{
-			if(Teams.Count() == 1)
+			if(_teams.Count() == 1)
 			{
 				throw new TournamentCreationException("Only 1 team supplied - need at least 2 to create a tournament");	
 			}

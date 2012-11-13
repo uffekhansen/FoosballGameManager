@@ -1,19 +1,29 @@
-﻿using Domain.Entities;
+﻿using System.Collections.Generic;
+using Domain.Entities;
+using Domain.ValueObjects;
 using FluentNHibernate.Testing;
 using Tests.Infrastructure.TestBases;
 using Xunit;
 
 namespace Tests.IntegrationTests.DAL
 {
-	public class PlayerPersistenceTest : InDatabaseTest
+	public class TournamentPersistenceTest : InDatabaseTest
 	{
 		[Fact]
-		public void Given_Player_When_Executing_Then_Player_Is_Returned()
+		public void Given_Tournament_When_Executing_Then_Tournament_Is_Returned()
 		{
-			new PersistenceSpecification<Player>(_session)
-				.CheckProperty(p => p.Affiliation, "Player affiliation")
-				.CheckProperty(p => p.Name, "Player name")
+			new PersistenceSpecification<Tournament>(_session)
+				//.CheckProperty(p => p.Teams, ArrangeTeams())
 				.VerifyTheMappings();
+		}
+
+		private IEnumerable<Team> ArrangeTeams()
+		{
+			return new List<Team>
+			{
+				new Team(null),
+				new Team(null),
+			};
 		}
 	}
 }

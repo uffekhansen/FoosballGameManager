@@ -4,6 +4,7 @@ using DAL.Queries;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Services;
+using Domain.ValueObjects;
 using FoosballGameManager.ViewModels;
 
 namespace FoosballGameManager.Controllers
@@ -47,15 +48,15 @@ namespace FoosballGameManager.Controllers
 				return View("Index");
 			}
 
-			CreateTeams(players);
-			var tournament = CreateTournament();
+			var teams = CreateTeams(players);
+			var tournament = CreateTournament(teams);
 
-			return RedirectToAction("Show", "Tournament", new { Id = tournament.Id });
+			return RedirectToAction("Show", "Tournament", new { tournament.Id });
 		}
 
-		private Tournament CreateTournament()
+		private Tournament CreateTournament(IEnumerable<Team> teams)
 		{
-			return _tournamentCreator.CreateTournament();
+			return _tournamentCreator.CreateTournament(teams);
 		}
 
 		private IEnumerable<Team> CreateTeams(IEnumerable<Player> players)

@@ -2,6 +2,7 @@
 using System.Linq;
 using Domain.Entities;
 using Domain.Exceptions;
+using Domain.ValueObjects;
 
 namespace Domain.Services
 {

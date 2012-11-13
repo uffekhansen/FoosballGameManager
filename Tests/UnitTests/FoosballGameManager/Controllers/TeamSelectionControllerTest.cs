@@ -6,6 +6,7 @@ using DAL.Queries;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Services;
+using Domain.ValueObjects;
 using FluentAssertions;
 using FoosballGameManager.Controllers;
 using FoosballGameManager.ViewModels;
@@ -26,7 +27,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		public PlayerSelectionControllerTest()
 		{
 			_getPlayersByIdsQuery = Substitute.For<IGetPlayersByIdsQuery>();
-			_tournamentCreator.CreateTournament().Returns(new Tournament());
+			_tournamentCreator.CreateTournament(Arg.Any<IEnumerable<Team>>()).Returns(new Tournament());
 			_playerSelectionController = new PlayerSelectionController(_getEveryPlayerEntityQuery, _getPlayersByIdsQuery, _teamCreator, _tournamentCreator);
 		}
 
@@ -76,7 +77,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		public void Given_PlayersViewModel_When_Create_Then_Result_Is_Redirected_To_Show_Action_On_TournamentController_With_Tournament_Id()
 		{
 			var tournament = new Tournament();
-			_tournamentCreator.CreateTournament().Returns(tournament);
+			_tournamentCreator.CreateTournament(Arg.Any<IEnumerable<Team>>()).Returns(tournament);
 
 			var redirectToRouteResult = _playerSelectionController.Create(new PlayersViewModel()) as RedirectToRouteResult;
 
@@ -121,11 +122,14 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		}
 
 		[Fact]
-		public void Given_PlayersViewModel__When_Create_Then_CreateTournament_Is_Called_On_TournamentCreator()
+		public void Given_Teams_When_Create_Then_CreateTournament_Is_Called_With_Teams()
 		{
+			var teams = ArrangeTwoTeams();
+			_teamCreator.CreateTeams().Returns(teams);
+
 			_playerSelectionController.Create(new PlayersViewModel());
 
-			_tournamentCreator.Received(1).CreateTournament();
+			_tournamentCreator.Received(1).CreateTournament(teams);
 		}
 
 		private void ArrangeGetEntitiesQueryReturningPlayers()
@@ -148,6 +152,15 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 					Affiliation = "ATeam",
 					Name = "B",
 				},
+			};
+		}
+
+		private IEnumerable<Team> ArrangeTwoTeams()
+		{
+			return new List<Team>
+			{
+				new Team(null),
+				new Team(null),
 			};
 		}
 	}
