@@ -7,7 +7,8 @@ namespace DAL.Mappings
 	{
 		public TeamMapping()
 		{
-			Id(team => team.Id);
+			Id(team => team.Id).GeneratedBy.Assigned();
+			HasManyToMany(x => x.Players);
 		}
 	}
 }

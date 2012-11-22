@@ -70,7 +70,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		}
 
 		[Fact]
-		public void Given_GetTournamentQuery_Throws_NotFoundExceptino_When_Show_Then_Model_Contains_Exception_Message()
+		public void Given_GetTournamentQuery_Throws_NotFoundException_When_Show_Then_Model_Contains_Exception_Message()
 		{
 			const string exceptionMessage = "unit test";
 			_getTournamentByIdQuery.When(x => x.Execute(Arg.Any<Guid>())).Do(x => { throw new NotFoundException(exceptionMessage); });
