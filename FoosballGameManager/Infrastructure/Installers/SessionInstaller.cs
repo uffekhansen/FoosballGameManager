@@ -6,7 +6,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
-//using NHibernate.Tool.hbm2ddl;
+using NHibernate.Tool.hbm2ddl;
 
 namespace FoosballGameManager.Infrastructure.Installers
 {

@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using FoosballGameManager.Infrastructure.DI;
+using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NHibernate;
 
 namespace FoosballGameManager
@@ -20,6 +21,7 @@ namespace FoosballGameManager
 			RegisterRoutes(RouteTable.Routes);
 
 			BootstrapContainer();
+			NHibernateProfiler.Initialize();
 		}
 
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)

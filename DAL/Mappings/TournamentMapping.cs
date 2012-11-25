@@ -9,7 +9,7 @@ namespace DAL.Mappings
 		{
 			Id(tournament => tournament.Id).GeneratedBy.Assigned();
 
-			HasMany(tournament => tournament.Teams);
+			HasMany(tournament => tournament.Teams).Cascade.All();
 		}
 	}
 }

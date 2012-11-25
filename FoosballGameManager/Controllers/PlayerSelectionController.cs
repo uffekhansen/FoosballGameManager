@@ -1,26 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using DAL.Commands;
 using DAL.Queries;
 using Domain.Entities;
 using Domain.Exceptions;
+using Domain.Extensions;
 using Domain.Services;
 using FoosballGameManager.ViewModels;
+using NHibernate;
 
 namespace FoosballGameManager.Controllers
 {
 	public class PlayerSelectionController : Controller
 	{
 		private readonly IGetPlayersByIdsQuery _getPlayersByIdsQuery;
+		private readonly IAddCommand<Tournament> _addTournamentCommand;
 		private readonly IGetEveryEntityQuery<Player> _getEveryPlayerEntityQuery;
 		private readonly ITeamCreator _teamCreator;
 		private readonly ITournamentCreator _tournamentCreator;
+		private readonly ISession _session;
 
-		public PlayerSelectionController(IGetEveryEntityQuery<Player> getEveryPlayerEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery, ITeamCreator teamCreator, ITournamentCreator tournamentCreator)
+		public PlayerSelectionController(IGetEveryEntityQuery<Player> getEveryPlayerEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery, 
+			IAddCommand<Tournament> addTournamentCommand, ITeamCreator teamCreator, ITournamentCreator tournamentCreator, ISession session)
 		{
 			_getEveryPlayerEntityQuery = getEveryPlayerEntityQuery;
 			_getPlayersByIdsQuery = getPlayersByIdsQuery;
+			_addTournamentCommand = addTournamentCommand;
 			_teamCreator = teamCreator;
 			_tournamentCreator = tournamentCreator;
+			_session = session;
 		}
 
 		public ActionResult Index()
@@ -49,6 +57,8 @@ namespace FoosballGameManager.Controllers
 
 			var teams = CreateTeams(players);
 			var tournament = CreateTournament(teams);
+
+			_addTournamentCommand.Execute(tournament);
 
 			return RedirectToAction("Show", "Tournament", new { tournament.Id });
 		}

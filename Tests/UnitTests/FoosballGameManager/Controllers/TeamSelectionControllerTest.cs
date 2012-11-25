@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using DAL.Commands;
 using DAL.Queries;
 using Domain.Entities;
 using Domain.Exceptions;
@@ -22,12 +23,14 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		private readonly ITournamentCreator _tournamentCreator = Substitute.For<ITournamentCreator>();
 		private readonly IGetPlayersByIdsQuery _getPlayersByIdsQuery;
 		private readonly IGetEveryEntityQuery<Player> _getEveryPlayerEntityQuery = Substitute.For<IGetEveryEntityQuery<Player>>();
+		private readonly IAddCommand<Tournament> _addTournamentCommand;
 
 		public PlayerSelectionControllerTest()
 		{
 			_getPlayersByIdsQuery = Substitute.For<IGetPlayersByIdsQuery>();
+			_addTournamentCommand = Substitute.For<IAddCommand<Tournament>>();
 			_tournamentCreator.CreateTournament(Arg.Any<IEnumerable<Team>>()).Returns(new Tournament());
-			_playerSelectionController = new PlayerSelectionController(_getEveryPlayerEntityQuery, _getPlayersByIdsQuery, _teamCreator, _tournamentCreator);
+			_playerSelectionController = new PlayerSelectionController(_getEveryPlayerEntityQuery, _getPlayersByIdsQuery, _addTournamentCommand, _teamCreator, _tournamentCreator, null);
 		}
 
 		[Fact]
@@ -131,6 +134,18 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 			_tournamentCreator.Received(1).CreateTournament(teams);
 		}
 
+		[Fact]
+		public void Given_TournamentCreator_Returns_Tournament_When_Create_Then_AddTournamentCommand_Is_Executed_With_Tournament()
+		{
+			var tournament = ArrangeTournament();
+			_tournamentCreator.CreateTournament(Arg.Any<IEnumerable<Team>>()).Returns(tournament);
+
+			_playerSelectionController.Create(new PlayersViewModel());
+
+			_addTournamentCommand.Received(1).Execute(tournament);
+		}
+
+
 		private void ArrangeGetEntitiesQueryReturningPlayers()
 		{
 			ArrangePlayers();
@@ -151,6 +166,14 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 					Affiliation = "ATeam",
 					Name = "B",
 				},
+			};
+		}
+
+		private Tournament ArrangeTournament()
+		{
+			return new Tournament
+			{
+				Teams = ArrangeTwoTeams(),
 			};
 		}
 

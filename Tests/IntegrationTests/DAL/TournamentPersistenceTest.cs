@@ -25,8 +25,8 @@ namespace Tests.IntegrationTests.DAL
 		{
 			return new List<Team>
 			{
-				new TeamBuilder(_persister) { Players = ArrangeTwoPlayers() }.Build(),
-				new TeamBuilder(_persister) { Players = ArrangeTwoPlayers() }.Build(),
+				new TeamBuilder { Players = ArrangeTwoPlayers() }.Build(),
+				new TeamBuilder { Players = ArrangeTwoPlayers() }.Build(),
 			};
 		}
 
@@ -34,12 +34,12 @@ namespace Tests.IntegrationTests.DAL
 		{
 			return new List<Player>
 			{
-				ArrangePlayer(),
-				ArrangePlayer(),
+				ArrangePersistedPlayer(),
+				ArrangePersistedPlayer(),
 			};
 		}
 
-		private Player ArrangePlayer()
+		private Player ArrangePersistedPlayer()
 		{
 			return new PlayerBuilder(_persister).Build();
 		}
