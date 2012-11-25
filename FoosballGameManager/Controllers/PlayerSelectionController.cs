@@ -4,10 +4,8 @@ using DAL.Commands;
 using DAL.Queries;
 using Domain.Entities;
 using Domain.Exceptions;
-using Domain.Extensions;
 using Domain.Services;
 using FoosballGameManager.ViewModels;
-using NHibernate;
 
 namespace FoosballGameManager.Controllers
 {
