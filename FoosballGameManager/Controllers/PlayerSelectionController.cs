@@ -13,17 +13,17 @@ namespace FoosballGameManager.Controllers
 	{
 		private readonly IGetPlayersByIdsQuery _getPlayersByIdsQuery;
 		private readonly IAddCommand<Tournament> _addTournamentCommand;
+		private readonly ITeamCreatorFactory _teamCreatorFactory;
 		private readonly IGetEveryEntityQuery<Player> _getEveryPlayerEntityQuery;
-		private readonly ITeamCreator _teamCreator;
 		private readonly ITournamentCreator _tournamentCreator;
 
 		public PlayerSelectionController(IGetEveryEntityQuery<Player> getEveryPlayerEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery, 
-			IAddCommand<Tournament> addTournamentCommand, ITeamCreator teamCreator, ITournamentCreator tournamentCreator)
+			IAddCommand<Tournament> addTournamentCommand, ITeamCreatorFactory teamCreatorFactory, ITournamentCreator tournamentCreator)
 		{
 			_getEveryPlayerEntityQuery = getEveryPlayerEntityQuery;
 			_getPlayersByIdsQuery = getPlayersByIdsQuery;
 			_addTournamentCommand = addTournamentCommand;
-			_teamCreator = teamCreator;
+			_teamCreatorFactory = teamCreatorFactory;
 			_tournamentCreator = tournamentCreator;
 		}
 
@@ -51,7 +51,8 @@ namespace FoosballGameManager.Controllers
 				return View("Index");
 			}
 
-			var teams = CreateTeams(players);
+			var teamCreator = _teamCreatorFactory.CreateTeamCreator(playersViewModel.TeamGenerationMethod);
+			var teams = teamCreator.CreateTeams();
 			var tournament = CreateTournament(teams);
 
 			_addTournamentCommand.Execute(tournament);
@@ -62,12 +63,6 @@ namespace FoosballGameManager.Controllers
 		private Tournament CreateTournament(IEnumerable<Team> teams)
 		{
 			return _tournamentCreator.CreateTournament(teams);
-		}
-
-		private IEnumerable<Team> CreateTeams(IEnumerable<Player> players)
-		{
-			_teamCreator.Players = players;
-			return _teamCreator.CreateTeams();
 		}
 	}
 }

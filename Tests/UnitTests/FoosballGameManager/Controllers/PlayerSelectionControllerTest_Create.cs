@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using DAL.Commands;
 using DAL.Queries;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Exceptions;
 using Domain.Services;
 using FluentAssertions;
@@ -12,13 +13,14 @@ using FoosballGameManager.Controllers;
 using FoosballGameManager.ViewModels;
 using NSubstitute;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Tests.UnitTests.FoosballGameManager.Controllers
 {
 	public class PlayerSelectionControllerTest_Create
 	{
 		private readonly PlayerSelectionController _playerSelectionController;
-		private readonly ITeamCreator _teamCreator = Substitute.For<ITeamCreator>();
+		private readonly ITeamCreatorFactory _teamCreatorFactory = Substitute.For<ITeamCreatorFactory>();
 		private readonly ITournamentCreator _tournamentCreator = Substitute.For<ITournamentCreator>();
 		private readonly IGetPlayersByIdsQuery _getPlayersByIdsQuery;
 		private readonly IAddCommand<Tournament> _addTournamentCommand;
@@ -28,15 +30,18 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 			_getPlayersByIdsQuery = Substitute.For<IGetPlayersByIdsQuery>();
 			_addTournamentCommand = Substitute.For<IAddCommand<Tournament>>();
 			_tournamentCreator.CreateTournament(Arg.Any<IEnumerable<Team>>()).Returns(new Tournament());
-			_playerSelectionController = new PlayerSelectionController(Substitute.For<IGetEveryEntityQuery<Player>>(), _getPlayersByIdsQuery, _addTournamentCommand, _teamCreator, _tournamentCreator);
+			_playerSelectionController = new PlayerSelectionController(Substitute.For<IGetEveryEntityQuery<Player>>(), _getPlayersByIdsQuery, _addTournamentCommand, _teamCreatorFactory, _tournamentCreator);
 		}
 
 		[Fact]
-		public void Given_TeamCreator_When_Create_Then_CreateTeams_Is_Called_On_TeamCreator()
+		public void Given_TeamCreator_Is_Returned_By_Team_Creator_Factory_When_Create_Then_CreateTeams_Is_Called_On_TeamCreator()
 		{
+			var teamCreator = Substitute.For<ITeamCreator>();
+			_teamCreatorFactory.CreateTeamCreator(Arg.Any<TeamGenerationMethod>()).Returns(teamCreator);
+
 			_playerSelectionController.Create(new PlayersViewModel());
 
-			_teamCreator.Received(1).CreateTeams();
+			teamCreator.Received(1).CreateTeams();
 		}
 
 		[Fact]
@@ -91,7 +96,9 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		public void Given_Teams_When_Create_Then_CreateTournament_Is_Called_With_Teams()
 		{
 			var teams = ArrangeTwoTeams();
-			_teamCreator.CreateTeams().Returns(teams);
+			var teamCreator = Substitute.For<ITeamCreator>();
+			teamCreator.CreateTeams().Returns(teams);
+			_teamCreatorFactory.CreateTeamCreator(Arg.Any<TeamGenerationMethod>()).Returns(teamCreator);
 
 			_playerSelectionController.Create(new PlayersViewModel());
 
@@ -108,6 +115,22 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 
 			_addTournamentCommand.Received(1).Execute(tournament);
 		}
+
+		[Theory]
+		[InlineData(TeamGenerationMethod.Random)]
+		[InlineData(TeamGenerationMethod.GroupByAffiliation)]
+		public void Given_Team_Generation_Enum_When_Create_Then_Team_Creator_Factory_Is_Execute_With_Team_Generation_Enum(TeamGenerationMethod teamGenerationMethod)
+		{
+			var playersViewModel = new PlayersViewModel
+			{
+				TeamGenerationMethod = teamGenerationMethod
+			};
+
+			_playerSelectionController.Create(playersViewModel);
+
+			_teamCreatorFactory.Received(1).CreateTeamCreator(teamGenerationMethod);
+		}
+
 
 		private Tournament ArrangeTournament()
 		{

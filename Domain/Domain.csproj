@@ -54,6 +54,7 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Infrastructure\Installers\DomainInstaller.cs" />
     <Compile Include="Services\ITeamCreator.cs" />
+    <Compile Include="Services\ITeamCreatorFactory.cs" />
     <Compile Include="Services\ITournamentCreator.cs" />
     <Compile Include="Services\RandomTeamCreator.cs" />
     <Compile Include="Services\TeamCreator.cs" />
