@@ -18,17 +18,15 @@ namespace FoosballGameManager.Controllers
 		private readonly IGetEveryEntityQuery<Player> _getEveryPlayerEntityQuery;
 		private readonly ITeamCreator _teamCreator;
 		private readonly ITournamentCreator _tournamentCreator;
-		private readonly ISession _session;
 
 		public PlayerSelectionController(IGetEveryEntityQuery<Player> getEveryPlayerEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery, 
-			IAddCommand<Tournament> addTournamentCommand, ITeamCreator teamCreator, ITournamentCreator tournamentCreator, ISession session)
+			IAddCommand<Tournament> addTournamentCommand, ITeamCreator teamCreator, ITournamentCreator tournamentCreator)
 		{
 			_getEveryPlayerEntityQuery = getEveryPlayerEntityQuery;
 			_getPlayersByIdsQuery = getPlayersByIdsQuery;
 			_addTournamentCommand = addTournamentCommand;
 			_teamCreator = teamCreator;
 			_tournamentCreator = tournamentCreator;
-			_session = session;
 		}
 
 		public ActionResult Index()

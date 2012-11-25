@@ -30,7 +30,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 			_getPlayersByIdsQuery = Substitute.For<IGetPlayersByIdsQuery>();
 			_addTournamentCommand = Substitute.For<IAddCommand<Tournament>>();
 			_tournamentCreator.CreateTournament(Arg.Any<IEnumerable<Team>>()).Returns(new Tournament());
-			_playerSelectionController = new PlayerSelectionController(_getEveryPlayerEntityQuery, _getPlayersByIdsQuery, _addTournamentCommand, _teamCreator, _tournamentCreator, null);
+			_playerSelectionController = new PlayerSelectionController(_getEveryPlayerEntityQuery, _getPlayersByIdsQuery, _addTournamentCommand, _teamCreator, _tournamentCreator);
 		}
 
 		[Fact]
