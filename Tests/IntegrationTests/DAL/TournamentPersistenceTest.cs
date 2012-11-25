@@ -25,12 +25,12 @@ namespace Tests.IntegrationTests.DAL
 		{
 			return new List<Team>
 			{
-				new TeamBuilder { Players = ArrangeTwoPlayers() }.Build(),
-				new TeamBuilder { Players = ArrangeTwoPlayers() }.Build(),
+				new TeamBuilder { Players = ArrangeTwoPersistedPlayers() }.Build(),
+				new TeamBuilder { Players = ArrangeTwoPersistedPlayers() }.Build(),
 			};
 		}
 
-		private IEnumerable<Player> ArrangeTwoPlayers()
+		private IEnumerable<Player> ArrangeTwoPersistedPlayers()
 		{
 			return new List<Player>
 			{
