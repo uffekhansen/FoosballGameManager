@@ -1,0 +1,23 @@
+﻿@model TournamentViewModel
+
+@{
+	ViewBag.Title = "Team manager - Tournament";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Team manager - Tournament</h2>
+
+<div>
+	@foreach(var team in Model.Tournament.Teams)
+	{
+		<div>
+		Team = @team.Id
+		@foreach(var player in team.Players)
+		{
+			<div>
+				@player.Name
+			</div>
+		}
+		</div>
+	}
+</div>
