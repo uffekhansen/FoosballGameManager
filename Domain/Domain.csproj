@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Entities\AssignedIdEntity.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Enums\TeamGenerationMethod.cs" />
     <Compile Include="Exceptions\AlreadyExistsException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Exceptions\TournamentCreationException.cs" />

@@ -1,4 +1,5 @@
-﻿@model PlayersViewModel
+﻿@using FoosballGameManager.Extensions
+@model PlayersViewModel
 
 @{
 	ViewBag.Title = "Team manager";
@@ -11,6 +12,10 @@
 {
 	<div>
 		@Html.ListBoxFor(model => model.SelectedPlayers, new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"))
+	</div>
+	
+	<div>
+		@Html.RadioButtonForEnum(x => x.TeamGenerationMethod)
 	</div>
 
 	<input type="submit" value="Create Teams" />
