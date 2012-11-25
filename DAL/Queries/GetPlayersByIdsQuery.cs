@@ -18,11 +18,7 @@ namespace DAL.Queries
 
 		public IEnumerable<Player> Execute(IEnumerable<Guid> playerIds)
 		{
-			if(playerIds == null)
-			{
-				playerIds = new List<Guid>();
-			}
-
+			playerIds = playerIds ?? new List<Guid>();
 			var players = playerIds.Select(GetPlayer);
 
 			if (_unrecognizedPlayerIds.Any())
