@@ -1,4 +1,4 @@
-﻿@using FoosballGameManager.Extensions
+﻿@using Domain.Enums
 @model PlayersViewModel
 
 @{
@@ -11,11 +11,12 @@
 @using (Html.BeginForm("Create", "PlayerSelection", FormMethod.Post) )
 {
 	<div>
-		@Html.ListBoxFor(model => model.SelectedPlayers, new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"))
+		@Html.ListBoxFor(model => model.SelectedPlayers, new SelectList(Model.Players.OrderBy(x => x.Name), "Id", "Name"), new { style = "height: 400px;" })
 	</div>
 	
 	<div>
-		@Html.RadioButtonForEnum(x => x.TeamGenerationMethod)
+		@Html.RadioButton("TeamGenerationMethod", TeamGenerationMethod.Random) Random
+		@Html.RadioButton("TeamGenerationMethod", TeamGenerationMethod.GroupByAffiliation) Group by Affiliation
 	</div>
 
 	<input type="submit" value="Create Teams" />
