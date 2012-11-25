@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
 using Domain.Exceptions;
+using Domain.Extensions;
 
 namespace DAL.Queries
 {
@@ -19,7 +20,7 @@ namespace DAL.Queries
 		public IEnumerable<Player> Execute(IEnumerable<Guid> playerIds)
 		{
 			playerIds = playerIds ?? new List<Guid>();
-			var players = playerIds.Select(GetPlayer);
+			var players = playerIds.Select(GetPlayer).ToList();
 
 			if (_unrecognizedPlayerIds.Any())
 			{
