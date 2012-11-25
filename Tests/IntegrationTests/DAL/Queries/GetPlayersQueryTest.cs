@@ -28,19 +28,19 @@ namespace Tests.IntegrationTests.DAL.Queries
 			{
 				yield return new object[]
 				{
-					new List<Guid> { new Guid("00000000-0000-0000-0000-000000000000") },
+					new List<Guid> { Guid.NewGuid() },
 					new List<Guid> { new Guid("11111111-1111-1111-1111-111111111111") },
 					"Players with the following ids did not exist: 11111111-1111-1111-1111-111111111111,"
 				};
 				yield return new object[]
 				{
-					new List<Guid> { new Guid("00000000-0000-0000-0000-000000000000"), new Guid("55555555-5555-5555-5555-555555555555") },
+					new List<Guid> { Guid.NewGuid(), Guid.NewGuid() },
 					new List<Guid> { new Guid("11111111-1111-1111-1111-111111111111"), new Guid("22222222-2222-2222-2222-222222222222") },
 					"Players with the following ids did not exist: 11111111-1111-1111-1111-111111111111, 22222222-2222-2222-2222-222222222222,"
 				};
 				yield return new object[]
 				{
-					new List<Guid> { new Guid("00000000-0000-0000-0000-000000000000"), new Guid("55555555-5555-5555-5555-555555555555") },
+					new List<Guid> { Guid.NewGuid(), Guid.NewGuid() },
 					new List<Guid> { new Guid("11111111-1111-1111-1111-111111111111"), new Guid("22222222-2222-2222-2222-222222222222"), new Guid("33333333-3333-3333-3333-333333333333") },
 					"Players with the following ids did not exist: 11111111-1111-1111-1111-111111111111, 22222222-2222-2222-2222-222222222222, 33333333-3333-3333-3333-333333333333,"
 				};

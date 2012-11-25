@@ -38,7 +38,7 @@ namespace Domain.Services
 		{
 			if(_teams.Count() == 1)
 			{
-				throw new TournamentCreationException("Only 1 team supplied - need at least 2 to create a tournament");	
+				throw new TournamentCreationException("Only 1 team supplied - need at least 2 to create a tournament");
 			}
 		}
 	}

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Domain.Entities
 {
@@ -17,7 +16,7 @@ namespace Domain.Entities
 
 		public Team(IEnumerable<Player> players)
 		{
-			Players = players.ToList();
+			Players = players;
 		}
 	}
 }
