@@ -5,6 +5,7 @@ using Domain.Tools;
 
 namespace Domain.Services
 {
+	//TODO: replace with strategy
 	public class RandomTeamCreator : TeamCreator
 	{
 		private readonly IRandom _random;

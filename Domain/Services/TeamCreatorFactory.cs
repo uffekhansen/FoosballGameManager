@@ -3,6 +3,7 @@ using Domain.Enums;
 
 namespace Domain.Services
 {
+	//TODO: replace with strategy-factory
 	public class TeamCreatorFactory : ITeamCreatorFactory
 	{
 		private readonly ITeamCreator[] _teamCreators;

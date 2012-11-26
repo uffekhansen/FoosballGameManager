@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Tests.UnitTests.Domain.Services
 {
+	//TODO: replace with strategy
 	public class TeamCreatorFactoryTest
 	{
 		private readonly TeamCreatorFactory _teamCreatorFactory;
