@@ -5,7 +5,7 @@ using FluentAssertions;
 using NSubstitute;
 using Xunit;
 
-namespace Tests.UnitTests.Domain.Services
+namespace Tests.UnitTests.Domain.Strategies
 {
 	public class TeamCreationStrategyFactoryTest
 	{

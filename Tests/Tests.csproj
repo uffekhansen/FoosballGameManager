@@ -103,7 +103,8 @@
     <Compile Include="UnitTests\Domain\Extensions\IntExtensionsTest.cs" />
     <Compile Include="UnitTests\Domain\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Infrastructure\TestBases\InDatabaseTest.cs" />
-    <Compile Include="UnitTests\Domain\Services\TeamCreationStrategyFactoryTest.cs" />
+    <Compile Include="UnitTests\Domain\Strategies\RandomTeamCreationStrategyTest.cs" />
+    <Compile Include="UnitTests\Domain\Strategies\TeamCreationStrategyFactoryTest.cs" />
     <Compile Include="UnitTests\Domain\Services\GroupedAffiliationTeamCreatorTest.cs" />
     <Compile Include="UnitTests\Domain\Services\TeamCreatorFactoryTest.cs" />
     <Compile Include="UnitTests\Domain\Services\TournamentCreatorTest.cs" />
