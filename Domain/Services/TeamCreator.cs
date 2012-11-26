@@ -22,7 +22,7 @@ namespace Domain.Services
 			set { _players = value; }
 		}
 
-		public List<Team> CreateTeams()
+		public IList<Team> CreateTeams()
 		{
 			GuardAgainstWrongSettings();
 
@@ -60,6 +60,6 @@ namespace Domain.Services
 			}
 		}
 
-		protected abstract List<Team> GenerateTeams();
+		protected abstract IList<Team> GenerateTeams();
 	}
 }

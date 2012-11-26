@@ -1,6 +1,7 @@
 ﻿using System;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
 using DAL.Infrastructure.Installers;
 using Domain.Infrastructure.Installers;
@@ -48,6 +49,7 @@ namespace FoosballGameManager.Infrastructure.DI
 			};
 
 			WindsorContainer = new WindsorContainer();
+			WindsorContainer.Kernel.Resolver.AddSubResolver(new ArrayResolver(WindsorContainer.Kernel));
 			WindsorContainer.Install(installers);
 		}
 

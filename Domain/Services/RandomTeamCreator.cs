@@ -9,12 +9,16 @@ namespace Domain.Services
 	{
 		private readonly IRandom _random;
 
+		public RandomTeamCreator()
+		{
+		}
+
 		public RandomTeamCreator(IRandom random)
 		{
 			_random = random;
 		}
 
-		protected override List<Team> GenerateTeams()
+		protected override IList<Team> GenerateTeams()
 		{
 			var teams = new List<Team>();
 			var players = _players.ToList();

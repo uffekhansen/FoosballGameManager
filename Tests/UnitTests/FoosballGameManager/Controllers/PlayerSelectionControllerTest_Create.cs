@@ -37,7 +37,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		public void Given_TeamCreator_Is_Returned_By_Team_Creator_Factory_When_Create_Then_CreateTeams_Is_Called_On_TeamCreator()
 		{
 			var teamCreator = Substitute.For<ITeamCreator>();
-			_teamCreatorFactory.CreateTeamCreator(Arg.Any<TeamGenerationMethod>()).Returns(teamCreator);
+			_teamCreatorFactory.MakeTeamCreator(Arg.Any<TeamGenerationMethod>()).Returns(teamCreator);
 
 			_playerSelectionController.Create(new PlayersViewModel());
 
@@ -98,7 +98,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 			var teams = ArrangeTwoTeams();
 			var teamCreator = Substitute.For<ITeamCreator>();
 			teamCreator.CreateTeams().Returns(teams);
-			_teamCreatorFactory.CreateTeamCreator(Arg.Any<TeamGenerationMethod>()).Returns(teamCreator);
+			_teamCreatorFactory.MakeTeamCreator(Arg.Any<TeamGenerationMethod>()).Returns(teamCreator);
 
 			_playerSelectionController.Create(new PlayersViewModel());
 
@@ -128,7 +128,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 
 			_playerSelectionController.Create(playersViewModel);
 
-			_teamCreatorFactory.Received(1).CreateTeamCreator(teamGenerationMethod);
+			_teamCreatorFactory.Received(1).MakeTeamCreator(teamGenerationMethod);
 		}
 
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
+using Domain.Extensions;
 using Domain.Services;
 using Domain.Tools;
 using NSubstitute;
@@ -40,7 +41,7 @@ namespace Tests.UnitTests.Domain.Services
 
 			var teams = teamCreator.CreateTeams();
 
-			teams.ForEach(x => Assert.Equal(numberPlayersPerTeam, x.Players.Count()));
+			teams.Each(x => Assert.Equal(numberPlayersPerTeam, x.Players.Count()));
 		}
 
 		[Theory]

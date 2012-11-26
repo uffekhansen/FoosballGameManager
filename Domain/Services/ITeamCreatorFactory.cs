@@ -4,6 +4,6 @@ namespace Domain.Services
 {
 	public interface ITeamCreatorFactory
 	{
-		ITeamCreator CreateTeamCreator(TeamGenerationMethod teamCreationMethod);
+		ITeamCreator MakeTeamCreator(TeamGenerationMethod teamCreationMethod);
 	}
 }

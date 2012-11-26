@@ -31,7 +31,7 @@ namespace Tests.UnitTests.Domain.Services
 
 			Action createTournament = () => _tournamentCreator.CreateTournament(teams);
 
-			createTournament.ShouldThrow<TournamentCreationException>().WithMessage("Only 1 team supplied - need at least 2 to create a tournament");
+			createTournament.ShouldThrow<TournamentCreationException>().WithMessage("Only 1 team supplied - At least 2 teams needed to create a tournament");
 		}
 
 		[Theory]

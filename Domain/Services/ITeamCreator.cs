@@ -5,7 +5,7 @@ namespace Domain.Services
 {
 	public interface ITeamCreator
 	{
-		List<Team> CreateTeams();
+		IList<Team> CreateTeams();
 
 		int PlayersPerTeam { get; set; }
 
