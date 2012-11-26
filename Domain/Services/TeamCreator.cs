@@ -1,14 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Exceptions;
+using Domain.Strategies;
 
 namespace Domain.Services
 {
-	public abstract class TeamCreator : ITeamCreator
+	public class TeamCreator : ITeamCreator
 	{
 		private int _playersPerTeam = 2;
 		protected IEnumerable<Player> _players;
+
+		private readonly ITeamCreationStrategyFactory _teamCreationStrategyFactory;
 
 		public int PlayersPerTeam
 		{
@@ -22,11 +26,20 @@ namespace Domain.Services
 			set { _players = value; }
 		}
 
-		public IList<Team> CreateTeams()
+		public TeamCreator(ITeamCreationStrategyFactory teamCreationStrategyFactory)
+		{
+			_teamCreationStrategyFactory = teamCreationStrategyFactory;
+		}
+
+		public IList<Team> CreateTeams(TeamGenerationMethod teamGenerationMethod)
 		{
 			GuardAgainstWrongSettings();
 
-			return GenerateTeams();
+			var teamCreationStrategy = _teamCreationStrategyFactory.MakeTeamCreationStrategy(teamGenerationMethod);
+			teamCreationStrategy.Players = _players;
+			teamCreationStrategy.PlayersPerTeam = _playersPerTeam;
+
+			return teamCreationStrategy.CreateTeams();
 		}
 
 		private void GuardAgainstWrongSettings()
@@ -59,7 +72,5 @@ namespace Domain.Services
 				throw new TeamGenerationException("Number players not divisable with number players per team in team settings");
 			}
 		}
-
-		protected abstract IList<Team> GenerateTeams();
 	}
 }

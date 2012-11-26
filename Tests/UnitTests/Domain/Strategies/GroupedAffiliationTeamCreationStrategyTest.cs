@@ -2,37 +2,27 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
 using Domain.Extensions;
-using Domain.Services;
-using Domain.Tools;
+using Domain.Strategies;
 using FluentAssertions;
 using NSubstitute;
 using Tests.Builders;
 using Xunit.Extensions;
 
-namespace Tests.UnitTests.Domain.Services
+namespace Tests.UnitTests.Domain.Strategies
 {
-	public class GroupedAffiliationTeamCreatorTest
+	public class GroupedAffiliationTeamCreationStrategyTest
 	{
 		private IList<Player> _players = new List<Player>();
-		private readonly GroupedAffiliationTeamCreator _groupedAffiliationTeamCreator;
+		private readonly GroupedAffiliationTeamCreationStrategy _groupedAffiliationTeamCreationStrategy;
 
 		private const string _noAffiliation = "";
 		private const string _mvnoAffiliation = "MVNO";
 		private const string _salesAffiliation = "Sales";
 
-		public GroupedAffiliationTeamCreatorTest()
+		public GroupedAffiliationTeamCreationStrategyTest()
 		{
-			_groupedAffiliationTeamCreator = new GroupedAffiliationTeamCreator(Substitute.For<IRandom>());
+			_groupedAffiliationTeamCreationStrategy = new GroupedAffiliationTeamCreationStrategy(Substitute.For<IRandomTeamCreationStrategy>());
 		}
-
-		/*
-		 * Given players size of 2
-		 * 2 MVNO, 2 SALES			= 1 mvno only, 1 sales only
-		 * 2 MVNO, 2 SALES, 2 N/A	= 1 mvno only, 1 sales only, 1 n/a only
-		 * 1 MVNO, 3 SALES			= 1 sales only
-		 * 1 MVNO, 4 SALES, 1 N/A	= 2 sales only
-		 * 2 MVNO, 2 SALES, 6 N/A	= 1 mvno only, 1 sales only, 3 n/a only
-		 */
 
 		[Theory]
 		[InlineData(2, 2, 0, 1, 1, 0)]
@@ -46,25 +36,16 @@ namespace Tests.UnitTests.Domain.Services
 			ArrangePlayers(salesAffiliatedPlayers, _salesAffiliation);
 			ArrangePlayers(notAffiliatedPlayers, _noAffiliation);
 			_players = _players.OrderBy(x => x.Id).ToList();
-			_groupedAffiliationTeamCreator.PlayersPerTeam = 2;
-			_groupedAffiliationTeamCreator.Players = _players;
+			_groupedAffiliationTeamCreationStrategy.PlayersPerTeam = 2;
+			_groupedAffiliationTeamCreationStrategy.Players = _players;
 
-			var teams = _groupedAffiliationTeamCreator.CreateTeams();
+			var teams = _groupedAffiliationTeamCreationStrategy.CreateTeams();
 
 			teams.Count().Should().Be(expectedPureMvnoTeams + expectedPureNotAffiliatedTeams + expectedPureSalesTeams);
 			FindNumberTeamsOfPureAffiliation(teams, _mvnoAffiliation).Should().Be(expectedPureMvnoTeams);
 			FindNumberTeamsOfPureAffiliation(teams, _salesAffiliation).Should().Be(expectedPureSalesTeams);
 			FindNumberTeamsOfPureAffiliation(teams, _noAffiliation).Should().Be(expectedPureNotAffiliatedTeams);
 		}
-
-		/*
-		 * Given players size of 3
-		 * 3 MVNO, 3 SALES			= 1 mvno only, 1 sales only
-		 * 3 MVNO, 2 SALES, 2 N/A	= 1 mvno only
-		 * 1 MVNO, 4 SALES			= 1 sales only
-		 * 1 MVNO, 6 SALES, 1 N/A	= 2 sales only
-		 * 3 MVNO, 3 SALES, 6 N/A	= 1 mvno only, 1 sales only, 2 n/a only
-		*/
 
 		[Theory]
 		[InlineData(3, 3, 0, 1, 1, 0)]
@@ -78,10 +59,10 @@ namespace Tests.UnitTests.Domain.Services
 			ArrangePlayers(salesAffiliatedPlayers, _salesAffiliation);
 			ArrangePlayers(notAffiliatedPlayers, _noAffiliation);
 			_players = _players.OrderBy(x => x.Id).ToList();
-			_groupedAffiliationTeamCreator.PlayersPerTeam = 3;
-			_groupedAffiliationTeamCreator.Players = _players;
+			_groupedAffiliationTeamCreationStrategy.PlayersPerTeam = 3;
+			_groupedAffiliationTeamCreationStrategy.Players = _players;
 
-			var teams = _groupedAffiliationTeamCreator.CreateTeams();
+			var teams = _groupedAffiliationTeamCreationStrategy.CreateTeams();
 
 			teams.Count().Should().Be(expectedPureMvnoTeams + expectedPureNotAffiliatedTeams + expectedPureSalesTeams);
 			FindNumberTeamsOfPureAffiliation(teams, _mvnoAffiliation).Should().Be(expectedPureMvnoTeams);
@@ -103,7 +84,5 @@ namespace Tests.UnitTests.Domain.Services
 			return teams.Count(team => team.Players
 				.All(player => player.Affiliation == affiliation));
 		}
-
-		//TODO: Random teamcreator is used
 	}
 }

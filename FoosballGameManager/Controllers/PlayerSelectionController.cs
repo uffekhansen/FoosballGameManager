@@ -13,17 +13,17 @@ namespace FoosballGameManager.Controllers
 	{
 		private readonly IGetPlayersByIdsQuery _getPlayersByIdsQuery;
 		private readonly IAddCommand<Tournament> _addTournamentCommand;
-		private readonly ITeamCreatorFactory _teamCreatorFactory;
+		private readonly ITeamCreator _teamCreator;
 		private readonly IGetEveryEntityQuery<Player> _getEveryPlayerEntityQuery;
 		private readonly ITournamentCreator _tournamentCreator;
 
-		public PlayerSelectionController(IGetEveryEntityQuery<Player> getEveryPlayerEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery, 
-			IAddCommand<Tournament> addTournamentCommand, ITeamCreatorFactory teamCreatorFactory, ITournamentCreator tournamentCreator)
+		public PlayerSelectionController(IGetEveryEntityQuery<Player> getEveryPlayerEntityQuery, IGetPlayersByIdsQuery getPlayersByIdsQuery,
+			IAddCommand<Tournament> addTournamentCommand, ITeamCreator teamCreator, ITournamentCreator tournamentCreator)
 		{
 			_getEveryPlayerEntityQuery = getEveryPlayerEntityQuery;
 			_getPlayersByIdsQuery = getPlayersByIdsQuery;
 			_addTournamentCommand = addTournamentCommand;
-			_teamCreatorFactory = teamCreatorFactory;
+			_teamCreator = teamCreator;
 			_tournamentCreator = tournamentCreator;
 		}
 
@@ -51,8 +51,7 @@ namespace FoosballGameManager.Controllers
 				return View("Index");
 			}
 
-			var teamCreator = _teamCreatorFactory.MakeTeamCreator(playersViewModel.TeamGenerationMethod);
-			var teams = teamCreator.CreateTeams();
+			var teams = _teamCreator.CreateTeams(playersViewModel.TeamGenerationMethod);
 			var tournament = CreateTournament(teams);
 
 			_addTournamentCommand.Execute(tournament);

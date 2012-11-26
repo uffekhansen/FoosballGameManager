@@ -22,7 +22,7 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 		public PlayerSelectionControllerTest_Index()
 		{
 			_tournamentCreator.CreateTournament(Arg.Any<IEnumerable<Team>>()).Returns(new Tournament());
-			_playerSelectionController = new PlayerSelectionController(_getEveryPlayerEntityQuery, Substitute.For<IGetPlayersByIdsQuery>(), Substitute.For<IAddCommand<Tournament>>(), Substitute.For<ITeamCreatorFactory>(), _tournamentCreator);
+			_playerSelectionController = new PlayerSelectionController(_getEveryPlayerEntityQuery, Substitute.For<IGetPlayersByIdsQuery>(), Substitute.For<IAddCommand<Tournament>>(), Substitute.For<ITeamCreator>(), _tournamentCreator);
 		}
 
 		[Fact]
