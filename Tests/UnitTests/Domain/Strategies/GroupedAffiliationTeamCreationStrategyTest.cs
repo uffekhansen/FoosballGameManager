@@ -41,7 +41,6 @@ namespace Tests.UnitTests.Domain.Strategies
 
 			var teams = _groupedAffiliationTeamCreationStrategy.CreateTeams();
 
-			teams.Count().Should().Be(expectedPureMvnoTeams + expectedPureNotAffiliatedTeams + expectedPureSalesTeams);
 			FindNumberTeamsOfPureAffiliation(teams, _mvnoAffiliation).Should().Be(expectedPureMvnoTeams);
 			FindNumberTeamsOfPureAffiliation(teams, _salesAffiliation).Should().Be(expectedPureSalesTeams);
 			FindNumberTeamsOfPureAffiliation(teams, _noAffiliation).Should().Be(expectedPureNotAffiliatedTeams);
@@ -64,7 +63,6 @@ namespace Tests.UnitTests.Domain.Strategies
 
 			var teams = _groupedAffiliationTeamCreationStrategy.CreateTeams();
 
-			teams.Count().Should().Be(expectedPureMvnoTeams + expectedPureNotAffiliatedTeams + expectedPureSalesTeams);
 			FindNumberTeamsOfPureAffiliation(teams, _mvnoAffiliation).Should().Be(expectedPureMvnoTeams);
 			FindNumberTeamsOfPureAffiliation(teams, _salesAffiliation).Should().Be(expectedPureSalesTeams);
 			FindNumberTeamsOfPureAffiliation(teams, _noAffiliation).Should().Be(expectedPureNotAffiliatedTeams);

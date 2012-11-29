@@ -8,6 +8,7 @@ using Domain.Services;
 using Domain.Strategies;
 using FluentAssertions;
 using NSubstitute;
+using Tests.Builders;
 using Xunit;
 using Xunit.Extensions;
 
@@ -15,6 +16,13 @@ namespace Tests.UnitTests.Domain.Services
 {
 	public class TeamCreatorTest
 	{
+		private readonly ITeamCreationStrategyFactory _teamCreationStrategyFactory;
+
+		public TeamCreatorTest()
+		{
+			_teamCreationStrategyFactory = Substitute.For<ITeamCreationStrategyFactory>();
+		}
+
 		[Theory]
 		[InlineData(1, 2)]
 		[InlineData(2, 3)]
@@ -52,11 +60,31 @@ namespace Tests.UnitTests.Domain.Services
 			createTeams.ShouldThrow<TeamGenerationException>().WithMessage("Zero players in list");
 		}
 
+		[Theory]
+		[InlineData(0)]
+		[InlineData(1)]
+		[InlineData(2)]
+		[InlineData(4)]
+		[InlineData(6)]
+		[InlineData(10)]
+		public void Given_TeamGeneratioMethod_Returns_Wrong_Number_Of_Teams_When_Creating_Teams_Then_TeamGenerationException_Is_Thrown(int numberTeamsReturned)
+		{
+			var teamCreator = ArrangeTeamCreator(10, 2);
+			var teamCreationStrategy = Substitute.For<ITeamCreationStrategy>();
+			var teams = new TeamBuilder().Build(numberTeamsReturned);
+			teamCreationStrategy.CreateTeams().Returns(teams);
+			_teamCreationStrategyFactory.MakeTeamCreationStrategy(Arg.Any<TeamGenerationMethod>()).Returns(teamCreationStrategy);
+
+			Action createTeams = () => teamCreator.CreateTeams(Arg.Any<TeamGenerationMethod>());
+
+			createTeams.ShouldThrow<TeamGenerationException>().WithMessage("Generated number of teams did not match team settings and player count");
+		}
+
 		private TeamCreator ArrangeTeamCreator(int numberPlayersInList, int numberPlayersPerTeam)
 		{
 			var playerList = ArrangePlayerList(numberPlayersInList);
 
-			var teamCreator = new TeamCreator(Substitute.For<ITeamCreationStrategyFactory>())
+			var teamCreator = new TeamCreator(_teamCreationStrategyFactory)
 			{
 				Players = playerList,
 				PlayersPerTeam = numberPlayersPerTeam

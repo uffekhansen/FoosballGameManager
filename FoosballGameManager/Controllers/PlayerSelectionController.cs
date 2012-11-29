@@ -51,6 +51,8 @@ namespace FoosballGameManager.Controllers
 				return View("Index");
 			}
 
+			_teamCreator.Players = players;
+			
 			var teams = _teamCreator.CreateTeams(playersViewModel.TeamGenerationMethod);
 			var tournament = CreateTournament(teams);
 

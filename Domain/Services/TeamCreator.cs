@@ -33,23 +33,26 @@ namespace Domain.Services
 
 		public IList<Team> CreateTeams(TeamGenerationMethod teamGenerationMethod)
 		{
-			GuardAgainstWrongSettings();
+			RequireValidSettings();
 
 			var teamCreationStrategy = _teamCreationStrategyFactory.MakeTeamCreationStrategy(teamGenerationMethod);
 			teamCreationStrategy.Players = _players;
 			teamCreationStrategy.PlayersPerTeam = _playersPerTeam;
 
-			return teamCreationStrategy.CreateTeams();
+			var teams = teamCreationStrategy.CreateTeams();
+			EnsureCorrectNumberTeams(teams);
+
+			return teams;
 		}
 
-		private void GuardAgainstWrongSettings()
+		private void RequireValidSettings()
 		{
-			ThrowsIfEmpty();
-			ThrowsIfNotEnoughPlayersForOneTeam();
-			ThrowsIfNumberPlayersDoesNotMatchTeamSettings();
+			RequirePlayers();
+			RequirePlayersEnoughForATeam();
+			RequireThatNumberPlayerMatchesTeamSettings();
 		}
 
-		private void ThrowsIfEmpty()
+		private void RequirePlayers()
 		{
 			if (!_players.Any())
 			{
@@ -57,7 +60,7 @@ namespace Domain.Services
 			}
 		}
 
-		private void ThrowsIfNotEnoughPlayersForOneTeam()
+		private void RequirePlayersEnoughForATeam()
 		{
 			if (_players.Count() < _playersPerTeam)
 			{
@@ -65,11 +68,20 @@ namespace Domain.Services
 			}
 		}
 
-		private void ThrowsIfNumberPlayersDoesNotMatchTeamSettings()
+		private void RequireThatNumberPlayerMatchesTeamSettings()
 		{
 			if (_players.Count() % _playersPerTeam != 0)
 			{
 				throw new TeamGenerationException("Number players not divisable with number players per team in team settings");
+			}
+		}
+
+		private void EnsureCorrectNumberTeams(IEnumerable<Team> teams)
+		{
+			var expectedNumberTeams = _players.Count() / _playersPerTeam;
+			if (teams.Count() != expectedNumberTeams)
+			{
+				throw new TeamGenerationException("Generated number of teams did not match team settings and player count");
 			}
 		}
 	}

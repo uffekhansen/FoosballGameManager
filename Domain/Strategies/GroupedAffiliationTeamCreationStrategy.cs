@@ -10,7 +10,7 @@ namespace Domain.Strategies
 		public int PlayersPerTeam { get; set; }
 		public IEnumerable<Player> Players { get; set; }
 
-		private IList<Team> _teams;
+		protected IList<Team> _teams;
 		private IList<Player> _excessPlayers;
 
 		private readonly IRandomTeamCreationStrategy _randomTeamCreationStrategy;
@@ -59,14 +59,16 @@ namespace Domain.Strategies
 
 		private void AddExcessPlayers(IEnumerable<Player> playersSharingAffiliation)
 		{
-			_excessPlayers.Concat(playersSharingAffiliation);
+			playersSharingAffiliation.Each(player => _excessPlayers.Add(player));
 		}
 
 		private void CreateRandomTeamsFromExcessPlayers()
 		{
 			_randomTeamCreationStrategy.Players = _excessPlayers;
 			_randomTeamCreationStrategy.PlayersPerTeam = PlayersPerTeam;
-			_teams.Concat(_randomTeamCreationStrategy.CreateTeams());
+
+			var excessTeams = _randomTeamCreationStrategy.CreateTeams();
+			excessTeams.Each(team => _teams.Add(team));
 		}
 	}
 }

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using AutoMapper;
+using Domain.Extensions;
 
 namespace Tests.Builders
 {
@@ -20,6 +22,13 @@ namespace Tests.Builders
 			_persister.Add(entity);
 
 			return entity;
+		}
+
+		public virtual IEnumerable<T> Build(int count)
+		{
+			var entities = new List<T>();
+			count.TimesDo(() => entities.Add(Build()));
+			return entities;
 		}
 
 		public virtual T CreateEntity()
