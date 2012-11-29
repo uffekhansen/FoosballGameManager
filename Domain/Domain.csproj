@@ -55,11 +55,13 @@
     <Compile Include="Infrastructure\Installers\DomainInstaller.cs" />
     <Compile Include="Strategies\GroupedAffiliationTeamCreationStrategy.cs" />
     <Compile Include="Strategies\IGroupedAffiliationTeamCreationStrategy.cs" />
+    <Compile Include="Strategies\IMixedAffiliationTeamCreationStrategy.cs" />
     <Compile Include="Strategies\IRandomTeamCreationStrategy.cs" />
     <Compile Include="Strategies\ITeamCreationStrategy.cs" />
     <Compile Include="Strategies\ITeamCreationStrategyFactory.cs" />
     <Compile Include="Services\ITeamCreator.cs" />
     <Compile Include="Services\ITournamentCreator.cs" />
+    <Compile Include="Strategies\MixedAffiliationTeamCreationStrategy.cs" />
     <Compile Include="Strategies\RandomTeamCreationStrategy.cs" />
     <Compile Include="Strategies\TeamCreationStrategyFactory.cs" />
     <Compile Include="Services\TeamCreator.cs" />

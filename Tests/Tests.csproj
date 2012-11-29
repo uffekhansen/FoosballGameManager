@@ -105,6 +105,7 @@
     <Compile Include="Infrastructure\TestBases\InDatabaseTest.cs" />
     <Compile Include="UnitTests\Domain\Services\TeamCreatorTest.cs" />
     <Compile Include="UnitTests\Domain\Services\TeamCreationStrategyBaseTest.cs" />
+    <Compile Include="UnitTests\Domain\Strategies\MixedAffiliationTeamCreationStrategyTest.cs" />
     <Compile Include="UnitTests\Domain\Strategies\GroupedAffiliationTeamCreationStrategyTest.cs" />
     <Compile Include="UnitTests\Domain\Strategies\RandomTeamCreationStrategyTest.cs" />
     <Compile Include="UnitTests\Domain\Strategies\TeamCreationStrategyFactoryTest.cs" />

@@ -10,7 +10,7 @@ namespace Domain.Strategies
 		public int PlayersPerTeam { get; set; }
 		public IEnumerable<Player> Players { get; set; }
 
-		protected IList<Team> _teams;
+		private IList<Team> _teams;
 		private IList<Player> _excessPlayers;
 
 		private readonly IRandomTeamCreationStrategy _randomTeamCreationStrategy;
