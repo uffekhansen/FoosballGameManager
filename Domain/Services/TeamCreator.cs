@@ -49,7 +49,7 @@ namespace Domain.Services
 		{
 			RequirePlayers();
 			RequirePlayersEnoughForATeam();
-			RequireThatNumberPlayerMatchesTeamSettings();
+			RequireThatNumberPlayerIsDivisableWithNumerPlayersPerTeam();
 		}
 
 		private void RequirePlayers()
@@ -68,7 +68,7 @@ namespace Domain.Services
 			}
 		}
 
-		private void RequireThatNumberPlayerMatchesTeamSettings()
+		private void RequireThatNumberPlayerIsDivisableWithNumerPlayersPerTeam()
 		{
 			if (_players.Count() % _playersPerTeam != 0)
 			{
