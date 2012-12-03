@@ -41,12 +41,23 @@ namespace Tests.UnitTests.Domain.Strategies
 
 			var teams = _mixedAffiliationTeamCreationStrategy.CreateTeams();
 
-			FindNumberTeamsOfMixedAffiliation(teams).Should().Be(expectedNumberOfMixedTeams);
+			FindNumberTeamsOfPureMixedAffiliation(teams).Should().Be(expectedNumberOfMixedTeams);
 		}
 
-		private int FindNumberTeamsOfMixedAffiliation(IEnumerable<Team> teams)
+		private int FindNumberTeamsOfPureMixedAffiliation(IEnumerable<Team> teams)
 		{
-			throw new System.NotImplementedException();
+			int pureMixedTeams = 0;
+
+			teams.Each(team =>
+			{
+				var groupings = team.Players.GroupBy(player => player.Affiliation);
+				if (groupings.Count() == team.Players.Count())
+				{
+					++pureMixedTeams;
+				}
+			});
+
+			return pureMixedTeams;
 		}
 
 		private void ArrangePlayers(int count, string affiliation)
