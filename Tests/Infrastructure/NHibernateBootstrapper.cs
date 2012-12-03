@@ -9,7 +9,8 @@ namespace Tests.Infrastructure
 {
 	public class NHibernateBootstrapper : INHibernateBootstrapper
 	{
-		private const string _databaseFilename = @"C:\Users\Uffe\Desktop\dbfiles\foosball_tests.db";
+		//private const string _databaseFilename = @"C:\Users\Uffe\Desktop\dbfiles\foosball_tests.db";
+		private const string _databaseFilename = "foosball_tests.db";
 
 		public ISessionFactory Bootstrap()
 		{
