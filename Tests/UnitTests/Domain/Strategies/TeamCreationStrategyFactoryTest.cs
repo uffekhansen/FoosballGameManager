@@ -16,7 +16,8 @@ namespace Tests.UnitTests.Domain.Strategies
 			var teamCreationStrategies = new ITeamCreationStrategy[]
 			{
 				new RandomTeamCreationStrategy(Substitute.For<IRandom>()),
-				new GroupedAffiliationTeamCreationStrategy(Substitute.For<IRandomTeamCreationStrategy>(), Substitute.For<IRandom>())
+				new GroupedAffiliationTeamCreationStrategy(Substitute.For<IRandomTeamCreationStrategy>(), Substitute.For<IRandom>()),
+				new MixedAffiliationTeamCreationStrategy(Substitute.For<IRandom>()),
 			};
 
 			_teamCreationStrategyFactory = new TeamCreationStrategyFactory(teamCreationStrategies);
@@ -36,6 +37,14 @@ namespace Tests.UnitTests.Domain.Strategies
 			var teamCreationStrategy = _teamCreationStrategyFactory.MakeTeamCreationStrategy(TeamGenerationMethod.GroupByAffiliation);
 
 			teamCreationStrategy.Should().BeOfType<GroupedAffiliationTeamCreationStrategy>();
+		}
+
+		[Fact]
+		public void Given_MixedAffiliation_As_Input_When_CreateTeamCreator_Then_A_MixedAffiliationTeamCreationStrategy_Is_Returned()
+		{
+			var teamCreationStrategy = _teamCreationStrategyFactory.MakeTeamCreationStrategy(TeamGenerationMethod.MixedAffiliation);
+
+			teamCreationStrategy.Should().BeOfType<MixedAffiliationTeamCreationStrategy>();
 		}
 	}
 }

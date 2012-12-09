@@ -12,8 +12,7 @@ namespace FoosballGameManager.Infrastructure.Installers
 {
 	public class SessionInstaller : IWindsorInstaller
 	{
-		///private const string _databaseFilename = @"C:\Users\Uffe\Desktop\dbfiles\foosball.db";
-		private const string _databaseFilename = "foosball.db";
+		private const string _databaseFilename = @"C:\Users\Uffe\Desktop\dbfiles\foosball.db";
 
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{

@@ -4,5 +4,6 @@ namespace Domain.Enums
 	{
 		Random,
 		GroupByAffiliation,
+		MixedAffiliation,
 	}
 }

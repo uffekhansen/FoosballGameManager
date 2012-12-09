@@ -14,12 +14,16 @@ namespace Domain.Strategies
 
 		public ITeamCreationStrategy MakeTeamCreationStrategy(TeamGenerationMethod teamGenerationMethod)
 		{
-			if (teamGenerationMethod == TeamGenerationMethod.Random)
+			switch (teamGenerationMethod)
 			{
-				return _teamCreationStrategies.OfType<IRandomTeamCreationStrategy>().Single();
+				default:
+				case TeamGenerationMethod.Random:
+					return _teamCreationStrategies.OfType<IRandomTeamCreationStrategy>().Single();
+				case TeamGenerationMethod.MixedAffiliation:
+					return _teamCreationStrategies.OfType<IMixedAffiliationTeamCreationStrategy>().Single();
+				case TeamGenerationMethod.GroupByAffiliation:
+					return _teamCreationStrategies.OfType<IGroupedAffiliationTeamCreationStrategy>().Single();
 			}
-
-			return _teamCreationStrategies.OfType<IGroupedAffiliationTeamCreationStrategy>().Single();
 		}
 	}
 }
