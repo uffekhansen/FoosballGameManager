@@ -81,7 +81,7 @@ namespace Tests.UnitTests.Domain.Services
 	{
 		protected override ITeamCreationStrategy CreateTeamCreationStrategy()
 		{
-			return new GroupedAffiliationTeamCreationStrategy(new RandomTeamCreationStrategy(Substitute.For<IRandom>()));
+			return new GroupedAffiliationTeamCreationStrategy(new RandomTeamCreationStrategy(Substitute.For<IRandom>()), Substitute.For<IRandom>());
 		}
 	}
 }

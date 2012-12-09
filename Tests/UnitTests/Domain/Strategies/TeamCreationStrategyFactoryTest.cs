@@ -16,7 +16,7 @@ namespace Tests.UnitTests.Domain.Strategies
 			var teamCreationStrategies = new ITeamCreationStrategy[]
 			{
 				new RandomTeamCreationStrategy(Substitute.For<IRandom>()),
-				new GroupedAffiliationTeamCreationStrategy(Substitute.For<IRandomTeamCreationStrategy>())
+				new GroupedAffiliationTeamCreationStrategy(Substitute.For<IRandomTeamCreationStrategy>(), Substitute.For<IRandom>())
 			};
 
 			_teamCreationStrategyFactory = new TeamCreationStrategyFactory(teamCreationStrategies);

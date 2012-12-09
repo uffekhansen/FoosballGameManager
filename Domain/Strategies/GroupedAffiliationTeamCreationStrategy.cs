@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
 using Domain.Extensions;
+using Domain.Tools;
 
 namespace Domain.Strategies
 {
@@ -13,11 +14,13 @@ namespace Domain.Strategies
 		private IList<Team> _teams;
 		private IList<Player> _excessPlayers;
 
+		private readonly IRandom _random;
 		private readonly IRandomTeamCreationStrategy _randomTeamCreationStrategy;
 
-		public GroupedAffiliationTeamCreationStrategy(IRandomTeamCreationStrategy randomTeamCreationStrategy)
+		public GroupedAffiliationTeamCreationStrategy(IRandomTeamCreationStrategy randomTeamCreationStrategy, IRandom random)
 		{
 			_randomTeamCreationStrategy = randomTeamCreationStrategy;
+			_random = random;
 		}
 
 		public IList<Team> CreateTeams()
@@ -43,13 +46,31 @@ namespace Domain.Strategies
 		{
 			while (playersSharingAffiliation.Count >= PlayersPerTeam)
 			{
-				var playersForTeam = playersSharingAffiliation.Take(PlayersPerTeam).ToList();
+				var playersForTeam = TakeRandomPlayersForTeam(playersSharingAffiliation);
 
 				AddTeam(playersForTeam);
-				playersSharingAffiliation.RemoveRange(0, PlayersPerTeam);
 			}
 
 			AddExcessPlayers(playersSharingAffiliation);
+		}
+
+		private IEnumerable<Player> TakeRandomPlayersForTeam(List<Player> players)
+		{
+			var randomPlayers = new List<Player>();
+
+			PlayersPerTeam.TimesDo(() => randomPlayers.Add(TakeRandomPlayer(players)));
+
+			return randomPlayers;
+		}
+
+		private Player TakeRandomPlayer(List<Player> players)
+		{
+			int index = _random.Next(players.Count);
+
+			var player = players[index];
+			players.RemoveAt(index);
+
+			return player;
 		}
 
 		private void AddTeam(IEnumerable<Player> players)

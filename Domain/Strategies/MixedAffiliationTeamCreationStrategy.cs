@@ -72,7 +72,8 @@ namespace Domain.Strategies
 		{
 			var unusedAffiliations = _playersGroupedByAffiliation
 				.Where(pair => !usedAffiliations.Contains(pair.Key))
-				.Select(pair => pair.Key);
+				.Select(pair => pair.Key)
+				.ToList();
 
 			if (!unusedAffiliations.Any())
 			{
