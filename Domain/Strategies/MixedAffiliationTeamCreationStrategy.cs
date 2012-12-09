@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
 using Domain.Extensions;
+using Domain.Tools;
 
 namespace Domain.Strategies
 {
@@ -11,89 +12,117 @@ namespace Domain.Strategies
 		public int PlayersPerTeam { get; set; }
 
 		private IList<Team> _teams;
-		public List<List<Player>> _playersGroupedByAffiliation;
+		private readonly IRandom _random;
+		private IDictionary<string, List<Player>> _playersGroupedByAffiliation;
+
+		public MixedAffiliationTeamCreationStrategy(IRandom random)
+		{
+			_random = random;
+		}
 
 		public IList<Team> CreateTeams()
 		{
 			_teams = new List<Team>();
 
-			CreateAffiliationGroupings();
-			CreateMixedTeamsFromAffiliationGroupings();
+			CreateAffiliationDictionary();
+			CreateMixedTeamsFromAffiliationDictionary();
 
 			return _teams;
 		}
 
-		private void CreateAffiliationGroupings()
+		private void CreateAffiliationDictionary()
 		{
 			_playersGroupedByAffiliation = Players
 				.GroupBy(player => player.Affiliation)
-				.Select(grouping => grouping.ToList()).ToList();
+				.ToDictionary(grouping => grouping.Key, grouping => grouping.ToList());
 		}
 
-		private void CreateMixedTeamsFromAffiliationGroupings()
+		private void CreateMixedTeamsFromAffiliationDictionary()
 		{
-			var players = GetPlayersFromLargestAffiliationGroupings();
+			int numberOfTeams = Players.Count() / PlayersPerTeam;
 
-			_teams.Add(new Team(players));
+			numberOfTeams.TimesDo(() => _teams.Add(GetTeamFromMostRepresentedAffiliation()));
 		}
 
-		private List<Player> GetPlayersFromLargestAffiliationGroupings()
+		private Team GetTeamFromMostRepresentedAffiliation()
 		{
 			var players = new List<Player>();
 			var usedAffiliations = new List<string>();
 
 			PlayersPerTeam.TimesDo(() =>
 			{
-				var player = TakePlayerFromLargestAffiliationGrouping(usedAffiliations);
+				var player = TakePlayerFromMostRepresentedAffiliation(usedAffiliations);
 				players.Add(player);
 				usedAffiliations.Add(player.Affiliation);
+				RemoveEmptyAffiliations();
 			});
 
-			return null;
+			return new Team(players);
 		}
 
-		private Player TakePlayerFromLargestAffiliationGrouping(IList<string> usedAffiliations)
+		private Player TakePlayerFromMostRepresentedAffiliation(IEnumerable<string> usedAffiliations)
 		{
-			var groupings = GetGroupings(usedAffiliations);
-			var largestGrouping = GetLargestGrouping(groupings);
-			var player = largestGrouping.First();
-			largestGrouping.Remove(player);
-			return largestGrouping.First();
+			var unusedAffiliations = GetUnusedAffiliations(usedAffiliations);
+			var largestAffiliationName = GetLargestAffiliationName(unusedAffiliations);
+			var player = TakePlayerWithAffiliation(largestAffiliationName);
+			return player;
 		}
 
-		private List<List<Player>> GetGroupings(IList<string> usedAffiliations)
+		private IEnumerable<string> GetUnusedAffiliations(IEnumerable<string> usedAffiliations)
 		{
-			var groupings = GetUnusedGroupings(usedAffiliations);
-			if (!groupings.Any())
+			var unusedAffiliations = _playersGroupedByAffiliation
+				.Where(pair => !usedAffiliations.Contains(pair.Key))
+				.Select(pair => pair.Key);
+
+			if (!unusedAffiliations.Any())
 			{
-				groupings = _playersGroupedByAffiliation;
+				return GetEveryAffiliation();
 			}
 
-			return groupings;
+			return unusedAffiliations;
 		}
 
-		private List<List<Player>> GetUnusedGroupings(IList<string> usedAffiliations)
+		private IEnumerable<string> GetEveryAffiliation()
+		{
+			return _playersGroupedByAffiliation.Select(pair => pair.Key);
+		}
+
+		private string GetLargestAffiliationName(IEnumerable<string> unusedAffiliationNames)
+		{
+			int largestAffiliationCount = GetLargestAffiliationCount(unusedAffiliationNames);
+
+			return _playersGroupedByAffiliation.First(pair => pair.Value.Count == largestAffiliationCount).Key;
+		}
+
+		private Player TakePlayerWithAffiliation(string affiliation)
+		{
+			var affiliationList = _playersGroupedByAffiliation
+				.First(pair => pair.Value.First().Affiliation == affiliation)
+				.Value;
+
+			int index = _random.Next(affiliationList.Count);
+			var player = affiliationList[index];
+
+			affiliationList.RemoveAt(index);
+
+			return player;
+		}
+
+		private int GetLargestAffiliationCount(IEnumerable<string> unusedAffiliationNames)
 		{
 			return _playersGroupedByAffiliation
-				.Where(grouping => grouping.Any() && !GroupingContainsUsedAffiliation(grouping, usedAffiliations))
+				.Where(pair => unusedAffiliationNames.Contains(pair.Key))
+				.Max(pair =>  pair.Value.Count);
+		}
+
+		private void RemoveEmptyAffiliations()
+		{
+			var emptyAffiliations = _playersGroupedByAffiliation
+				.Where(pair => !pair.Value.Any())
+				.Select(pair => pair.Key)
 				.ToList();
-		}
 
-		private bool GroupingContainsUsedAffiliation(List<Player> grouping, IList<string> usedAffiliations)
-		{
-			return usedAffiliations.Contains(grouping.First().Affiliation);
-		}
-
-		private List<Player> GetLargestGrouping(List<List<Player>> groupings)
-		{
-			int largestGroupingCount = GetLargestGroupingCount(groupings);
-
-			return groupings.First(grouping => grouping.Count() == largestGroupingCount);
-		}
-
-		private int GetLargestGroupingCount(List<List<Player>> groupings)
-		{
-			return groupings.Max(grouping => grouping.Count());
+			emptyAffiliations.Each(x => _playersGroupedByAffiliation.Remove(x));
 		}
 	}
 }
