@@ -133,11 +133,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="SQLite.Interop.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
