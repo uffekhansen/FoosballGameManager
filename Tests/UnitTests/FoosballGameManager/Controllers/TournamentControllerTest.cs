@@ -69,16 +69,16 @@ namespace Tests.UnitTests.FoosballGameManager.Controllers
 			viewResult.Model.As<TournamentViewModel>().Tournament.Teams.Should().ContainExactlyInOrder(tournament.Teams);
 		}
 
-        //[Fact]
-        //public void Given_GetTournamentQuery_Throws_NotFoundException_When_Show_Then_Model_Contains_Exception_Message()
-        //{
-        //    const string exceptionMessage = "unit test";
-        //    _getTournamentByIdQuery.When(x => x.Execute(Arg.Any<Guid>())).Do(x => { throw new NotFoundException(exceptionMessage); });
+        [Fact]
+        public void Given_GetTournamentQuery_Throws_NotFoundException_When_Show_Then_Model_Contains_Exception_Message()
+        {
+            const string exceptionMessage = "unit test";
+            _getTournamentByIdQuery.When(x => x.Execute(Arg.Any<Guid>())).Do(x => { throw new NotFoundException(exceptionMessage); });
 
-        //    Action show = () => _tournamentController.Show(Guid.NewGuid());
+            Action show = () => _tournamentController.Show(Guid.NewGuid());
 
-        //    show.ShouldThrow<NotFoundException>().WithMessage(exceptionMessage);
-        //}
+            show.ShouldThrow<NotFoundException>().WithMessage(exceptionMessage);
+        }
 
 		private Tournament ArrangeTournament(int numberTeams)
 		{
