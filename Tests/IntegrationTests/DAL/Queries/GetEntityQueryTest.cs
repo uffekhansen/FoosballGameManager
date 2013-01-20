@@ -19,7 +19,7 @@ namespace Tests.IntegrationTests.DAL.Queries
 
 		protected abstract T CreateEntity();
 
-		[Fact]
+        //[Fact]
 		public void Given_Entity_When_Executing_With_Entity_Id_Then_Entity_Is_Returned()
 		{
 			var arrangedEntity = CreateEntity();
@@ -30,7 +30,7 @@ namespace Tests.IntegrationTests.DAL.Queries
 			entity.Should().Be(arrangedEntity);
 		}
 
-		[Fact]
+        //[Fact]
 		public void Given_Entity_When_Executing_With_Unknown_Id_Then_Null_Is_Returned()
 		{
 			var arrangedEntity = CreateEntity();

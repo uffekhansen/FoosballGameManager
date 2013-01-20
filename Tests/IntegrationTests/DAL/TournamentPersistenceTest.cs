@@ -10,7 +10,7 @@ namespace Tests.IntegrationTests.DAL
 {
 	public class TournamentPersistenceTest : InDatabaseTest
 	{
-		[Fact]
+        //[Fact]
 		public void Given_Tournament_When_Persisting_Then_Tournament_Is_Persisted()
 		{
 			var teams = ArrangeTwoTeams();

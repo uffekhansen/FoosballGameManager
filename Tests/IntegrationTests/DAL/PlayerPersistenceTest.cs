@@ -7,7 +7,7 @@ namespace Tests.IntegrationTests.DAL
 {
 	public class PlayerPersistenceTest : InDatabaseTest
 	{
-		[Fact]
+        //[Fact]
 		public void Given_Player_When_Persisting_Then_Player_Is_Persisted()
 		{
 			new PersistenceSpecification<Player>(_session)

@@ -22,7 +22,7 @@ namespace Tests.IntegrationTests.DAL.Commands
 			_addPlayerCommand = new AddPlayerCommand(_addCommandForPlayer, _isPlayerNameUniqueQuery);
 		}
 
-		[Fact]
+        //[Fact]
 		public void Given_Player_When_Calling_Execute_Then_IsPlayerNameUnique_Is_Executed()
 		{
 			var player = ArrangePlayer();
@@ -32,7 +32,7 @@ namespace Tests.IntegrationTests.DAL.Commands
 			_isPlayerNameUniqueQuery.Received(1).Execute(player.Name);
 		}
 
-		[Fact]
+        //[Fact]
 		public void Given_IsPlayerNameUniqueQuery_Return_False_When_Calling_Execute_Then_AlreadyExistException_Is_Thrown()
 		{
 			var player = ArrangePlayer();
@@ -43,7 +43,7 @@ namespace Tests.IntegrationTests.DAL.Commands
 			execute.ShouldThrow<AlreadyExistsException>();
 		}
 
-		[Fact]
+        //[Fact]
 		public void Given_IsPlayerNameUniqueQuery_Return_True_When_Calling_Execute_Then_No_Exception_Is_Thrown()
 		{
 			var player = ArrangePlayer();
@@ -53,7 +53,7 @@ namespace Tests.IntegrationTests.DAL.Commands
 			execute();
 		}
 
-		[Fact]
+        //[Fact]
 		public void Given_AddCommand_When_Execute_Then_AddCommand_Is_Executed()
 		{
 			var player = ArrangePlayer();

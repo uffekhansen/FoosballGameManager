@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AssignedIdEntity.cs" />
+    <Compile Include="Entities\Game.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Enums\TeamGenerationMethod.cs" />
     <Compile Include="Exceptions\AlreadyExistsException.cs" />

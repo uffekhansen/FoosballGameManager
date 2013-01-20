@@ -17,10 +17,10 @@ namespace Tests.IntegrationTests.DAL.Queries
 			_isPlayerNameUniqueQuery = new IsPlayerNameUniqueQuery(_session);
 		}
 
-		[Theory]
-		[InlineData(0)]
-		[InlineData(1)]
-		[InlineData(2)]
+        //[Theory]
+        //[InlineData(0)]
+        //[InlineData(1)]
+        //[InlineData(2)]
 		public void Given_No_Player_With_The_Same_Name_When_Execute_Then_True_Is_Returned(int numberPlayers)
 		{
 			int nameCounter = 0;
@@ -33,7 +33,7 @@ namespace Tests.IntegrationTests.DAL.Queries
 			isPlayerNameUnique.Should().BeTrue();
 		}
 
-		[Fact]
+        //[Fact]
 		public void Given_A_Single_Player_With_The_Same_Name_When_Execute_Then_False_Is_Returned()
 		{
 			const string sharedName = "foo";
@@ -45,7 +45,7 @@ namespace Tests.IntegrationTests.DAL.Queries
 			isPlayerNameUnique.Should().BeFalse();
 		}
 
-		[Fact]
+        //[Fact]
 		public void Given_A_Single_Player_With_The_Same_Name_And_A_Player_With_Another_Name_When_Execute_Then_False_Is_Returned()
 		{
 			const string sharedName = "foo";

@@ -1,0 +1,15 @@
+﻿@model Domain.Entities.Game
+
+@{
+    ViewBag.Title = "title";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tilmelding af spillere</h2>
+
+<ol>
+	@foreach(var player in Model.Players)
+	{
+        <li>@player.Name</li>
+	}
+</ol>

@@ -61,6 +61,7 @@
     <Compile Include="Commands\IAddCommand.cs" />
     <Compile Include="Commands\IAddPlayerCommand.cs" />
     <Compile Include="Infrastructure\Installers\DalInstaller.cs" />
+    <Compile Include="Mappings\GameMapping.cs" />
     <Compile Include="Mappings\TeamMapping.cs" />
     <Compile Include="Mappings\TournamentMapping.cs" />
     <Compile Include="Mappings\PlayerMapping.cs" />

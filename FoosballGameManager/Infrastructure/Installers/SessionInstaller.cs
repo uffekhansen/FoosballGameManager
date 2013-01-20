@@ -29,7 +29,7 @@ namespace FoosballGameManager.Infrastructure.Installers
 		private ISessionFactory CreateSessionFactory()
 		{
 			return Fluently.Configure()
-				.Database(SQLiteConfiguration.Standard.UsingFile(_databaseFilename))
+                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(builder => builder.FromConnectionStringWithKey("FoosballGameManager")))
 				.Mappings(m => m.FluentMappings.AddFromAssemblyOf<PlayerMapping>())
 				.ExposeConfiguration(BuildSchema)
 				.BuildSessionFactory();
@@ -37,8 +37,8 @@ namespace FoosballGameManager.Infrastructure.Installers
 
 		private void BuildSchema(Configuration configuration)
 		{
-			//var schemaExport = new SchemaExport(configuration);
-			//schemaExport.Create(script: false, export: true);
+			var schemaExport = new SchemaExport(configuration);
+			schemaExport.Create(script: false, export: true);
 		}
 	}
 }

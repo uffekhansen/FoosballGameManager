@@ -9,13 +9,10 @@ namespace Tests.Infrastructure
 {
 	public class NHibernateBootstrapper : INHibernateBootstrapper
 	{
-		//private const string _databaseFilename = @"C:\Users\Uffe\Desktop\dbfiles\foosball_tests.db";
-		private const string _databaseFilename = "foosball_tests.db";
-
 		public ISessionFactory Bootstrap()
 		{
 			return Fluently.Configure()
-				.Database(SQLiteConfiguration.Standard.UsingFile(_databaseFilename))
+                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(builder => builder.FromConnectionStringWithKey("FoosballGameManagerTest")))
 				.Mappings(m => m.FluentMappings.AddFromAssemblyOf<PlayerMapping>())
 				.ExposeConfiguration(BuildSchema)
 				.BuildSessionFactory();

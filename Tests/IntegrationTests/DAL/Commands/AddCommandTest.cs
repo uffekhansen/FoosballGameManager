@@ -13,7 +13,7 @@ namespace Tests.IntegrationTests.DAL.Commands
 	{
 		protected IAddCommand<T> _addCommand;
 
-		[Fact]
+        //[Fact]
 		public void Given_Entity_When_Calling_Execute_Then_Player_Is_Persisted()
 		{
 			var entity = CreateEntity();
