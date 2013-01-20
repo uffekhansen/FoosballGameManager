@@ -11,7 +11,7 @@ namespace Test2
         [Fact]
         public void Is_Ok()
         {
-            
+            Assert.Equal(true, true);
         }
     }
 }
